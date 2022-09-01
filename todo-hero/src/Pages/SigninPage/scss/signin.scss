@@ -5,6 +5,10 @@
 
 
 $page-background-mobile: rgb(248, 249, 250);
+$panel-background: $page-background-mobile;
+$banner-color-on-mobile: rgb(248, 249, 250);
+$signin-btn-bg: #35c44d;
+$star-on-git-fg: #000000;
 
 #signin-page
 { overflow-y: auto; }
@@ -14,21 +18,16 @@ $page-background-mobile: rgb(248, 249, 250);
 #signin-page__bg
 {
     top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 
-    $left: calc(0% + 400px);
-
-    left: $left;
-    transform: translateY(-50%);
+    width: 100%;
+    transition: left 0.8s ease-in-out !important;
 }
 
 #signin-page__app-bg
-{
-    width: 100% !important;
-}
+{ width: 100% !important; }
 
-
-
-$panel-background: $page-background-mobile;
 
 #signin-page__panel
 {
@@ -37,8 +36,47 @@ $panel-background: $page-background-mobile;
     height: auto;
     min-height: 100%;
     
-    backdrop-filter: blur(3px);
+    backdrop-filter: blur(6px);
     background-color: transparent !important;
+}
+
+
+#signin__blob-design-0
+{
+    width: 400px;
+    left: -200px;
+    bottom: -200px;
+    z-index: 0;
+}
+
+#signin__blob-design-1
+{
+    width: 400px;
+    top: -200px;
+    right: -200px;
+    z-index: 0;
+}
+
+#signin-page__app-icon
+{ width: 64px; }
+
+#signin-page__app-brand > *
+{ font-family: "Roboto Regular"; }
+
+
+
+#signin-page__btn-signin
+{ background-color: $signin-btn-bg !important; }
+
+
+// on md and below
+@media screen and (max-width: 768px) {
+    #signin-page__app-brand > *
+    { color: $banner-color-on-mobile !important; }
+
+
+    #signin__star-on-github-label
+    { color: $star-on-git-fg !important; } 
 }
 
 
@@ -65,42 +103,18 @@ $panel-background: $page-background-mobile;
         border-radius: 0.375rem !important;
         background-color: $panel-background !important;
     }
+
+    #signin-page__bg
+    {
+        top: 50%;
+        left: 10%;
+        transform: translate(-10%, -50%);
+
+        width: 50%;
+        transition: left 1s ease-in-out !important;
+    }
+
+    #signin-page__app-bg
+    { width: 80% !important; }
+
 }
-
-
-
-#signin__blob-design-0
-{
-    width: 400px;
-    left: -200px;
-    bottom: -200px;
-    z-index: 0;
-}
-
-#signin__blob-design-1
-{
-    width: 400px;
-    top: -200px;
-    right: -200px;
-    z-index: 0;
-}
-
-#signin-page__app-icon
-{ width: 64px; }
-
-#signin-page__app-brand > *
-{ font-family: "Roboto Regular"; }
-
-
-$banner-color-on-mobile: rgb(248, 249, 250);
-
-@media screen and (max-width: 769px) {
-    #signin-page__app-brand > *
-    { color: $banner-color-on-mobile !important; }
-}
-
-
-$signinbtn-bg: #35c44d;
-
-#signin-page__btn-signin
-{ background-color: $signinbtn-bg !important; }
