@@ -6,6 +6,16 @@
   overflow-y: auto;
 }
 
+#signin-page__bg {
+  top: 50%;
+  left: calc(0% + 400px);
+  transform: translateY(-50%);
+}
+
+#signin-page__app-bg {
+  width: 100% !important;
+}
+
 #signin-page__panel {
   z-index: 2;
   width: 100%;
@@ -41,10 +51,26 @@
   z-index: 0;
 }
 
+#signin__blob-design-1 {
+  width: 400px;
+  top: -200px;
+  right: -200px;
+  z-index: 0;
+}
+
 #signin-page__app-icon {
   width: 64px;
 }
 
+#signin-page__app-brand > * {
+  font-family: "Roboto Regular";
+}
+
+@media screen and (max-width: 769px) {
+  #signin-page__app-brand > * {
+    color: rgb(248, 249, 250) !important;
+  }
+}
 #signin-page__btn-signin {
   background-color: #35c44d !important;
 }/*# sourceMappingURL=signin.css.map */

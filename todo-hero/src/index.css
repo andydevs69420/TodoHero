@@ -4,6 +4,12 @@
  */
 
 
+@font-face {
+    font-family: "Roboto Regular";
+    src: url("./Assets/Fonts/roboto/Roboto-Regular.ttf");
+}
+
+
 *, ::before, ::after 
 {
     margin: 0;

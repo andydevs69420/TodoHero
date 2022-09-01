@@ -10,15 +10,25 @@ $page-background-mobile: rgb(248, 249, 250);
 { overflow-y: auto; }
 
 
-// @media screen and (max-width: 768px) {
-//     #signin-page
-//     { background-color: $page-background-mobile !important; }
-// }
+
+#signin-page__bg
+{
+    top: 50%;
+
+    $left: calc(0% + 400px);
+
+    left: $left;
+    transform: translateY(-50%);
+}
+
+#signin-page__app-bg
+{
+    width: 100% !important;
+}
+
 
 
 $panel-background: $page-background-mobile;
-
-
 
 #signin-page__panel
 {
@@ -26,6 +36,7 @@ $panel-background: $page-background-mobile;
     width: 100%;
     height: auto;
     min-height: 100%;
+    
     backdrop-filter: blur(3px);
     background-color: transparent !important;
 }
@@ -66,9 +77,30 @@ $panel-background: $page-background-mobile;
     z-index: 0;
 }
 
+#signin__blob-design-1
+{
+    width: 400px;
+    top: -200px;
+    right: -200px;
+    z-index: 0;
+}
+
 #signin-page__app-icon
 { width: 64px; }
 
+#signin-page__app-brand > *
+{ font-family: "Roboto Regular"; }
+
+
+$banner-color-on-mobile: rgb(248, 249, 250);
+
+@media screen and (max-width: 769px) {
+    #signin-page__app-brand > *
+    { color: $banner-color-on-mobile !important; }
+}
+
+
+$signinbtn-bg: #35c44d;
 
 #signin-page__btn-signin
-{ background-color: #35c44d !important; }
+{ background-color: $signinbtn-bg !important; }
