@@ -41,7 +41,7 @@ const SigninPage = () => {
             {/* main panel */}
             <div id="signin-page__panel" className="card rounded-0">
                 <div className="card-header border-0 bg-transparent">
-                    <div className="d-flex flex-row flex-nowrap align-items-center mt-2 mb-5 mt-md-1 mb-md-3 px-2">
+                    <div className="d-flex flex-row flex-nowrap align-items-center justify-content-md-center mt-2 mb-5 mt-md-3 mb-md-4 px-2">
                         <img id="signin-page__app-icon" className="img rounded-circle shadow-sm" src={AppLogo} alt="app-icon"/>
                         <div id="signin-page__app-brand" className="d-flex flex-column mx-2">
                             <span className="fs-6 text-muted" role="banner">TodoHero</span>
