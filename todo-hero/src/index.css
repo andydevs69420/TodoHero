@@ -1,0 +1,51 @@
+/*
+ *   Copyright (c) 2022 andydevs69420
+ *   All rights reserved.
+ */
+
+
+*, ::before, ::after 
+{
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+:root 
+{
+    --html-default:rgb(248, 248, 238);
+}
+
+html 
+{ background-color: var(--html-default); }
+
+
+body
+{
+    width: 100vw;
+    height: 100vh;
+
+    /* limits to galaxy fold */
+    min-width: 280px;
+    min-height: 653px;
+
+    overflow: hidden !important;
+    background-color: inherit !important;
+}
+
+
+/* on sm to xxl and up */
+@media screen and (min-width: 576px) {
+    html {
+        min-width: initial;
+        min-height: initial;
+    }
+}
+
+#root
+{
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: inherit;
+}
