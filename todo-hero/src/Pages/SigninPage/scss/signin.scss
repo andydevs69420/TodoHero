@@ -4,11 +4,17 @@
  */
 
 
-$page-background-mobile: rgb(248, 249, 250);
-$panel-background: $page-background-mobile;
-$banner-color-on-mobile: rgb(248, 249, 250);
+
+$light: rgb(248, 249, 250);
+
+$page-background-mobile: $light;
+$panel-background: $light;
+$banner-color-on-mobile: $light;
 $signin-btn-bg: #35c44d;
-$star-on-git-fg: #212529;
+$dark-on-mobile-fg: #212529;
+$light-on-mobile-fg: $light;
+
+
 
 #signin-page
 { overflow-y: auto; }
@@ -69,14 +75,24 @@ $star-on-git-fg: #212529;
 { background-color: $signin-btn-bg !important; }
 
 
+
+
+
 // on md and below
 @media screen and (max-width: 768px) {
     #signin-page__app-brand > *
     { color: $banner-color-on-mobile !important; }
 
 
-    #signin__star-on-github-label
-    { color: $star-on-git-fg !important; } 
+    .dark-on-mobile
+    { color: $dark-on-mobile-fg !important; } 
+
+    .light-on-mobile
+    { 
+        color: $light !important; 
+        &:hover
+        { color: #3333d4 !important; }
+    } 
 }
 
 

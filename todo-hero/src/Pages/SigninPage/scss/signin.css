@@ -58,8 +58,22 @@
   #signin-page__app-brand > * {
     color: rgb(248, 249, 250) !important;
   }
-  #signin__star-on-github-label {
+  .dark-on-mobile {
     color: #212529 !important;
+  }
+  .light-on-mobile {
+    color: rgb(248, 249, 250) !important;
+  }
+  .light-on-mobile:hover {
+    color: #3333d4 !important;
+  }
+  #signin-page__github-group {
+    position: fixed;
+    left: 50%;
+    bottom: 20px;
+    transform: translateX(-50%);
+    margin: 0 !important;
+    width: 100% !important;
   }
 }
 @media screen and (min-width: 768px) {

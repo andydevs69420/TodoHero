@@ -12,9 +12,9 @@ class SignupPage extends Component
     render()
     {
         return (
-            <div>
-                <h1 className="display-1">SignupPage</h1>
-            </div>
+            <section className="d-block position-relative p-0 py-md-5 w-100 h-100 bg-primary">
+
+            </section>
         );
     }
 }

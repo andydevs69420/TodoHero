@@ -26,9 +26,6 @@ import XRoundLink from "../../Components/XRoundLink/XRoundLink";
 
 const SigninPage = () => {
 
-    const navigate = useNavigate();
-        
-
     return (
         <section id="signin-page" className="d-block position-relative p-0 py-md-5 w-100 h-100 bg-primary">
             
@@ -36,7 +33,6 @@ const SigninPage = () => {
             <div id="signin-page__bg" className="d-inline-block position-absolute">
                 <img id="signin-page__app-bg" className="d-block img mx-auto" src={TodoLogo} alt="todo-icon"/>
             </div>
-
             
             {/* main panel */}
             <div id="signin-page__panel" className="card rounded-0">
@@ -65,21 +61,19 @@ const SigninPage = () => {
                                     placeholder="password"/>
                             </div>
                             <div className="col-12 pt-2 ">
-                                <XButton id="signin-page__btn-signin" onClick={() => {
-                                    navigate("/signup");
-                                }}>
+                                <XButton id="signin-page__btn-signin">
                                     SIGNIN
                                 </XButton>
                             </div>
                             <div className="col-12">
                                 <div className="d-flex flex-row flex-nowrap align-items-center w-100">
                                     <hr className="d-block w-100"/>
-                                    <span className="d-block mx-1 small text-muted">OR</span>
+                                    <span className="d-block mx-1 small dark-on-mobile text-muted">OR</span>
                                     <hr className="d-block w-100"/>
                                 </div>
                             </div>
                             <div className="col-12">
-                                <GoogleLogin className="btn btn-light justify-content-center align-items-center w-100"
+                                <GoogleLogin className="btn btn-light justify-content-center align-items-center w-100 rounded"
                                     clientId={2}
                                     onSuccess={console.log}
                                     onFailure={console.log}>
@@ -87,12 +81,22 @@ const SigninPage = () => {
                                 </GoogleLogin>
                             </div>
                             <div className="col-12">
+                                <div className="container-fluid mt-2 text-center">
+                                    <small className="small dark-on-mobile text-muted">Don't have an account? <a className="light-on-mobile text-decoration-none" href="/signup">signup now!</a></small>
+                                </div>
+                            </div>
+                            <div className="col-12">
+                                <div className="container-fluid text-center">
+                                    <a className="small light-on-mobile text-decoration-none" href="/asdad">forgot password?</a>
+                                </div>
+                            </div>
+                            <div className="col-12">
                                 <div className="d-flex flex-row flex-nowrap align-items-center justify-content-center mt-5 w-100 text-center">
                                     <XRoundLink 
                                         id="signin-page__github-page-link" 
                                         iconClass="bi bi-github" 
                                         href="https://github.com/andydevs69420/technical-interview" />
-                                    <label id="signin__star-on-github-label" className="small fw-bold mx-1 text-muted" aria-label="github-star-me">star on github <i className="bi bi-star-fill small text-warning"></i></label>
+                                    <span id="signin__star-on-github-label" className="small fw-bold mx-1 dark-on-mobile text-muted" aria-label="github-star-me"><i className="bi bi-star-fill small text-warning"></i> star on github</span>
                                 </div>
                             </div>
                         </div>

@@ -10,6 +10,7 @@ const XRoundLink = (props) => {
             className="d-flex flex-column align-items-center justify-content-center btn btn-light p-0 rounded-circle shadow" 
             role="button" 
             href={props.href} 
+            target="blank" 
             style={{width: "40px", height: "40px", fontSize: "1.7rem"}}>
             <i className={props.iconClass + " p-0 m-0"}></i>
         </a>

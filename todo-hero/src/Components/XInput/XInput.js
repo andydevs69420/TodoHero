@@ -20,7 +20,7 @@ const XInput = (props={}) => {
             <span className="xinput__igt input-group-text position-absolute text-muted border-0">
                 <i className={props.iconClass}></i>
             </span>
-            <input id={props.id} className="xinput__fc form-control border-0" type={props.type} name={props.name} placeholder={props.placeholder} value={currentValue} onChange={onUpdate}/>
+            <input id={props.id} className="xinput__fc form-control border-0 bg-light" type={props.type} name={props.name} placeholder={props.placeholder} value={currentValue} onChange={onUpdate}/>
         </div>
     );
 
