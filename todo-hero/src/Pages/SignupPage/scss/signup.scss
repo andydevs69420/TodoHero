@@ -20,22 +20,7 @@ $light-on-mobile-fg: $light;
 { overflow-y: auto; }
 
 
-
-#signin-page__bg
-{
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
-    width: 100%;
-    transition: left 0.8s ease-in-out !important;
-}
-
-#signin-page__app-bg
-{ width: 100% !important; }
-
-
-#signin-page__panel
+#signup-page__panel
 {
     z-index: 2;
     width: 100%;
@@ -47,7 +32,7 @@ $light-on-mobile-fg: $light;
 }
 
 
-#signin-page__blob-design-0
+#signup-page__blob-design-0
 {
     width: 400px;
     left: -200px;
@@ -55,7 +40,7 @@ $light-on-mobile-fg: $light;
     z-index: 0;
 }
 
-#signin-page__blob-design-1
+#signup-page__blob-design-1
 {
     width: 400px;
     top: -200px;
@@ -63,15 +48,15 @@ $light-on-mobile-fg: $light;
     z-index: 0;
 }
 
-#signin-page__app-icon
+#signup-page__app-icon
 { width: 64px; }
 
-#signin-page__app-brand > *
+#signup-page__app-brand > *
 { font-family: "Roboto Regular"; }
 
 
 
-#signin-page__btn-signin
+#signup-page__btn-signin
 { background-color: $signin-btn-bg !important; }
 
 
@@ -80,7 +65,7 @@ $light-on-mobile-fg: $light;
 
 // on sm and below
 @media screen and (max-width: 576px) {
-    #signin-page__app-brand > *
+    #signup-page__app-brand > *
     { color: $banner-color-on-mobile !important; }
 
 
@@ -100,13 +85,7 @@ $light-on-mobile-fg: $light;
 // on sm to xxl and up
 @media screen and (min-width: 576px) 
 {
-    #signin-page__panel {
-        // position if absolute
-        position: absolute;
-        top: 50%;
-        right: 10%;
-        transform: translateY(-50%);
-
+    #signup-page__panel {
         width: 380px;
         min-height: initial;
         max-height: 90%;
@@ -120,7 +99,7 @@ $light-on-mobile-fg: $light;
         background-color: $panel-background !important;
     }
 
-    #signin-page__bg
+    #signup-page__bg
     {
         top: 50%;
         left: 10%;
@@ -130,7 +109,7 @@ $light-on-mobile-fg: $light;
         transition: left 1s ease-in-out !important;
     }
 
-    #signin-page__app-bg
+    #signup-page__app-bg
     { width: 80% !important; }
 
 }
