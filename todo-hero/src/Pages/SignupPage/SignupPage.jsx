@@ -44,8 +44,9 @@ const SignupPage = (props) => {
     const [planListFetched, onFetchPlanSuccess] = useState([]);
 
     const onSignup = (e) => {
-        onLoadChange(true);
         e.preventDefault();
+        
+        onLoadChange(true);
 
         let email,
             passw,

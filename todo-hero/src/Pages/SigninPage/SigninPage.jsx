@@ -28,6 +28,13 @@ const SigninPage = () => {
 
     const [greet, onGreetUpdate] = useState("");
 
+
+    const onSignin = (e) => {
+        e.preventDefault();
+
+        alert("fooc");
+    }
+
     (function RenderGreet() {
         /** greeting delay */
         const greetValue = "Welcome to TodoHero!";
@@ -49,7 +56,7 @@ const SigninPage = () => {
             {/* background */}
             <div id="signin-page__bg" className="d-inline-block position-absolute">
                 <img id="signin-page__app-bg" className="d-block img mx-auto" src={TodoLogo} alt="todo-icon"/>
-                <h2 className="fs-1 fw-bold text-light text-center">{greet}</h2>
+                <h2 className="display-6 text-light text-center">{greet}</h2>
             </div>
             
             {/* main panel */}
@@ -64,7 +71,7 @@ const SigninPage = () => {
                     </div>
                 </div>
                 <div className="card-body">
-                    <form method="GET">
+                    <form method="GET" onSubmit={onSignin}>
                         <div className="container-fluid">
                             <div className="row">
                                 <div className="col-12 pb-2">

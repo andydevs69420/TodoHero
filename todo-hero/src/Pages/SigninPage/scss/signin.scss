@@ -14,20 +14,17 @@ $signin-btn-bg: #35c44d;
 $dark-on-mobile-fg: #212529;
 $light-on-mobile-fg: $light;
 
-
-
 #signin-page
-{ overflow-y: auto; }
-
+{ overflow: hidden auto; }
 
 
 #signin-page__bg
 {
     top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    left: 100%;
+    transform: translateY(-50%);
 
-    width: 100%;
+    width: 80%;
     transition: left 0.8s ease-in-out !important;
 }
 

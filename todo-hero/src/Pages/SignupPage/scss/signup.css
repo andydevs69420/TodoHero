@@ -3,7 +3,7 @@
  *   All rights reserved.
  */
 #signin-page {
-  overflow-y: auto;
+  overflow: hidden auto;
 }
 
 #signup-page__panel {
