@@ -32,6 +32,11 @@ const SigninPage = () => {
     const onSignin = (e) => {
         e.preventDefault();
 
+        let email,
+            passw;
+        
+        
+
         alert("fooc");
     }
 
@@ -76,18 +81,20 @@ const SigninPage = () => {
                             <div className="row">
                                 <div className="col-12 pb-2">
                                     <XInput 
+                                        id="signin-page__email-input"
                                         iconClass="bi bi-envelope-fill"
                                         type="email"
                                         placeholder="email"/>
                                 </div>
                                 <div className="col-12 py-2">
                                     <XInput 
+                                        id="signin-page__passw-input"
                                         iconClass="bi bi-lock-fill"
                                         type="password"
                                         placeholder="password"/>
                                 </div>
                                 <div className="col-12 pt-2 ">
-                                    <XButton id="signin-page__btn-signin">
+                                    <XButton id="signin-page__btn-signin" type="submit">
                                         SIGNIN
                                     </XButton>
                                 </div>
