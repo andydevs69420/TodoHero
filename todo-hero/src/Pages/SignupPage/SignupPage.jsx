@@ -3,27 +3,28 @@
  *   All rights reserved.
  */
 
-import $ from "jquery/dist/jquery";
 
 import React, {useState, useEffect} from "react";
+import { useNavigate } from "react-router-dom";
 import "./scss/signup.css";
-
 
 
 /*
  | OTHER COMPONENTS
  */ 
 
-import XButton from "../../Components/XButton/XButton";
-import XInput  from "../../Components/XInput/XInput";
+import XLoading from "../../Components/XLoading/XLoading";
+import XInput   from "../../Components/XInput/XInput";
+import XButton  from "../../Components/XButton/XButton";
+import XSelect  from "../../Components/XSelect/XSelect";
+import XRoundLink from "../../Components/XRoundLink/XRoundLink";
 
 
 /*
  | ASSETS/IMAGES
  */
 import AppLogo from "../../Assets/Images/icon.png";
-import XRoundLink from "../../Components/XRoundLink/XRoundLink";
-import XSelect from "../../Components/XSelect/XSelect";
+
 
 
 /*
@@ -35,43 +36,24 @@ const PLAN_LIST = process.env.REACT_APP_API_HOST + "/fetchPlanList";
 
 const SignupPage = (props) => {
 
-    const [state, onStateUpdate] = useState({
+    const navigate = useNavigate();
 
-        confirmPassText: "",
-        planList: []
-    });
-
-    const onConfirmChange = () => {
-        let passw,
-            cpass;
-
-        passw = $("#signup-page__passw-input").val();
-        cpass = $("#signup-page__cpass-input").val();
-
-
-        if (passw !== cpass)
-            onStateUpdate((old) => ({
-                ...old,
-                confirmPassText: "Password does not matched!"
-            }));
-        else
-            onStateUpdate((old) => ({
-                ...old,
-                confirmPassText: ""
-            }));
-                
-    }
+    const [loading, onLoadChange] = useState(false);
+    const [emailText, onEmailChange] = useState("");
+    const [confirmPassText, onCPasswordChange] = useState("");
+    const [planListFetched, onFetchPlanSuccess] = useState([]);
 
     const onSignup = (e) => {
+        onLoadChange(true);
         e.preventDefault();
-        
+
         let email,
             passw,
             cplan;
 
-        email = $("#signup-page__email-input").val();
-        passw = $("#signup-page__passw-input").val();
-        cplan = $("#signup-page__plan-select").val();
+        email = document.getElementById("signup-page__email-input").value;
+        passw = document.getElementById("signup-page__passw-input").value;
+        cplan = document.getElementById("signup-page__plan-select").value;
 
 
         fetch(SIGNUP, {
@@ -87,8 +69,13 @@ const SignupPage = (props) => {
         })
         .then((res) => res.json())
         .then((res_json) => {
-            // 
-            console.log(res_json);
+            onLoadChange(false);
+            if (res_json.status === "ok")
+            {
+                return navigate("/signin");
+            }
+            
+            onEmailChange(res_json.email);
         }, 
         (error) => {
             // 
@@ -97,6 +84,21 @@ const SignupPage = (props) => {
     }
 
 
+    const onConfirmChange = () => {
+        let passw,
+            cpass;
+
+        passw = document.getElementById("signup-page__passw-input").value;
+        cpass = document.getElementById("signup-page__cpass-input").value;
+
+
+        if (passw !== cpass)
+            onCPasswordChange("Password does not matched!");
+        else
+            onCPasswordChange("");
+                
+    }
+
     (function LoadPlan() {
         /*
          | For code readablity and to group variables;
@@ -104,17 +106,10 @@ const SignupPage = (props) => {
 
         useEffect(function() {
             fetch(PLAN_LIST)
-            .then((res) => res.json())
-            .then((json_res) => {
-                onStateUpdate({
-                    ...state,
-                    planList: json_res
-                });
-            }, 
-            // callback when error
-            (error) => {
-                console.log("Error fetching data at " + PLAN_LIST);
-            });
+                .then((res) => res.json())
+                .then((json_res) => onFetchPlanSuccess(json_res), 
+                // callback when error
+                (error) => console.log("Error fetching data at " + PLAN_LIST));
         }, []);
 
     })();
@@ -122,6 +117,9 @@ const SignupPage = (props) => {
 
     return (
         <section className="d-block position-relative p-0 py-sm-5 w-100 h-100 bg-primary">
+
+            {/* load?? */}
+            {loading && <XLoading/>}
 
             {/* main panel */}
             <div id="signup-page__panel" className="card mx-auto rounded-0">
@@ -144,13 +142,16 @@ const SignupPage = (props) => {
                                         iconClass="bi bi-envelope-fill"
                                         type="email"
                                         placeholder="email" required/>
+                                    <small className="small text-danger">{emailText}</small>
                                 </div>
                                 <div className="col-12 py-2">
                                     <XInput 
                                         id="signup-page__passw-input" 
                                         iconClass="bi bi-lock-fill"
                                         type="password"
-                                        placeholder="password" required/>
+                                        placeholder="password" 
+                                        pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" 
+                                        required/>
                                 </div>
                                 <div className="col-12 py-2">
                                     <XInput 
@@ -158,8 +159,10 @@ const SignupPage = (props) => {
                                         iconClass="bi bi-check-circle-fill"
                                         type="password"
                                         onChange={onConfirmChange} 
-                                        placeholder="confirm password" required/>
-                                    <strong className="small text-danger">{state.confirmPassText}</strong>
+                                        placeholder="confirm password" 
+                                        pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" 
+                                        required/>
+                                    <small className="small text-danger">{confirmPassText}</small>
                                 </div>
                                 <div className="col-12 py-2">
                                     <XSelect
@@ -168,7 +171,7 @@ const SignupPage = (props) => {
                                         type="password"
                                         placeholder="confirm password">
 
-                                        {state.planList.map(function(data) {
+                                        {planListFetched.map(function(data) {
                                             return (
                                                 <option key={data.plan_name} value={data.id}>
                                                     {data.plan_name}
@@ -182,6 +185,11 @@ const SignupPage = (props) => {
                                     <XButton id="signup-page__btn-signin" type="submit">
                                         SIGNUP
                                     </XButton>
+                                </div>
+                                <div className="col-12">
+                                    <div className="container-fluid mt-2 text-center">
+                                        <small className="small dark-on-mobile text-muted">Already have an account? <a className="light-on-mobile text-decoration-none" href="/signin">signin!</a></small>
+                                    </div>
                                 </div>
                                 <div className="col-12">
                                     <div className="d-flex flex-row flex-nowrap align-items-center justify-content-center mt-5 w-100 text-center">

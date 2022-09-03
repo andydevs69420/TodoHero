@@ -3,7 +3,12 @@
  *   All rights reserved.
  */
 
+import $ from "jquery/dist/jquery";
+
+
 import React from "react";
+import "./scss/app.css";
+
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"; 
 
 
@@ -21,6 +26,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import SigninPage from "../Pages/SigninPage/SigninPage";
 import SignupPage from "../Pages/SignupPage/SignupPage";
 
+window.$ = window.jQuery = $;
 
 const App = () => {
     
