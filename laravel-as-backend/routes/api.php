@@ -29,8 +29,9 @@ use App\Http\Controllers\CredentialController;
  | status: unstable
  */
 Route::controller(CredentialController::class)->group(function(){
-    Route::post("/signup", "signup");
-    Route::post("/signin", "signin");
+    Route::post("/signup"      , "signup"      );
+    Route::post("/signin"      , "signin"      );
+    Route::post("/signinGoogle", "signinGoogle");
 });
 
 

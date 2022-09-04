@@ -68,6 +68,11 @@ class User extends Authenticatable
         return $user;
     }
 
+    /**
+     * Retrieve user using email
+     * @param string  $email
+     * @return self
+     **/
     public static function getByEmail(string $email)
     {
         return self::where("email", "=", $email)

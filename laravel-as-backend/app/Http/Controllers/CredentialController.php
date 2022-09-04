@@ -13,7 +13,7 @@ class CredentialController extends Controller
      * Handles signup
      * uses: POST method
      * @param Request $request
-     * @return View
+     * @return Array|JSON
      **/
     public function signup(Request $request)
     {
@@ -30,7 +30,7 @@ class CredentialController extends Controller
         if (User::emailExist($request->input("email")))
         {
             $response["status" ] = "bad";
-            $response["message"] = "This email is alread used!";
+            $response["message"] = "This email is already used!";
             return json_encode($response);
         }
 
@@ -46,7 +46,7 @@ class CredentialController extends Controller
      * Handles signin
      * uses: POST method
      * @param Request $request
-     * @return View
+     * @return Array|JSON
      **/
     public function signin(Request $request)
     {
@@ -65,28 +65,73 @@ class CredentialController extends Controller
 
         if (!$user)
         {   // user does not exist
-            $request["status"] = "bad";
-            $request["email" ] = "User \"$email\" does not exist!";
+            $response["status"] = "bad";
+            $response["email" ] = "User does not exist!";
+            return json_encode($response);
+        }
+
+        if (!$user->verified_at)
+        {   // user does is not verified
+            $response["status"] = "bad";
+            $response["email" ] = "User is not yet verified!";
             return json_encode($response);
         }
 
         /** user exist | check password hash! */
         if (!Hash::check($password, $user->password))
         {   // invalid username or password
-            $request["status"] = "bad";
-            $request["passw" ] = "Incorrect password for this account!";
+            $response["status"] = "bad";
+            $response["passw" ] = "Incorrect password for this account!";
             return json_encode($response);
         }
 
         /** user satisfied attempt! */
-        $request["status" ] = "ok";
-        $request["message"] = "User successful!";
+        $response["status" ] = "ok";
+        $response["message"] = "User successful!";
         // only user id and email to
         // be returned!
-        $request["userdata"] = ([
-            "id"    => $user->id,
+        $response["userdata"] = ([
+            "id"    => $user->id   ,
             "email" => $user->email,
         ]);
         return json_encode($response);
+    }
+
+    /**
+     * Handles google signin
+     * uses: POST method
+     * @param Request $request
+     * @return Array|JSON
+     **/
+    public function signinGoogle(Request $request)
+    {
+        $email = $request->input("email");
+        $name  = $request->input("name");
+
+        /** return email and userid */
+        if (User::emailExist($email))
+        {
+            $user = User::getByEmail($email);
+            return ([
+                "id"    => $user->id   ,
+                "email" => $user->email,
+            ]);
+        }
+
+        /** first time login with google */
+        /*
+         | Use name as password
+         */
+        $user = User::initialSave($email, $name);
+            /** update name */
+            User::where("id", "=",$user->id)
+                ->update([ "name" => $name ]);
+
+        // only user id and email to
+        // be returned!
+        return json_encode([
+            "id"    => $user->id   ,
+            "email" => $user->email,
+        ]);
     }
 }
