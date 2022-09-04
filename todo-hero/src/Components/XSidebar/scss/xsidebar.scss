@@ -1,0 +1,99 @@
+/*
+ *   Copyright (c) 2022 andydevs69420
+ *   All rights reserved.
+ */
+
+
+.xsidebar__shape-wrapper
+{
+}
+
+.xsidebar__collapse
+{
+    width: auto;
+    height: 100% !important;
+}
+
+
+$navbar-color-default: #fefeff;
+$navbar-color-mobile: #ffffff;
+
+.xsidebar__nav
+{
+    width: 210px;
+    height: 100%;
+    overflow-y: auto !important;
+    background-color: $navbar-color-default;
+}
+
+.xsidebar__link-btn
+{
+    display: flex; 
+    align-items: center; justify-content: start;
+    margin: 0 auto !important;
+    padding: 0 1rem;
+
+    width: 94%;
+    line-height: 35px;
+
+   
+}
+
+.xsidebar__link-btn > *
+{ font-size: 1rem !important; }
+
+
+.xsidebar__link-btn:hover
+{ background-color: #eaeef5; }
+
+
+.xsidebar__link-btn.active
+{
+    box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 8%) !important;
+    background-color: #0d6efd;
+    & > *
+    { color: #ffffff !important; }
+}
+
+
+
+/** on sm below */ 
+@media screen and (max-width: 576px) 
+{
+    .xsidebar__shape-wrapper
+    {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        z-index: 1;
+
+        width: 100% !important;
+        height: auto !important;
+    }
+
+    .xsidebar__nav
+    { 
+        width: 100% !important; 
+        background-color: $navbar-color-mobile;
+    }
+
+    $btn-material: #f3eded;
+
+    .xsidebar__link-btn
+    {
+        align-items: center; justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 0.375rem;
+        & > *
+        { font-size: 1.6rem !important; }
+    }
+
+    .xsidebar__link-btn.active
+    {
+        box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 8%) !important;
+        background-color: $btn-material;
+        & > *
+        { color: #fc5252 !important; }
+    }
+}

@@ -16,7 +16,7 @@ import { gapi } from "gapi-script"
 /*
  | OTHER COMPONENTS
  */ 
-
+import XLoading from "../../Components/XLoading/XLoading";
 import XInput  from "../../Components/XInput/XInput";
 import XButton from "../../Components/XButton/XButton";
 import XRoundLink from "../../Components/XRoundLink/XRoundLink";
@@ -33,23 +33,31 @@ import TodoLogo from "../../Assets/Images/todo-bg.png";
 /*
  | API LINKS
  */
-const SIGNIN = process.env.REACT_APP_API_HOST + "/signin";
+const SIGNIN       = process.env.REACT_APP_API_HOST + "/signin";
+const SIGNINGOOGLE = process.env.REACT_APP_API_HOST + "/signinGoogle";
 
 
 const SigninPage = () => {
 
     const navigate = useNavigate();
-    const [greet, onGreetUpdate] = useState("");
+    const [greet, onGreetUpdate]  = useState("");
+    const [loading, onLoadChange] = useState(false);
+    const [fieldValidate, onfieldValidateUpdate] = useState({
+        email: "",
+        passw: "",
+    });
 
 
     const onSignin = (e) => {
         e.preventDefault();
 
+        onLoadChange(true);
+
         let email,
             passw;
         
-        email = document.getElementById("").value;
-        passw = document.getElementById("").value;
+        email = document.getElementById("signin-page__email-input").value;
+        passw = document.getElementById("signin-page__passw-input").value;
 
         fetch(SIGNIN, {
             headers: {
@@ -63,33 +71,74 @@ const SigninPage = () => {
         })
         .then((res) => res.json())
         .then((res_json) => {
-            navigate("/home");
+            onLoadChange(false);
+
+            if (res_json.status === "ok")
+            {
+                /** store todohero in string */
+                localStorage.setItem(
+                    "todoherouser",
+                    JSON.stringify({
+                        id   : res_json.userdata.id   ,
+                        email: res_json.userdata.email,
+                    }),
+                );
+                return navigate("/todoheroapp");
+            }
+
+            /** render alert */ 
+            return onfieldValidateUpdate({
+                email: res_json.email,
+                passw: res_json.passw,
+            });
         }, 
         (error) => console.log("Error transmitting data at "+ SIGNIN));
 
     }
 
-    const onGSigninOk = (e) => {
+    const onGSigninOk = (obj) => {
+        onLoadChange(true);
 
-        navigate("/todoheroapp");
-
+        // navigate("/todoheroapp");
+        fetch(SIGNINGOOGLE, {
+            headers: {
+                "Content-Type": "application/json"
+            },
+            method: "POST",
+            body: JSON.stringify({
+                email: obj.profileObj.email,
+                name : obj.profileObj.name ,
+            })
+        })
+        .then((res) => res.json())
+        .then((res_json) => {
+            onLoadChange(false);
+            /** store todohero in string */
+            localStorage.setItem(
+                "todoherouser",
+                JSON.stringify({
+                    id   : res_json.id   ,
+                    email: res_json.email,
+                }),
+            );
+            return navigate("/todoheroapp");
+        }, 
+        (error) => console.log("Error transmitting data at " + SIGNINGOOGLE));
     }
 
-    const onGSigninError = (e) => {
-
-        console.log("Error Google");
-
-    }
+    const onGSigninError = (e) => console.log("Error Google Login");
 
     (function RenderGreet() {
         /** greeting delay */
         const greetValue = "Welcome to TodoHero!";
-        
+
         useEffect(() => {
+            let x = "";
             for(let idx = 0; idx < greetValue.length; idx++) 
             { 
+                // eslint-disable-next-line no-loop-func
                 setTimeout(function() {
-                    return onGreetUpdate((oldValue) => (oldValue + greetValue[idx]));
+                    return onGreetUpdate((x += greetValue[idx]));
                 }, (idx * 100)); 
             }
         }, [/**/]);
@@ -98,6 +147,9 @@ const SigninPage = () => {
     return (
         <section id="signin-page" className="d-block position-relative p-0 py-sm-5 w-100 h-100 bg-primary">
             
+            {/* load?? */}
+            {loading && <XLoading/>}
+
             {/* background */}
             <div id="signin-page__bg" className="d-inline-block position-absolute">
                 <img id="signin-page__app-bg" className="d-block img mx-auto" src={TodoLogo} alt="todo-icon"/>
@@ -124,14 +176,16 @@ const SigninPage = () => {
                                         id="signin-page__email-input"
                                         iconClass="bi bi-envelope-fill"
                                         type="email"
-                                        placeholder="email"/>
+                                        placeholder="email" required/>
+                                    <small className="small text-danger">{fieldValidate.email}</small>
                                 </div>
                                 <div className="col-12 py-2">
                                     <XInput 
                                         id="signin-page__passw-input"
                                         iconClass="bi bi-lock-fill"
                                         type="password"
-                                        placeholder="password"/>
+                                        placeholder="password" required/>
+                                    <small className="small text-danger">{fieldValidate.passw}</small>
                                 </div>
                                 <div className="col-12 pt-2 ">
                                     <XButton id="signin-page__btn-signin" type="submit">

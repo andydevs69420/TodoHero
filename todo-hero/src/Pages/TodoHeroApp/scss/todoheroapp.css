@@ -1,0 +1,13 @@
+/*
+ *   Copyright (c) 2022 andydevs69420
+ *   All rights reserved.
+ */
+.todoheroapp__content-wrap {
+  background-color: #e4f2f5;
+}
+
+@media screen and (max-width: 576px) {
+  .todoheroapp__content-wrap {
+    background-color: initial;
+  }
+}/*# sourceMappingURL=todoheroapp.css.map */

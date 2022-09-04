@@ -12,7 +12,6 @@ import "./scss/signup.css";
 /*
  | OTHER COMPONENTS
  */ 
-
 import XLoading from "../../Components/XLoading/XLoading";
 import XInput   from "../../Components/XInput/XInput";
 import XButton  from "../../Components/XButton/XButton";
@@ -59,7 +58,7 @@ const SignupPage = (props) => {
 
         fetch(SIGNUP, {
             headers: {
-                'Content-Type': 'application/json'
+                "Content-Type": "application/json"
             },
             method: "POST",
             body: JSON.stringify({
@@ -71,13 +70,14 @@ const SignupPage = (props) => {
         .then((res) => res.json())
         .then((res_json) => {
             onLoadChange(false);
+
             if (res_json.status === "ok")
-                return navigate("/signin");
+            return navigate("/signin");
             
             /** render message */ 
-            onEmailChange(res_json.message);
+            return onEmailChange(res_json.message);
         }, 
-        (error) => console.log("Error transmitting data at " + SIGNUP));
+        (error) => console.log("Error transmitting data at " + SIGNUP, error));
     }
 
 
@@ -216,6 +216,5 @@ const SignupPage = (props) => {
         </section>
     );
 }
-
 
 export default SignupPage;

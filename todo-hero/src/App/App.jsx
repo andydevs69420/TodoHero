@@ -21,45 +21,22 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 /*
  | PAGES IMPORTS
  */ 
-import SigninPage from "../Pages/SigninPage/SigninPage";
-import SignupPage from "../Pages/SignupPage/SignupPage";
-
-
-
-import { GoogleLogout } from "react-google-login";
-// eslint-disable-next-line no-unused-vars
-import { gapi } from "gapi-script"
-
+import SigninPage  from "../Pages/SigninPage/SigninPage";
+import SignupPage  from "../Pages/SignupPage/SignupPage";
+import TodoHeroApp from "../Pages/TodoHeroApp/TodoHeroapp";
+    import Todos   from "../Pages/TodoHeroApp/Todos/Todos";
 
 
 const App = () => {
-    
-
-
-    const onGSignoutOk = () => {
-        console.log("Ok");
-    }
-
-    const onGSignoutError = () => {
-        console.log("Error logging out!");
-    }
-    
     return (
         <Router>
             <Routes>
-                <Route exact path="/" element={<div>Hola!</div>}/>
-                <Route exact path="signin" element={<SigninPage/>}/>
-                <Route exact path="signup" element={<SignupPage/>}/>
-                <Route exact path="todoheroapp" element={
-                    <div>
-                        <GoogleLogout className="btn btn-light justify-content-center align-items-center w-100 rounded"
-                            clientId={process.env.REACT_APP_GOOGLE_API}
-                            onLogoutSuccess={onGSignoutOk} 
-                            onFailure={onGSignoutError} 
-                            buttonText="Logout Google"
-                        />
-                    </div>
-                }/>
+                <Route path="/" element={<div>Hola!</div>}/>
+                <Route path="signin" element={<SigninPage/>}/>
+                <Route path="signup" element={<SignupPage/>}/>
+                <Route path="todoheroapp" element={<TodoHeroApp/>}>
+                    <Route index path="todos" element={<Todos/>}/>
+                </Route>
             </Routes>
         </Router>
     );
