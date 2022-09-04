@@ -6,13 +6,16 @@
 
 
 import React from "react";
+import "./scss/xmanage.css";
 
 
 const XManage = (props) => {
 
     return (
-        <section className="d-block position-relative w-100 h-100">
-            Manage
+        <section id="xmanage__main" className="d-block position-relative p-2 w-100 h-100">
+            <div className="container-fluid">
+                Management
+            </div>
         </section>
     );
 }

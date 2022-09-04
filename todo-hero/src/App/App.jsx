@@ -21,11 +21,11 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 /*
  | PAGES IMPORTS
  */ 
-import SigninPage  from "../Pages/SigninPage/SigninPage";
-import SignupPage  from "../Pages/SignupPage/SignupPage";
-import TodoHeroApp from "../Pages/TodoHeroApp/TodoHeroapp";
+import SigninPage   from "../Pages/SigninPage/SigninPage";
+import SignupPage   from "../Pages/SignupPage/SignupPage";
+import TodoHeroApp  from "../Pages/TodoHeroApp/TodoHeroapp";
     import XTodos   from "../Pages/TodoHeroApp/XTodos/XTodos";
-
+    import XManage  from "../Pages/TodoHeroApp/XManage/XManage";
 
 const App = () => {
     return (
@@ -36,7 +36,7 @@ const App = () => {
                 <Route path="signup" element={<SignupPage/>}/>
                 <Route path="todoheroapp" element={<TodoHeroApp/>}>
                     <Route path="todos"        index element={<XTodos/>}/>
-                    <Route path="manage"       index element={<div>Monkey </div>}/>
+                    <Route path="manage"       index element={<XManage/>}/>
                     <Route path="subscription" index element={<div>Subscription</div>}/>
                     <Route path="account"      index element={<div>Account</div>}/>
                 </Route>
