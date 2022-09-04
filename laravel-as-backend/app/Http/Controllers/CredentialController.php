@@ -5,6 +5,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Registered;
 
+use Illuminate\Support\Facades\Hash;
 
 class CredentialController extends Controller
 {
@@ -53,19 +54,39 @@ class CredentialController extends Controller
         $password = $request->input("password");
 
         $response = ([
-            "status"  => "",
-            "message" => "",
+            "status" => "",
+            "email"  => "",
+            "passw"  => "",
         ]);
 
         /** retrieve user by email */
         $user = User::getByEmail($email);
+        error_log($user);
 
         if (!$user)
-        {   // user not exist
-
-            return;
+        {   // user does not exist
+            $request["status"] = "bad";
+            $request["email" ] = "User \"$email\" does not exist!";
+            return json_encode($response);
         }
 
-        error_log($user);
+        /** user exist | check password hash! */
+        if (!Hash::check($password, $user->password))
+        {   // invalid username or password
+            $request["status"] = "bad";
+            $request["passw" ] = "Incorrect password for this account!";
+            return json_encode($response);
+        }
+
+        /** user satisfied attempt! */
+        $request["status" ] = "ok";
+        $request["message"] = "User successful!";
+        // only user id and email to
+        // be returned!
+        $request["userdata"] = ([
+            "id"    => $user->id,
+            "email" => $user->email,
+        ]);
+        return json_encode($response);
     }
 }
