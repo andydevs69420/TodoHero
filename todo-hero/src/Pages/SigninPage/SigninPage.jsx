@@ -83,7 +83,7 @@ const SigninPage = () => {
                         email: res_json.userdata.email,
                     }),
                 );
-                return navigate("/todoheroapp");
+                return navigate("/todoheroapp/todos");
             }
 
             /** render alert */ 
@@ -121,7 +121,7 @@ const SigninPage = () => {
                     email: res_json.email,
                 }),
             );
-            return navigate("/todoheroapp");
+            return navigate("/todoheroapp/todos");
         }, 
         (error) => console.log("Error transmitting data at " + SIGNINGOOGLE));
     }

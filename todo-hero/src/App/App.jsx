@@ -24,7 +24,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import SigninPage  from "../Pages/SigninPage/SigninPage";
 import SignupPage  from "../Pages/SignupPage/SignupPage";
 import TodoHeroApp from "../Pages/TodoHeroApp/TodoHeroapp";
-    import Todos   from "../Pages/TodoHeroApp/Todos/Todos";
+    import XTodos   from "../Pages/TodoHeroApp/XTodos/XTodos";
 
 
 const App = () => {
@@ -35,7 +35,10 @@ const App = () => {
                 <Route path="signin" element={<SigninPage/>}/>
                 <Route path="signup" element={<SignupPage/>}/>
                 <Route path="todoheroapp" element={<TodoHeroApp/>}>
-                    <Route index path="todos" element={<Todos/>}/>
+                    <Route path="todos"        index element={<XTodos/>}/>
+                    <Route path="manage"       index element={<div>Monkey </div>}/>
+                    <Route path="subscription" index element={<div>Subscription</div>}/>
+                    <Route path="account"      index element={<div>Account</div>}/>
                 </Route>
             </Routes>
         </Router>

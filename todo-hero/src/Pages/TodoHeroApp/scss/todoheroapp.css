@@ -6,8 +6,17 @@
   background-color: #e4f2f5;
 }
 
+.todoheroapp__view-wrapper {
+  width: 100% !important;
+  height: calc(100% - 54.5px) !important;
+  overflow: hidden !important;
+}
+
 @media screen and (max-width: 576px) {
   .todoheroapp__content-wrap {
     background-color: initial;
+  }
+  .todoheroapp__view-wrapper {
+    height: calc(100% - 74px) !important;
   }
 }/*# sourceMappingURL=todoheroapp.css.map */

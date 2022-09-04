@@ -3,11 +3,6 @@
  *   All rights reserved.
  */
 
-
-.xsidebar__shape-wrapper
-{
-}
-
 .xsidebar__collapse
 {
     width: auto;
@@ -17,10 +12,14 @@
 
 $navbar-color-default: #fefeff;
 $navbar-color-mobile: #ffffff;
+$hover-link-bg: #eaeef5;
+$active-link: #ffffff;
+$btn-material: #f3eded;
+$active-mobile-blue: #0d6efd;
 
 .xsidebar__nav
 {
-    width: 210px;
+    width: 225px;
     height: 100%;
     overflow-y: auto !important;
     background-color: $navbar-color-default;
@@ -29,11 +28,11 @@ $navbar-color-mobile: #ffffff;
 .xsidebar__link-btn
 {
     display: flex; 
-    align-items: center; justify-content: start;
+    align-items: center; justify-content: flex-start;
     margin: 0 auto !important;
     padding: 0 1rem;
 
-    width: 94%;
+    width: 90%;
     line-height: 35px;
 
    
@@ -44,15 +43,15 @@ $navbar-color-mobile: #ffffff;
 
 
 .xsidebar__link-btn:hover
-{ background-color: #eaeef5; }
+{ background-color: $hover-link-bg; }
 
 
 .xsidebar__link-btn.active
 {
     box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 8%) !important;
-    background-color: #0d6efd;
+    background-color: $active-mobile-blue;
     & > *
-    { color: #ffffff !important; }
+    { color: $active-link !important; }
 }
 
 
@@ -77,8 +76,6 @@ $navbar-color-mobile: #ffffff;
         background-color: $navbar-color-mobile;
     }
 
-    $btn-material: #f3eded;
-
     .xsidebar__link-btn
     {
         align-items: center; justify-content: center;
@@ -86,7 +83,7 @@ $navbar-color-mobile: #ffffff;
         height: 40px;
         border-radius: 0.375rem;
         & > *
-        { font-size: 1.6rem !important; }
+        { font-size: 1.3rem !important; }
     }
 
     .xsidebar__link-btn.active
@@ -94,6 +91,6 @@ $navbar-color-mobile: #ffffff;
         box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 8%) !important;
         background-color: $btn-material;
         & > *
-        { color: #fc5252 !important; }
+        { color: $active-mobile-blue !important; }
     }
 }

@@ -5,12 +5,12 @@
 
 import React from "react";
 
-const Todos = (props) => {
+const XTodos = (props) => {
     return (
-        <section className="d-block position-relative p-0 py-sm-5 w-100 h-100">
+        <section className="d-block position-relative w-100 h-100">
             fooc
         </section>
     );
 }
 
-export default Todos;
+export default XTodos;
