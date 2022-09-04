@@ -4,10 +4,14 @@
  */
 
 import React, {useState, useEffect} from "react";
+import { useNavigate } from "react-router-dom";
 import "./scss/signin.css";
 
 
 import GoogleLogin from "react-google-login";
+// eslint-disable-next-line no-unused-vars
+import { gapi } from "gapi-script"
+
 
 /*
  | OTHER COMPONENTS
@@ -24,8 +28,17 @@ import XRoundLink from "../../Components/XRoundLink/XRoundLink";
 import AppLogo from "../../Assets/Images/icon.png";
 import TodoLogo from "../../Assets/Images/todo-bg.png";
 
+
+
+/*
+ | API LINKS
+ */
+const SIGNIN = process.env.REACT_APP_API_HOST + "/signin";
+
+
 const SigninPage = () => {
 
+    const navigate = useNavigate();
     const [greet, onGreetUpdate] = useState("");
 
 
@@ -35,9 +48,37 @@ const SigninPage = () => {
         let email,
             passw;
         
-        
+        email = document.getElementById("").value;
+        passw = document.getElementById("").value;
 
-        alert("fooc");
+        fetch(SIGNIN, {
+            headers: {
+                "Content-Type": "application/json"
+            },
+            method: "POST",
+            body: JSON.stringify({
+                email    : email,
+                password : passw,
+            })
+        })
+        .then((res) => res.json())
+        .then((res_json) => {
+            navigate("/home");
+        }, 
+        (error) => console.log("Error transmitting data at "+ SIGNIN));
+
+    }
+
+    const onGSigninOk = (e) => {
+
+        navigate("/todoheroapp");
+
+    }
+
+    const onGSigninError = (e) => {
+
+        console.log("Error Google");
+
     }
 
     (function RenderGreet() {
@@ -53,7 +94,6 @@ const SigninPage = () => {
             }
         }, [/**/]);
     })();
-
 
     return (
         <section id="signin-page" className="d-block position-relative p-0 py-sm-5 w-100 h-100 bg-primary">
@@ -107,9 +147,11 @@ const SigninPage = () => {
                                 </div>
                                 <div className="col-12">
                                     <GoogleLogin className="btn btn-light justify-content-center align-items-center w-100 rounded"
-                                        clientId={2}
-                                        onSuccess={console.log}
-                                        onFailure={console.log}>
+                                        clientId={process.env.REACT_APP_GOOGLE_API}
+                                        onSuccess={onGSigninOk}
+                                        onFailure={onGSigninError}
+                                        cookiePolicy="single_host_origin"
+                                        isSignedIn={false}>
                                         SIGNIN WITH GOOGLE
                                     </GoogleLogin>
                                 </div>

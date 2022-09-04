@@ -72,16 +72,12 @@ const SignupPage = (props) => {
         .then((res_json) => {
             onLoadChange(false);
             if (res_json.status === "ok")
-            {
                 return navigate("/signin");
-            }
             
-            onEmailChange(res_json.email);
+            /** render message */ 
+            onEmailChange(res_json.message);
         }, 
-        (error) => {
-            // 
-            console.log(error);
-        });
+        (error) => console.log("Error transmitting data at " + SIGNUP));
     }
 
 
@@ -110,7 +106,7 @@ const SignupPage = (props) => {
                 .then((res) => res.json())
                 .then((json_res) => onFetchPlanSuccess(json_res), 
                 // callback when error
-                (error) => console.log("Error fetching data at " + PLAN_LIST));
+                (error) => console.log("Error fetching plans data at " + PLAN_LIST));
         }, []);
 
     })();
