@@ -1,0 +1,50 @@
+/*
+ *   Copyright (c) 2022 andydevs69420
+ *   All rights reserved.
+ */
+/*
+ | SIMILAR TO BOOTSTRAP GRID SYSTEM 
+ | intended for list purposes
+ */
+.xmllistitem__list-item {
+  width: calc((100% - 3rem) / 4);
+  height: auto;
+}
+
+.xmllistitem__list-item:nth-child(odd) {
+  margin: 0 1rem;
+}
+
+.xmllistitem__list-item:first-child {
+  margin-left: 0;
+}
+
+.xmllistitem__list-item:last-child {
+  margin-right: 0;
+}
+
+/** sm and below */
+@media screen and (max-width: 768px) {
+  .xmllistitem__list-item {
+    margin: 0 !important;
+    width: 100% !important;
+  }
+  .xmllistitem__list-item:nth-child(even):not(:last-child) {
+    border-bottom: 0;
+  }
+  .xmllistitem__list-item:nth-child(odd):not(:last-child) {
+    border-bottom: 0;
+  }
+}
+@media screen and (max-width: 992px) {
+  .xmllistitem__list-item {
+    margin: 0.5rem 0;
+    width: calc((100% - 1rem) / 2);
+  }
+  .xmllistitem__list-item:nth-child(odd) {
+    margin: 0;
+  }
+  .xmllistitem__list-item:nth-child(even) {
+    margin-left: 1rem;
+  }
+}/*# sourceMappingURL=xmanagelist.css.map */

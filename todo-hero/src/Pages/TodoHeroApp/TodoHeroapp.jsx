@@ -19,9 +19,7 @@ import XTopbar from "../../Components/XTopbar/XTopbar";
 const TodoHeroApp = (props) => {
     return (
         <div className="d-flex flex-row flex-nowrap position-relative w-100 h-100">
-            
             <XSidebar id="todoheroapp__sidebar"/>
-            
             <div className="todoheroapp__content-wrap d-block w-100 h-100">
                 <XTopbar targetId="todoheroapp__sidebar"/>
                 <div className="todoheroapp__view-wrapper d-block">
