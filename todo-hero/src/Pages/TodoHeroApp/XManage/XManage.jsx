@@ -5,7 +5,7 @@
 
 
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { XManageList, XMLListItem } from "../../../Components/XManageList/XManageList";
 import "./scss/xmanage.css";
 
@@ -23,9 +23,10 @@ import LoginHandler from "../LogginHandler";
 /*
  | API LINKS
  */ 
-const NEW_TODO = process.env.REACT_APP_API_HOST + "/todo/" + LoginHandler.getLoginCred().id + "/insert";
+const NEW_TODO  = process.env.REACT_APP_API_HOST + "/todo/" + LoginHandler.getLoginCred().id + "/insert";
+const TODO_LINK = process.env.REACT_APP_API_HOST + "/todo/" + LoginHandler.getLoginCred().id + "/fetchTodos";
 
-console.log(NEW_TODO);
+console.log(TODO_LINK);
 
 const NewTodo = ({id}) => {
 
@@ -124,6 +125,24 @@ const NewTodo = ({id}) => {
 
 const XManage = (props) => {
 
+    const [todoList, onTodoUpdate] = useState([]);
+
+
+    useEffect(() => {
+
+        (function LoadTodos() {
+
+            fetch(TODO_LINK)
+            .then((res) => res.json())
+            .then((res_json) => {
+                onTodoUpdate(res_json);
+            }, 
+            (error) => console.log("Error transmitting data at " + TODO_LINK));
+    
+        })();
+
+    }, []);
+
     return (
         <section id="xmanage__main" className="d-block position-relative p-0 p-sm-2 w-100 h-100">
             
@@ -137,11 +156,18 @@ const XManage = (props) => {
                 </div>
                 <div id="xmanage__manage-list-wrapper" className="d-block position-relative">
                     <XManageList>
-                        <XMLListItem 
-                            title="Circumsation Tommorow" 
-                            descrption="fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff" 
-                            date="09/05/2022" 
-                            time="01:08PM"/>
+                        {todoList.map((todo_raw) => {
+
+                            return (
+                                <XMLListItem 
+                                    key={todo_raw.user_todo_details_id}
+                                    title={todo_raw.title} 
+                                    descrption={todo_raw.description} 
+                                    date={todo_raw.date}
+                                    time={todo_raw.time}/>
+                            );
+
+                        })}
                     </XManageList>
                     <XFab id="xmanage__fab" 
                         iconClass="bi bi-file-plus-fill" 
