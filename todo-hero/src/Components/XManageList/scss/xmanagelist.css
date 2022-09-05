@@ -17,29 +17,16 @@
  | intended for list purposes
  */
 .xmllistitem__list-item {
-  margin: 0.5rem 0;
+  margin: 0.5rem 0.5rem;
   width: calc((100% - 3rem) / 4);
   height: auto;
-}
-
-.xmllistitem__list-item:nth-child(even):not(:nth-child(n+4)) {
-  margin-top: 0;
-}
-
-.xmllistitem__list-item:nth-child(odd) {
-  margin: 0 1rem;
 }
 
 .xmllistitem__list-item:nth-child(4n+1) {
   margin-left: 0;
 }
 
-.xmllistitem__list-item:first-child {
-  margin-left: 0;
-}
-
-.xmllistitem__list-item:last-child {
-  margin-top: 0.5rem;
+.xmllistitem__list-item:nth-child(4n) {
   margin-right: 0;
 }
 
@@ -54,35 +41,19 @@
 /** md and below */
 @media screen and (min-width: 576px) and (max-width: 768px) {
   .xmllistitem__list-item {
-    margin: 0.5rem auto !important;
+    margin: 0.5rem 0 !important;
     width: 100% !important;
-    border: 0;
-  }
-  .xmllistitem__list-item:nth-child(even):not(:last-child) {
-    border-bottom: 0;
-  }
-  .xmllistitem__list-item:nth-child(odd):not(:last-child) {
-    border-bottom: 0;
-  }
-  .xmllistitem__list-item:first-child {
-    border-top: 0;
-  }
-  .xmllistitem__list-item:last-child {
-    border-bottom: 0;
   }
 }
 @media screen and (min-width: 768px) and (max-width: 992px) {
   .xmllistitem__list-item {
-    margin: 0.5rem 0;
+    margin: 0.5rem 0.5rem;
     width: calc((100% - 1rem) / 2);
   }
-  .xmllistitem__list-item:nth-child(odd) {
-    margin: 0;
+  .xmllistitem__list-item:nth-child(2n+1) {
+    margin-left: 0;
   }
-  .xmllistitem__list-item:nth-child(even) {
-    margin-left: 1rem;
-  }
-  .xmllistitem__list-item:last-child {
-    margin-top: 0.5rem;
+  .xmllistitem__list-item:nth-child(2n) {
+    margin-right: 0;
   }
 }/*# sourceMappingURL=xmanagelist.css.map */
