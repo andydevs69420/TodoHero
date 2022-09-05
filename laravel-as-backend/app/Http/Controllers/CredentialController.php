@@ -2,10 +2,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\UserPlanDetails;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Registered;
 
 use Illuminate\Support\Facades\Hash;
+
+use Illuminate\Support\Carbon;
 
 class CredentialController extends Controller
 {
@@ -19,7 +22,7 @@ class CredentialController extends Controller
     {
         $email = $request->input("email");
         $password = $request->input("password");
-        $selected_plan = $request->input("plan");
+        $selected_plan = $request->input("choosenPlan");
 
         $response = ([
             "status"  => "",
@@ -37,10 +40,23 @@ class CredentialController extends Controller
         /** insert user first */
         $user = User::initialSave($email, $password);
 
+        /** insert user and plan */
+        $user_plan_details = UserPlanDetails::create([
+            "user_id_fk" => $user->id     ,
+            "plan_id_fk" => $selected_plan,
+
+            // TODO: 1 for unpaid. see plan_status table
+            "plan_status_id_fk" => 1,
+            "date_validated"    => Carbon::now("+8:00")
+        ]);
+
         $response["status" ] = "ok";
         $response["message"] = "Successfully signedup!";
         return json_encode($response);
     }
+
+
+
 
     /**
      * Handles signin
@@ -91,11 +107,14 @@ class CredentialController extends Controller
         // only user id and email to
         // be returned!
         $response["userdata"] = ([
-            "id"    => $user->id   ,
-            "email" => $user->email,
+            "id"    => $user->user_id,
+            "email" => $user->email  ,
         ]);
         return json_encode($response);
     }
+
+
+
 
     /**
      * Handles google signin
@@ -113,8 +132,8 @@ class CredentialController extends Controller
         {
             $user = User::getByEmail($email);
             return ([
-                "id"    => $user->id   ,
-                "email" => $user->email,
+                "id"    => $user->user_id,
+                "email" => $user->email  ,
             ]);
         }
 
@@ -124,8 +143,18 @@ class CredentialController extends Controller
          */
         $user = User::initialSave($email, $name);
             /** update name */
-            User::where("id", "=",$user->id)
+            User::where("user_id", "=",$user->id)
                 ->update([ "name" => $name ]);
+
+        /** insert user and plan */
+        $user_plan_details = UserPlanDetails::create([
+            "user_id_fk" => $user->id,
+            // TODO: 1 for freemium. see plan table
+            "plan_id_fk" => 1,
+            // TODO: 2 for unpaid. see plan_status table
+            "plan_status_id_fk" => 2,
+            "date_validated"    => Carbon::now("+8:00")
+        ]);
 
         // only user id and email to
         // be returned!

@@ -22,17 +22,32 @@ Route::middleware("auth:sanctum")->get("/user", function (Request $request) {
 
 use App\Http\Controllers\PlanController;
 use App\Http\Controllers\CredentialController;
+use App\Http\Controllers\TodoController;
 
 
 /*
  | Credential area
- | status: unstable
+ | status: stable
  */
-Route::controller(CredentialController::class)->group(function(){
+Route::controller(CredentialController::class)->group(function() {
     Route::post("/signup"      , "signup"      );
     Route::post("/signin"      , "signin"      );
     Route::post("/signinGoogle", "signinGoogle");
 });
+
+
+/*
+ | Todo CRUD area
+ | status: unstable
+ */
+Route::controller(TodoController::class)->group(function() {
+    Route::post("/todo/{userid}/insert", "insertTodo")
+        ->where("userid", "[1-9]+");
+    Route::post("/todo/{userid}/{method}", "update_OR_deleteTodo")
+        ->where("userid", "[1-9]+")
+        ->whereIn("method", ["update", "delete"]);
+});
+
 
 
 /*

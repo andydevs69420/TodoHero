@@ -13,6 +13,8 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    protected $table = "user";
+
     /**
      * The attributes that are mass assignable.
      *
@@ -21,7 +23,7 @@ class User extends Authenticatable
     protected $fillable = [
         // 'name',
         'email',
-        // 'password',
+        'password',
     ];
 
     /**
@@ -61,10 +63,10 @@ class User extends Authenticatable
      **/
     public static function initialSave(string $email, string $raw_password)
     {
-        $user = new User();
-            $user->email = $email;
-            $user->password = Hash::make($raw_password);
-        $user->save();
+        $user = self::create([
+            "email"    => $email,
+            "password" => Hash::make($raw_password)
+        ]);
         return $user;
     }
 
