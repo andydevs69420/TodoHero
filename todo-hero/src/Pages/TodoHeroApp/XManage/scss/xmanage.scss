@@ -16,10 +16,31 @@ $control-wrapper-height-mobile: 108px;
 #xmanage__manage-list-wrapper
 { height: calc(100% - $control-wrapper-height-default) !important; }
 
+#xmanage__new-todo-modal
+{
+    background: initial !important;
+    backdrop-filter: blur(5px); 
+}
+
+.modal-backdrop
+{ 
+    background-color: rgba(0, 0, 0, 0.1) !important;
+    @supports not(backdrop-filter: blur(5px))
+    { background-color: rgba(255, 255, 255, 0.7) !important; }
+}
+
+#xmanage__fab
+{
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+}
+
+textarea 
+{ resize: none; }
 
 @media screen and (max-width: 576px) 
 {
     #xmanage__manage-list-wrapper
     { height: calc(100% - $control-wrapper-height-mobile) !important; }
-
 }

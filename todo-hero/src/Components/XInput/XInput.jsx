@@ -22,7 +22,7 @@ const XInput = (props={}) => {
     };
 
     return (
-        <div className="xinput__ig input-group position-relative rounded shadow">
+        <div className="xinput__ig input-group position-relative rounded shadow-sm">
             <span className="xinput__igt input-group-text position-absolute text-muted border-0">
                 <i className={props.iconClass}></i>
             </span>

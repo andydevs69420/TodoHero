@@ -166,11 +166,12 @@ const SignupPage = (props) => {
                                         id="signup-page__plan-select" 
                                         iconClass="bi bi-cash-coin"
                                         type="password"
-                                        placeholder="confirm password">
+                                        placeholder="confirm password" 
+                                        required>
 
                                         {planListFetched.map(function(data) {
                                             return (
-                                                <option key={data.plan_name} value={data.id}>
+                                                <option key={data.plan_name} value={data.plan_id}>
                                                     {data.plan_name}
                                                 </option>
                                             )

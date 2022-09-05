@@ -3,7 +3,7 @@
  *   All rights reserved.
  */
 
-import React from "react";
+import React, { useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import "./scss/todoheroapp.css";
 
@@ -14,9 +14,21 @@ import "./scss/todoheroapp.css";
  */
 import XSidebar from "../../Components/XSidebar/XSidebar";
 import XTopbar from "../../Components/XTopbar/XTopbar";
+import { useNavigate } from "react-router-dom";
+import LoginHandler from "./LogginHandler";
 
 
 const TodoHeroApp = (props) => {
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+
+        if (!LoginHandler.isLoggedin())
+        return navigate("/signin");
+
+    }, [navigate]);
+
     return (
         <div className="d-flex flex-row flex-nowrap position-relative w-100 h-100">
             <XSidebar id="todoheroapp__sidebar"/>
