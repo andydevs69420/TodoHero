@@ -41,6 +41,9 @@ Route::controller(CredentialController::class)->group(function() {
  | status: unstable
  */
 Route::controller(TodoController::class)->group(function() {
+    Route::get ("/todo/{userid}/fetchTodos", "fetchTodos")
+        ->where("userid", "[1-9]+");
+
     Route::post("/todo/{userid}/insert", "insertTodo")
         ->where("userid", "[1-9]+");
     Route::post("/todo/{userid}/{method}", "update_OR_deleteTodo")

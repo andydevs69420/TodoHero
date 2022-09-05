@@ -7,14 +7,33 @@ use Illuminate\Http\Request;
 
 use App\Models\Todo;
 use App\Models\UserPlanDetails;
+use App\Models\UserTodoDetails;
 
 
 class TodoController extends Controller
 {
     /**
-     *
+     * Handles todo list
+     * uses: GET method
+     * @param Request $request
+     * @param int $id
+     * @return Array|JSON
      **/
-    public function insertTodo(Request $request, $id)
+    public function fetchTodos(Request $request, int $id)
+    {
+        $todos = UserTodoDetails::getTodosByUserId($id);
+        return json_encode($todos);
+    }
+
+
+    /**
+     * Handles todo insertion
+     * uses: POST method
+     * @param Request $request
+     * @param int $id
+     * @return Array|JSON
+     **/
+    public function insertTodo(Request $request, int $id)
     {
         $title = $request->input("title");
         $date  = $request->input("date");
@@ -39,7 +58,14 @@ class TodoController extends Controller
         /** user exist */
 
         // -> check plan
-        error_log(json_encode($user));
+        $number_of_todos = count(UserTodoDetails::where("user_id_fk", "=", $id)->get());
+
+        if (($number_of_todos + 1) > $user->number_of_todos)
+        {   // exceeded plan offer
+            $response["status" ] = "bad";
+            $response["message"] = "Maximum number of todo has been reached!";
+            return json_encode($response);
+        }
 
         /** insert todo first */
         $todo = Todo::create([
@@ -49,8 +75,15 @@ class TodoController extends Controller
             "description" => $descr
         ]);
 
+        /** insert user todo */
+        $user_todo_details = UserTodoDetails::create([
+            "user_id_fk" => $id      ,
+            "todo_id_fk" => $todo->id,
+        ]);
 
-        return json_encode(["yes" => "I recieved", "id" => $id]);
+        $response["status" ] = "ok";
+        $response["message"] = "Successfully added todo!";
+        return json_encode($response);
     }
 
 
