@@ -8,7 +8,7 @@
 
 .todoheroapp__view-wrapper {
   width: 100% !important;
-  height: 100% !important;
+  height: calc(100% - 54.5px) !important;
   overflow: hidden !important;
 }
 

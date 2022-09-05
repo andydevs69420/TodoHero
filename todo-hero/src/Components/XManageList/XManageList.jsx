@@ -13,10 +13,8 @@ import "./scss/xmanagelist.css";
 import XMLListItem from "./XMLListItem";
 
 const XManageList = (props) => {
-
-
     return (
-        <div className="d-flex flex-column flex-sm-row flex-wrap justify-content-start align-items-center align-content-evenly">
+        <div id={props.id} className="xmanagelist__list d-flex flex-column flex-sm-row flex-wrap justify-content-start align-items-center align-content-evenly w-100 h-100">
             {props.children}
         </div>
     );

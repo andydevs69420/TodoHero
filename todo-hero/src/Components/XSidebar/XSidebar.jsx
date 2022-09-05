@@ -77,7 +77,7 @@ const XSidebar = (props) => {
                             <Link className="nav-link p-0" to="subscription">
                                 <span className={"xsidebar__link-btn text-dark rounded " + active.subscription}>
                                     <i className="bi bi-cart-fill"></i>
-                                    <span className="d-none d-sm-inline-block ms-2">Subcription</span>
+                                    <span className="d-none d-sm-inline-block ms-2">Subscription</span>
                                 </span>
                             </Link>
                         </li>

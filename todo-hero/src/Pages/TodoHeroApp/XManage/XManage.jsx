@@ -13,19 +13,29 @@ import "./scss/xmanage.css";
 const XManage = (props) => {
 
     return (
-        <section id="xmanage__main" className="d-block position-relative p-0 p-md-2 w-100 h-100">
-            <div className="container-fluid p-0 px-md-2">
-                Management
-                <XManageList>
-
-                    <XMLListItem />
-                    <XMLListItem />
-                    <XMLListItem />
-                    <XMLListItem />
-                  
-                   
-                    
-                </XManageList>
+        <section id="xmanage__main" className="d-block position-relative p-0 p-sm-2 w-100 h-100">
+            <div className="container-fluid p-0 px-sm-2">
+                <div id="xmanage__manage_list-wrapper">
+                    <XManageList>
+                        <XMLListItem />
+                        <XMLListItem />
+                        <XMLListItem />
+                        <XMLListItem />
+                        <XMLListItem />
+                        <XMLListItem />
+                        <XMLListItem />
+                        <XMLListItem />
+                        <XMLListItem />
+                        <XMLListItem />
+                        <XMLListItem />
+                        <XMLListItem />
+                        <XMLListItem />
+                        <XMLListItem />
+                        <XMLListItem />
+                        <XMLListItem />
+                        <XMLListItem />
+                    </XManageList>
+                </div>
             </div>
         </section>
     );
