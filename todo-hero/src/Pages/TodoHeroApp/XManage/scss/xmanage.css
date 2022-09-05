@@ -4,4 +4,18 @@
  */
 #xmanage__main {
   overflow-y: auto !important;
+}
+
+#xmanage__manage-controls-wrapper {
+  overflow: visible !important;
+}
+
+#xmanage__manage-list-wrapper {
+  height: calc(100% - 60px) !important;
+}
+
+@media screen and (max-width: 576px) {
+  #xmanage__manage-list-wrapper {
+    height: calc(100% - 108px) !important;
+  }
 }/*# sourceMappingURL=xmanage.css.map */

@@ -14,7 +14,7 @@ import XMLListItem from "./XMLListItem";
 
 const XManageList = (props) => {
     return (
-        <div id={props.id} className="xmanagelist__list d-flex flex-column flex-sm-row flex-wrap justify-content-start align-items-center align-content-evenly w-100 h-100">
+        <div id={props.id} className="xmanagelist__list d-flex flex-column flex-nowrap flex-md-row flex-md-wrap justify-content-start align-items-start w-100 h-100">
             {props.children}
         </div>
     );
