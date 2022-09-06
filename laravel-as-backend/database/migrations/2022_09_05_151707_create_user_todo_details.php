@@ -13,13 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('user_todo_details', function(Blueprint $table) {
+        Schema::create("user_todo_details", function(Blueprint $table) {
             $table->id("user_todo_details_id");
             $table->bigInteger("user_id_fk")->unsigned();
             $table->bigInteger("todo_id_fk")->unsigned();
 
             $table->foreign("user_id_fk")->references("user_id")->on("user");
-            $table->foreign("todo_id_fk")->references("todo_id")->on("todo");
+            $table->foreign("todo_id_fk")->references("todo_id")->on("todo")->onDelete("cascade");
         });
     }
 
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_todo_details');
+        Schema::dropIfExists("user_todo_details");
     }
 };
