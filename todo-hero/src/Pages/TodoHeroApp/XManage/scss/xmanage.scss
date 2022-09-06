@@ -16,7 +16,7 @@ $control-wrapper-height-mobile: 108px;
 #xmanage__manage-list-wrapper
 { height: calc(100% - $control-wrapper-height-default) !important; }
 
-#xmanage__new-todo-modal
+#xmanage__new-todo-modal, #xmanage__update-todo-modal
 {
     background: initial !important;
     backdrop-filter: blur(5px); 

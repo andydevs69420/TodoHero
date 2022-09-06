@@ -30,13 +30,11 @@
     margin: .5rem .5rem;
     width: calc( calc(100% - 3rem)  / 4);
     height: auto;
+    user-select: none !important;
+    & * 
+    { user-select: none !important; }
 }
 
-.xmllistitem__list-item-delete-btn
-{
-    top: 8px;
-    right: 8px;
-}
 
 .xmllistitem__list-item:nth-child(4n + 1)
 { margin-left: 0; }

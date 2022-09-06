@@ -9,21 +9,20 @@ import React from "react";
 
 
 
-const XMLListItem = ({id, title, descrption, date, time, onDelete}) => {
+const XMLListItem = ({todoid, title, description, date, time, onClick, dataBsTarget, dataBsToggle}) => {
 
-    const deleteItem = () => onDelete?.call(null, id);
+    const tileClick  = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        return onClick?.call(null, todoid, title, description, date, time);
+    }
 
     return (
-        <div className="xmllistitem__list-item card position-relative border-0 rounded-0 shadow-sm">
-            
-            <button className="xmllistitem__list-item-delete-btn btn btn-sm btn-primary border-0 bg-transparent position-absolute" onClick={deleteItem}>
-                <i className="bi bi-trash-fill text-muted"></i>
-            </button>
-
+        <div className="xmllistitem__list-item card position-relative border-0 rounded-0 shadow-sm" data-bs-toggle={dataBsToggle} data-bs-target={dataBsTarget} onClick={tileClick}>
             <div className="card-body">
                 <h6 className="card-title text-truncate">{title}</h6>
                 <p className="card-text small text-truncate text-muted">
-                    {descrption.substring(0, 80)}
+                    {description.substring(0, 80)}
                 </p>
             </div>
             <div className="card-footer border-0 bg-transparent px-3 py-2">

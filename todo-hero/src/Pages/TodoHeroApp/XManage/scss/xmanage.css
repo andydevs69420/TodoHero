@@ -14,7 +14,7 @@
   height: calc(100% - 60px) !important;
 }
 
-#xmanage__new-todo-modal {
+#xmanage__new-todo-modal, #xmanage__update-todo-modal {
   background: initial !important;
   -webkit-backdrop-filter: blur(5px);
           backdrop-filter: blur(5px);

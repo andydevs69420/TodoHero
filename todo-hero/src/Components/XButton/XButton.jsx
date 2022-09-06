@@ -8,8 +8,15 @@ import React from "react";
 const XButton = (props={}) => {
 
     return (
-        <span className="d-block shadow">
-            <button id={props.id} className="btn btn-primary border-0 w-100" type={props.type} onClick={props.onClick}>
+        <span className="d-block rounded shadow">
+            <button id={props.id} className="btn btn-primary border-0 w-100" 
+                type={props.type} 
+                style={props.style} 
+                data-bs-target={props.dataBsTarget} 
+                data-bs-toggle={props.dataBsToggle} 
+                data-bs-dismiss={props.dataBsDismiss} 
+                aria-label={props.ariaLabel}
+                onClick={props.onClick}>
                 {props.children}
             </button>
         </span>
