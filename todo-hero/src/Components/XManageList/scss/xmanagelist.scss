@@ -7,9 +7,12 @@
 
 .xmanagelist__list
 {   
+    max-height: 100% !important;
+    overflow: hidden auto !important; 
+
+    // scrollbar
     -ms-overflow-style: none; 
     scrollbar-width: none;
-    overflow: hidden auto !important; 
 }
 
 .xmanagelist__list::-webkit-scrollbar { 
@@ -29,13 +32,20 @@
     height: auto;
 }
 
+.xmllistitem__list-item-delete-btn
+{
+    top: 8px;
+    right: 8px;
+}
+
 .xmllistitem__list-item:nth-child(4n + 1)
 { margin-left: 0; }
 
 .xmllistitem__list-item:nth-child(4n)
 { margin-right: 0; }
 
-
+.card-footer small
+{ font-size: .8em !important; }
 
 /** sm and below */ 
 @media screen and (max-width: 576px)
