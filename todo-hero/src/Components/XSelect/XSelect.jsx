@@ -18,7 +18,7 @@ const XSelect = (props) => {
     const onUpdate = (e) => onValueUpdated((old) => e.target.value);
 
     return (
-        <div className="xselect__ig input-group position-relative rounded shadow">
+        <div className="xselect__ig input-group position-relative rounded shadow-sm">
             <span className="xselect__igt input-group-text position-absolute text-muted border-0">
                 <i className={props.iconClass}></i>
             </span>

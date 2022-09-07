@@ -1,3 +1,5 @@
+
+
 /*
  *   Copyright (c) 2022 andydevs69420
  *   All rights reserved.
@@ -5,11 +7,14 @@
 
 import React from "react";
 
-const XButton = (props={}) => {
+
+
+const XButtonFlat = (props={}) => {
 
     return (
-        <span className="d-block rounded shadow">
-            <button id={props.id} className="btn btn-primary border-0 w-100" 
+        <span className="d-block rounded shadow-sm">
+            <button id={props.id} 
+                className={(props.className?props.className:"") + " btn " + ((props.btnTheme)?props.btnTheme:"btn-primary") + " border-0 w-100"}
                 type={props.type} 
                 style={props.style} 
                 data-bs-target={props.dataBsTarget} 
@@ -25,4 +30,5 @@ const XButton = (props={}) => {
 }
 
 
-export default XButton;
+export default XButtonFlat;
+

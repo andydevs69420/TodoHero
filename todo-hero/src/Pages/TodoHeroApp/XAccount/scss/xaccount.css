@@ -1,0 +1,20 @@
+/*
+ *   Copyright (c) 2022 andydevs69420
+ *   All rights reserved.
+ */
+#xaccount__main {
+  overflow-y: auto !important;
+}
+
+#xaccount__aspect-ratio {
+  position: relative;
+  width: 100%;
+  height: 310px;
+  background-color: yellow;
+}
+
+@media screen and (max-width: 768px) {
+  #xaccount__aspect-ratio {
+    height: 280px;
+  }
+}/*# sourceMappingURL=xaccount.css.map */

@@ -14,7 +14,7 @@ import "./scss/signup.css";
  */ 
 import XLoading from "../../Components/XLoading/XLoading";
 import XInput   from "../../Components/XInput/XInput";
-import XButton  from "../../Components/XButton/XButton";
+import XButtonFlat  from "../../Components/XButton/XButtonFlat";
 import XSelect  from "../../Components/XSelect/XSelect";
 import XRoundLink from "../../Components/XRoundLink/XRoundLink";
 
@@ -44,17 +44,21 @@ const SignupPage = (props) => {
 
     const onSignup = (e) => {
         e.preventDefault();
-        
-        onLoadChange(true);
 
         let email,
             passw,
+            cpass,
             cplan;
 
         email = document.getElementById("signup-page__email-input").value;
         passw = document.getElementById("signup-page__passw-input").value;
+        cpass = document.getElementById("signup-page__cpass-input").value;
         cplan = document.getElementById("signup-page__plan-select").value;
 
+        if (passw !== cpass)
+        return;
+
+        onLoadChange(true);
 
         fetch(SIGNUP, {
             headers: {
@@ -164,9 +168,7 @@ const SignupPage = (props) => {
                                 <div className="col-12 py-2">
                                     <XSelect
                                         id="signup-page__plan-select" 
-                                        iconClass="bi bi-cash-coin"
-                                        type="password"
-                                        placeholder="confirm password" 
+                                        iconClass="bi bi-ticket-fill"
                                         required>
 
                                         {planListFetched.map(function(data) {
@@ -180,9 +182,9 @@ const SignupPage = (props) => {
                                     </XSelect>
                                 </div>
                                 <div className="col-12 pt-2 ">
-                                    <XButton id="signup-page__btn-signin" type="submit">
+                                    <XButtonFlat id="signup-page__btn-signin" type="submit">
                                         SIGNUP
-                                    </XButton>
+                                    </XButtonFlat>
                                 </div>
                                 <div className="col-12">
                                     <div className="container-fluid mt-2 text-center">

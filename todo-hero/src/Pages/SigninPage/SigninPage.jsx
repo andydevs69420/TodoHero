@@ -51,13 +51,13 @@ const SigninPage = () => {
     const onSignin = (e) => {
         e.preventDefault();
 
-        onLoadChange(true);
-
         let email,
             passw;
         
         email = document.getElementById("signin-page__email-input").value;
         passw = document.getElementById("signin-page__passw-input").value;
+
+        onLoadChange(true);
 
         fetch(SIGNIN, {
             headers: {

@@ -119,7 +119,7 @@ const XNewTodo = ({id, onSuccess}) => {
                                     <div className="col-12 pb-2">
                                         <XInputRaw 
                                             id="newtodo__title" 
-                                            iconClass="bi bi-list" 
+                                            iconClass="bi bi-vector-pen" 
                                             type="text" pattern="[\sA-Z]+" 
                                             placeholder="Todo title" 
                                             required/>

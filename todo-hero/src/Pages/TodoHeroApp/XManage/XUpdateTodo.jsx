@@ -117,7 +117,7 @@ const XUpdateTodo = (props) => {
             if (res_json.status === "ok")
             return props.onSuccess?.call();
         }, 
-        (error) => console.log("Error transmitting data at " + (getDeleteTodoLink() + props.state.todoid + "/delete"), error));
+        (error) => console.log("Error transmitting data at " + (getDeleteTodoLink() + props.state.todoid + "/delete")));
     }
 
 
@@ -147,7 +147,7 @@ const XUpdateTodo = (props) => {
                                     <div className="col-12 pb-2">
                                         <XInputRaw 
                                             id="updatetodo__title" 
-                                            iconClass="bi bi-list" 
+                                            iconClass="bi bi-vector-pen" 
                                             type="text" pattern="[\sA-Z]+" 
                                             placeholder="Todo title" 
                                             value={titleState} 
