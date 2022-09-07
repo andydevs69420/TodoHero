@@ -11,6 +11,7 @@ import "./scss/xaccount.css";
  | IMAGE ASSETS
  */ 
 import CARD_BG from "../../../Assets/Images/card-image.jpg";
+import AVATAR  from "../../../Assets/Images/avatar-placeholder.png";
 
 /*
  | OTHER COMPONENTS
@@ -18,6 +19,7 @@ import CARD_BG from "../../../Assets/Images/card-image.jpg";
 import XInput      from "../../../Components/XInput/XInput";
 import XAvatar     from "../../../Components/XAvatar/XAvatar";
 import XButtonFlat from "../../../Components/XButton/XButtonFlat";
+
 
 
 import LoginHandler from "../LogginHandler";
@@ -273,7 +275,7 @@ const XAccount = (props) => {
                                         <img className="card-img-top" src={CARD_BG} alt="card-img"/>
                                         <div className="card-body placeholder-glow">
 
-                                            <XAvatar id="xaccount__avatar" src={userInfo.image} size="40%"/>
+                                            <XAvatar id="xaccount__avatar" src={userInfo.image?userInfo.image:AVATAR} size="40%"/>
 
                                             <h4 className={
                                                 "card-title" + 

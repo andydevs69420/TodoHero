@@ -57,7 +57,7 @@ const SignupPage = (props) => {
 
         if (passw !== cpass)
         return;
-
+       
         onLoadChange(true);
 
         fetch(SIGNUP, {
