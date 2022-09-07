@@ -97,6 +97,7 @@ const SigninPage = () => {
     }
 
     const onGSigninOk = (obj) => {
+      
         onLoadChange(true);
 
         // navigate("/todoheroapp");
@@ -106,8 +107,9 @@ const SigninPage = () => {
             },
             method: "POST",
             body: JSON.stringify({
-                email: obj.profileObj.email,
-                name : obj.profileObj.name ,
+                email : obj.profileObj.email,
+                name  : obj.profileObj.name ,
+                image : obj.profileObj.imageUrl ,
             })
         })
         .then((res) => res.json())

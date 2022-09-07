@@ -3,13 +3,12 @@
  *   All rights reserved.
  */
 
-
-
 #xaccount__main
 { overflow-y: auto !important; }
 
 
-@media screen and (max-width: 768px) 
+#xaccount__avatar
 {
-   
+    margin-top: calc(-20% - 0.5rem) !important; 
+    margin-bottom: 1rem;
 }

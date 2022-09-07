@@ -16,6 +16,7 @@ import CARD_BG from "../../../Assets/Images/card-image.jpg";
  | OTHER COMPONENTS
  */
 import XInput      from "../../../Components/XInput/XInput";
+import XAvatar     from "../../../Components/XAvatar/XAvatar";
 import XButtonFlat from "../../../Components/XButton/XButtonFlat";
 
 
@@ -31,7 +32,7 @@ const XAccount = (props) => {
 
     const [userInfo, updateUserInfo] = useState({});
     const [serverMessage, updateServerMesage] = useState("");
-    const [passwordState, updatePasswordState] = useState({});
+    const [confPassword, updateConfPasswordState] = useState("");
 
     useEffect(() => {
         fetchUser();
@@ -112,6 +113,41 @@ const XAccount = (props) => {
             return updateServerMesage(res_json.message);
         },
         (error) => console.log("Error transmitting data at " + (getAccountLink() + "/update/password")));
+    }
+
+
+    const onConfPassUpdate = (e) => {
+        let passw = document.getElementById("xaccount__new-password"    ).value;
+        let cpass = document.getElementById("xaccount__confirm-password").value;
+
+        if (passw.length <= 0)
+        return updateConfPasswordState("");
+
+        if (passw !== cpass)
+            updateConfPasswordState("password does not match!");
+        else
+            updateConfPasswordState("");
+    }
+
+    const onNewDP = (e) => {
+
+        if (e.target.files.length <= 0)
+        return;
+
+        let formD = new FormData();
+            formD.append("file", e.target.files[0]);
+            formD.append("host", process.env.REACT_APP_HOST);
+        
+        fetch(getAccountLink() + "/update/image", {
+            method: "POST",
+            body: formD
+        })
+        .then((res) => res.json())
+        .then((res_json) => {
+            if (res_json.status === "ok")
+            return fetchUser();
+        }, 
+        (error) => console.log("Error transmitting data at " + (getAccountLink() + "/update/image")));
     }
 
     const cleanup = () => {
@@ -209,7 +245,9 @@ const XAccount = (props) => {
                                                             fgTheme="text-white" 
                                                             placeholder="confirm password" 
                                                             type="password" 
-                                                            pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" />
+                                                            onChange={onConfPassUpdate}
+                                                            pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"/>
+                                                        <small className="small text-danger">{confPassword}</small>
                                                     </div>
                                                 </div>
                                                 <div className="col-12 col-sm-4 col-md-3 offset-0 offset-sm-8 offset-md-9 px-0">
@@ -234,6 +272,9 @@ const XAccount = (props) => {
                                     <div className="card border-0 shadow-sm">
                                         <img className="card-img-top" src={CARD_BG} alt="card-img"/>
                                         <div className="card-body placeholder-glow">
+
+                                            <XAvatar id="xaccount__avatar" src={userInfo.image} size="40%"/>
+
                                             <h4 className={
                                                 "card-title" + 
                                                 ((userInfo.name)?"":" placeholder")
@@ -253,6 +294,12 @@ const XAccount = (props) => {
                                                     }
                                                 </span>
                                             </p>
+                                        </div>
+                                        <div className="card-footer text-end border-0 bg-transparent">
+                                            <input id="xaccount__image-pick" className="d-none form-control" type="file" accept=".png" onChange={onNewDP}/>
+                                            <label className="btn btn-primary border-0 bg-transparent" htmlFor="xaccount__image-pick" role="button">
+                                                <i className="bi bi-camera-fill text-muted"></i>
+                                            </label>
                                         </div>
                                     </div>
                                 </div>

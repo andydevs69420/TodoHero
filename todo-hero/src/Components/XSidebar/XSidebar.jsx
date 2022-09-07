@@ -61,7 +61,7 @@ const XSidebar = (props) => {
                             <Link className="nav-link p-0" to="todos">
                                 <span className={"xsidebar__link-btn text-dark rounded " + active.todos}>
                                     <i className="bi bi-clock-fill"></i>
-                                    <span className="d-none d-sm-inline-block ms-2">Todos</span>
+                                    <span className="d-none d-sm-inline-block ms-2 small">TODO</span>
                                 </span>
                             </Link>
                         </li>
@@ -69,7 +69,7 @@ const XSidebar = (props) => {
                             <Link className="nav-link p-0" to="manage">
                                 <span className={"xsidebar__link-btn text-dark rounded " + active.manage}>
                                     <i className="bi bi-grid-1x2-fill"></i>
-                                    <span className="d-none d-sm-inline-block ms-2">Manage</span>
+                                    <span className="d-none d-sm-inline-block ms-2 small">MANAGE</span>
                                 </span>
                             </Link>
                         </li>
@@ -77,7 +77,7 @@ const XSidebar = (props) => {
                             <Link className="nav-link p-0" to="subscription">
                                 <span className={"xsidebar__link-btn text-dark rounded " + active.subscription}>
                                     <i className="bi bi-cart-fill"></i>
-                                    <span className="d-none d-sm-inline-block ms-2">Subscription</span>
+                                    <span className="d-none d-sm-inline-block ms-2 small">SUBSCRIPTION</span>
                                 </span>
                             </Link>
                         </li>
@@ -85,7 +85,7 @@ const XSidebar = (props) => {
                             <Link className="nav-link p-0" to="account">
                                 <span className={"xsidebar__link-btn text-dark rounded " + active.account}>
                                     <i className="bi bi-person-fill"></i>
-                                    <span className="d-none d-sm-inline-block ms-2">Account</span>
+                                    <span className="d-none d-sm-inline-block ms-2 small">ACCOUNT</span>
                                 </span>
                             </Link>
                         </li>
