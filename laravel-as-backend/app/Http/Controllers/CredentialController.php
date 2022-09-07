@@ -1,14 +1,21 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use App\Models\UserPlanDetails;
+
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Registered;
-
 use Illuminate\Support\Facades\Hash;
-
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Mail;
+
+
+
+
+use App\Models\User;
+use App\Models\UserPlanDetails;
+use App\Mail\SendVerificationEmail;
+
+
 
 class CredentialController extends Controller
 {
@@ -83,13 +90,6 @@ class CredentialController extends Controller
         {   // user does not exist
             $response["status"] = "bad";
             $response["email" ] = "User does not exist!";
-            return json_encode($response);
-        }
-
-        if (!$user->verified_at)
-        {   // user does is not verified
-            $response["status"] = "bad";
-            $response["email" ] = "User is not yet verified!";
             return json_encode($response);
         }
 

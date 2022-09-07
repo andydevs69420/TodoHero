@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 
 use App\Models\Todo;
+use App\Models\Plan;
 use App\Models\UserPlanDetails;
 use App\Models\UserTodoDetails;
 
@@ -56,11 +57,18 @@ class TodoController extends Controller
         }
 
         /** user exist */
-
         // -> check plan
         $number_of_todos = count(UserTodoDetails::where("user_id_fk", "=", $id)->get());
 
-        if (($number_of_todos + 1) > $user->number_of_todos)
+        $limiter = $user->number_of_todos;
+
+        // unpaid account so apply "freemium" plan
+        if ($user->plan_status_id_fk == 1)
+        // limiter is freemium
+        $limiter = Plan::where("plan_id", "=", 1)
+            ->get()->first()->number_of_todos;
+
+        if (($number_of_todos + 1) > $limiter)
         {   // exceeded plan offer
             $response["status" ] = "bad";
             $response["message"] = "Maximum number of todo has been reached!";
