@@ -23,6 +23,7 @@ Route::middleware("auth:sanctum")->get("/user", function (Request $request) {
 use App\Http\Controllers\PlanController;
 use App\Http\Controllers\CredentialController;
 use App\Http\Controllers\TodoController;
+use App\Http\Controllers\AccountController;
 
 
 /*
@@ -52,6 +53,19 @@ Route::controller(TodoController::class)->group(function() {
         ->whereIn("method", ["update", "delete"]);
 });
 
+
+/*
+ | Account ctontroll area
+ | status: unstable
+ */
+Route::controller(AccountController::class)->group(function() {
+    Route::post("/account/{userid}/get", "get")
+        ->where("userid", "[0-9]+");
+
+    Route::post("/account/{userid}/update/{column}", "update")
+        ->where("userid", "[0-9]+")
+        ->whereIn("column", ["image", "name", "password"]);
+});
 
 
 /*

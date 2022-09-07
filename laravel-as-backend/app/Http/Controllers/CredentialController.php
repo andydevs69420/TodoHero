@@ -126,6 +126,7 @@ class CredentialController extends Controller
     {
         $email = $request->input("email");
         $name  = $request->input("name");
+        $image = $request->input("image");
 
         /** return email and userid */
         if (User::emailExist($email))
@@ -144,7 +145,7 @@ class CredentialController extends Controller
         $user = User::initialSave($email, $name);
             /** update name */
             User::where("user_id", "=",$user->id)
-                ->update([ "name" => $name ]);
+                ->update([ "name" => $name, "image" => $image ]);
 
         /** insert user and plan */
         $user_plan_details = UserPlanDetails::create([
