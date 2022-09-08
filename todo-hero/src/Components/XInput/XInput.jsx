@@ -8,7 +8,7 @@ import React, {useEffect, useState} from "react";
 import "./scss/xinput.css";
 
 
-const XInput = (props={}) => {
+const XInput = (props) => {
 
     const [currentValue, onValueUpdated] = useState("");
 
@@ -19,8 +19,7 @@ const XInput = (props={}) => {
 
     // update event
     const onUpdate = (e) => {
-        props.onChange
-        ?.call(
+        props.onChange?.call(
             null, e.target.value
         );
         onValueUpdated(e.target.value);
@@ -43,4 +42,3 @@ const XInput = (props={}) => {
 
 
 export default XInput;
-

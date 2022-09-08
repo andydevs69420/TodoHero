@@ -7,7 +7,7 @@ import React from "react";
 
 const XTodos = (props) => {
     return (
-        <section className="d-block position-relative w-100 h-100">
+        <section id="xaccount__main" className="d-block position-relative p-0 p-sm-3 w-100 h-100">
             fooc
         </section>
     );

@@ -288,7 +288,7 @@ const XAccount = (props) => {
                                                     {(userInfo.plan_name)?
                                                         (
                                                             <span className="d-inline text-muted">
-                                                                <i className="bi bi-ticket-fill text-warning"></i> {userInfo.plan_name}
+                                                                <i className="bi bi-ticket-fill text-warning"></i> {userInfo.plan_name?.toUpperCase() + " PLAN USER"}
                                                             </span>
                                                         )
                                                         :

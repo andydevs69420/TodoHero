@@ -16,10 +16,10 @@ import { gapi } from "gapi-script"
 /*
  | OTHER COMPONENTS
  */ 
-import XLoading from "../../Components/XLoading/XLoading";
-import XInput  from "../../Components/XInput/XInput";
-import XButton from "../../Components/XButton/XButton";
-import XRoundLink from "../../Components/XRoundLink/XRoundLink";
+import XLoading    from "../../Components/XLoading/XLoading";
+import XInput      from "../../Components/XInput/XInput";
+import XButtonFlat from "../../Components/XButton/XButtonFlat";
+import XRoundLink  from "../../Components/XRoundLink/XRoundLink";
 
 
 /*
@@ -183,16 +183,16 @@ const SigninPage = () => {
                                 </div>
                                 <div className="col-12 py-2">
                                     <XInput 
-                                        id="signin-page__passw-input"
+                                        id="signin-page__passw-input" 
                                         iconClass="bi bi-lock-fill"
                                         type="password"
                                         placeholder="password" required/>
                                     <small className="small text-danger">{fieldValidate.passw}</small>
                                 </div>
                                 <div className="col-12 pt-2 ">
-                                    <XButton id="signin-page__btn-signin" type="submit">
+                                    <XButtonFlat id="signin-page__btn-signin" type="submit">
                                         SIGNIN
-                                    </XButton>
+                                    </XButtonFlat>
                                 </div>
                                 <div className="col-12">
                                     <div className="d-flex flex-row flex-nowrap align-items-center w-100">

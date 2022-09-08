@@ -26,6 +26,7 @@ import SignupPage   from "../Pages/SignupPage/SignupPage";
 import TodoHeroApp  from "../Pages/TodoHeroApp/TodoHeroapp";
     import XTodos   from "../Pages/TodoHeroApp/XTodos/XTodos";
     import XManage  from "../Pages/TodoHeroApp/XManage/XManage";
+    import XSubscription  from "../Pages/TodoHeroApp/XSubscription/XSubscription";
     import XAccount from "../Pages/TodoHeroApp/XAccount/XAccount";
 
 const App = () => {
@@ -38,7 +39,7 @@ const App = () => {
                 <Route path="todoheroapp" element={<TodoHeroApp/>}>
                     <Route path="todos"        index element={<XTodos/>}/>
                     <Route path="manage"       index element={<XManage/>}/>
-                    <Route path="subscription" index element={<div>Subscription</div>}/>
+                    <Route path="subscription" index element={<XSubscription/>}/>
                     <Route path="account"      index element={<XAccount/>}/>
                 </Route>
             </Routes>
