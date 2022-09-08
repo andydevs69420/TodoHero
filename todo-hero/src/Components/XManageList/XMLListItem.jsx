@@ -22,7 +22,7 @@ const XMLListItem = ({todoid, title, description, date, time, onClick, dataBsTar
             <div className="card-body">
                 <h6 className="card-title text-truncate">{title}</h6>
                 <p className="card-text small text-truncate text-muted">
-                    {description.substring(0, 80)}
+                    {description?.substring(0, 80)}
                 </p>
             </div>
             <div className="card-footer border-0 bg-transparent px-3 py-2">

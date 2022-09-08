@@ -9,6 +9,6 @@ class Todo extends Model
 {
     use HasFactory;
     protected $table = "todo";
-    public $timestamps = false;
+    public $timestamps = true;
     protected $fillable  = ["title", "date", "time", "description"];
 }
