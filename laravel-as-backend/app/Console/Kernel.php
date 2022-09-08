@@ -23,6 +23,7 @@ class Kernel extends ConsoleKernel
         $schedule->call(function () {
 
 
+
             /** handles plan */
             /*
              | ONLY UPDATE EXPIRED PLAN SUBCRIPTION
@@ -32,7 +33,7 @@ class Kernel extends ConsoleKernel
                 UPDATE user_plan_details SET user_plan_details.plan_status_id_fk = 1
                             WHERE (month(user_plan_details.date_validated) < month(CURRENT_DATE)) and
                                   ( year(user_plan_details.date_validated) = year (CURRENT_DATE)) and
-                                  (user_plan_details.plan_status_id_fk = 2);
+                                  (user_plan_details.plan_status_id_fk = 2 and user_plan_details.plan_id_fk != 1);
             ");
         })
         ->timezone("Asia/Manila")
