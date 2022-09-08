@@ -5,6 +5,7 @@
 
 
 import React, { useEffect, useState } from "react";
+import "./scss/xsubscription.css";
 
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
@@ -38,16 +39,10 @@ function getAccountLink()
 
 const XSubscription = (props) => {
 
-    const [userInfo,updateUserInfo] = useState({});
-    const [selectPlan, updateSelectPlan] = useState({
-        currentPlan: null
-    });
+    const [userInfo, updateUserInfo] = useState({});
+    const [selectPlan, updateSelectPlan] = useState(null);
     const [clientSecret, updateClientSecret] = useState("");
     const [planListFetched, onFetchPlanSuccess] = useState([]);
-
-    useEffect(() => {
-        fetchUser();
-    }, []);
 
     useEffect(function() {
         fetch(PLAN_LIST)
@@ -57,20 +52,7 @@ const XSubscription = (props) => {
             (error) => console.log("Error fetching plans data at " + PLAN_LIST));
     }, []);
 
-
     useEffect(() => {
-        const myCarousel = document.getElementById("xsubscription__plan-carousel");
-        myCarousel.addEventListener('slide.bs.carousel', (event) => {
-            // do something...
-            updateClientSecret("");
-            updateSelectPlan((old) => ({
-                ...old, 
-                currentPlan: parseInt(event.relatedTarget.getAttribute("data-index"))
-            }));
-        })
-    }, []);
-
-    const fetchUser = () => {
         fetch(getAccountLink() + "/get", {
             headers: {
                 "Content-Type": "application/json"
@@ -80,25 +62,35 @@ const XSubscription = (props) => {
         .then((res) => res.json())
         .then((res_json) => {
             if (res_json.status === "ok")
-            {
-                if( res_json.usrdata.plan_status_id === 1)
-                onUpgrade();
-                updateSelectPlan((old) => ({
-                    ...old, 
-                    currentPlan: res_json.usrdata.plan_id
-                }));
-                return updateUserInfo(res_json.usrdata);
-            }
+            return updateUserInfo(res_json.usrdata);
         },
         (error) => console.log("Error transmitting data at " + getAccountLink() + "/get"));
-    }
+    }, []);
+
+    useEffect(() => {
+        const myCarousel = document.getElementById("xsubscription__plan-carousel");
+        myCarousel.addEventListener('slide.bs.carousel', (event) => {
+            // do something...
+            updateClientSecret("");
+            updateSelectPlan(parseInt(event.relatedTarget.getAttribute("data-index")));
+        })
+    }, []);
+
+
+    useEffect(() => {
+        updateSelectPlan(userInfo.plan_id);
+    }, [userInfo]);
 
     /** on upgrade account */ 
-    const onUpgrade = () => {
+    function onUpgrade() {
+        
+        if (planListFetched[selectPlan - 1].plan_price < 1)
+        return 
+        
         fetch("http://localhost:4000/create-payment-intent", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(planListFetched[selectPlan.currentPlan]),
+            body: JSON.stringify(planListFetched[selectPlan - 1]),
         })
         .then((res) => res.json())
         .then((data) => updateClientSecret(data.clientSecret));
@@ -106,15 +98,15 @@ const XSubscription = (props) => {
     
     /** Check if upgradable account */
     const isUpgradeable = () => {
-        if (!selectPlan.currentPlan)
+        if (!selectPlan)
             return false;
-        return selectPlan.currentPlan !== userInfo.plan_id;
+        return selectPlan !== userInfo.plan_id;
     }
 
 
     /** Check if upgradable account */
     const isExpired = () => {
-        return clientSecret? true: (clientSecret && !isUpgradeable());
+        return (userInfo.plan_status_id === 1);
     }
 
 
@@ -133,7 +125,7 @@ const XSubscription = (props) => {
 
             <div className="container-fluid p-4 bg-white shadow-sm">
                 <div className="row gy-5 gy-md-0">
-                    <div className="col-12 col-md-6">
+                    <div className={"col-12 col-md-6" + ((clientSecret)?"":" col-md-8 offset-0 offset-md-2")}>
                         <div className="container mb-3 px-0">
                             <div id="xsubscription__plan-carousel" className="carousel slide" data-interval={false}>
                                 <div className="carousel-inner rounded shadow">
@@ -141,7 +133,12 @@ const XSubscription = (props) => {
                                         return (
                                             <div className={"carousel-item position-relative" + ((data.plan_id === userInfo.plan_id)?" active":"")} key={data.plan_id} data-index={data.plan_id}>
                                                 <img src={CAROUSEL_BG} className="d-block img-fluid w-100" alt="carousel-bg"/>
-                                                <span className="d-block position-absolute top-0">{data.plan_id}</span>
+                                                <div className="xsubscription__plan-entry d-block position-absolute p-3">
+                                                    <h3 className="text-white mb-3">{data.plan_name?.toUpperCase()}</h3>
+                                                    <span className="d-block text-white pb-1"><i className="fa fa-check-circle"></i> Total of {data.number_of_todos} todos</span>
+                                                    <span className="d-block text-white py-1"><i className="fa fa-check-circle"></i> Email notification</span>
+                                                    <span className="d-block text-white pt-1"><i className="fa-solid fa-sack-dollar"></i> ₱{data.plan_price}/month</span>
+                                                </div>
                                             </div>
                                         )
                                     })}
@@ -160,37 +157,45 @@ const XSubscription = (props) => {
                         <div className="container-fluid px-0">
                             <div className="row gy-2">
                                 {/* plan name */}
-                                <div className="col-6">
+                                <div className="col-4 col-sm-6 col-xl-3">
                                     <span className="fw-bold text-muted"><i className="bi bi-ticket-fill"></i> PLAN</span>
                                 </div>
-                                <div className="col-6 col-md-auto">
-                                    <span className="text-muted">{userInfo.plan_name?.toUpperCase()}</span>
+                                <div className="col-8 col-sm-6 col-xl-9">
+                                    <span className="text-muted">{userInfo?.plan_name?.toUpperCase()}</span>
                                 </div>
                                 {/* plan status */}
-                                <div className="col-6">
+                                <div className="col-4 col-sm-6 col-xl-3">
                                     <span className="fw-bold text-muted"> <i className="bi bi-heart-fill text-muted"></i> STATUS</span>
                                 </div>
-                                <div className="col-6 col-md-auto">
+                                <div className="col-4 col-sm-6 col-xl-9">
                                     <span className="text-muted">{userInfo.plan_status_name?.toUpperCase()}</span>
                                 </div>
+                                {/* on expired */}
+                                {(isExpired() && !isUpgradeable()) &&
+                                    <div className="col-12 col-md-5">
+                                        <XButtonFlat className="text-white btn-sm" btnTheme="btn-success" onClick={onUpgrade}>
+                                            RENEW
+                                        </XButtonFlat>
+                                    </div>
+                                }
                                 {/* on upgrade */}
                                 {isUpgradeable() &&
                                     <div className="col-12 col-md-5">
-                                        <XButtonFlat className="text-white btn-sm" btnTheme="btn-success" onClick={onUpgrade}>SELECT PLAN {selectPlan.currentPlan}</XButtonFlat>
+                                        <XButtonFlat className="text-white btn-sm" btnTheme="btn-success" onClick={onUpgrade}>
+                                            CHANGE TO THIS PLAN {selectPlan} 
+                                        </XButtonFlat>
                                     </div>
                                 }
                             </div>
                         </div>
                     </div>
-                    <div className="col-12 col-md-6 col-xl-4">
-                        {(clientSecret || isExpired())?
+                    <div className="col-12 col-md-6 col-xl-4 text-center">
+                        {clientSecret &&
                             (
                                 <Elements options={options} stripe={stripePromise}>
                                     <XCheckout />
                                 </Elements>
                             )
-                            :
-                            "asdasdasdasdasd"
                         }
                     </div>
                 </div>

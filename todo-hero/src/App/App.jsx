@@ -18,6 +18,9 @@ import "bootstrap/dist/js/bootstrap.bundle.js";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
 
+import "@fortawesome/fontawesome-free/js/all";
+
+
 /*
  | PAGES IMPORTS
  */ 

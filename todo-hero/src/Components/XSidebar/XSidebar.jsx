@@ -59,33 +59,33 @@ const XSidebar = (props) => {
                     <ul className="navbar-nav flex-row flex-sm-column justify-content-around px-1 py-3 p-sm-1">
                         <li className="nav-item my-0 mb-sm-1">
                             <Link className="nav-link p-0" to="todos">
-                                <span className={"xsidebar__link-btn text-dark rounded " + active.todos}>
-                                    <i className="bi bi-clock-fill"></i>
-                                    <span className="d-none d-sm-inline-block ms-2 small">TODO</span>
+                                <span className={"xsidebar__link-btn text-muted rounded " + active.todos}>
+                                    <i className="bi bi-calendar-fill"></i>
+                                    <span className="d-none d-sm-inline-block ms-2 small">Todo</span>
                                 </span>
                             </Link>
                         </li>
                         <li className="nav-item my-0 my-sm-1">
                             <Link className="nav-link p-0" to="manage">
-                                <span className={"xsidebar__link-btn text-dark rounded " + active.manage}>
+                                <span className={"xsidebar__link-btn text-muted rounded " + active.manage}>
                                     <i className="bi bi-grid-1x2-fill"></i>
-                                    <span className="d-none d-sm-inline-block ms-2 small">MANAGE</span>
+                                    <span className="d-none d-sm-inline-block ms-2 small">Manage</span>
                                 </span>
                             </Link>
                         </li>
                         <li className="nav-item my-0 my-sm-1">
                             <Link className="nav-link p-0" to="subscription">
-                                <span className={"xsidebar__link-btn text-dark rounded " + active.subscription}>
+                                <span className={"xsidebar__link-btn text-muted rounded " + active.subscription}>
                                     <i className="bi bi-cart-fill"></i>
-                                    <span className="d-none d-sm-inline-block ms-2 small">SUBSCRIPTION</span>
+                                    <span className="d-none d-sm-inline-block ms-2 small">Plan</span>
                                 </span>
                             </Link>
                         </li>
                         <li className="nav-item my-0 mt-sm-1">
                             <Link className="nav-link p-0" to="account">
-                                <span className={"xsidebar__link-btn text-dark rounded " + active.account}>
+                                <span className={"xsidebar__link-btn text-muted rounded " + active.account}>
                                     <i className="bi bi-person-fill"></i>
-                                    <span className="d-none d-sm-inline-block ms-2 small">ACCOUNT</span>
+                                    <span className="d-none d-sm-inline-block ms-2 small">Account</span>
                                 </span>
                             </Link>
                         </li>
