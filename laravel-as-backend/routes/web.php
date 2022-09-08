@@ -17,6 +17,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/verification', function () {
-    return view('mail.verification-email');
+Route::get("/mail", function () {
+    return view('mail.send-email');
 });
