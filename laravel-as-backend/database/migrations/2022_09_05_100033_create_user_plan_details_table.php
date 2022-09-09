@@ -20,7 +20,7 @@ return new class extends Migration
             $table->bigInteger("plan_status_id_fk")->unsigned();
             $table->date("date_validated");
 
-            $table->foreign("user_id_fk")->references("user_id")->on("user");
+            $table->foreign("user_id_fk")->references("user_id")->on("user")->onDelete("cascade");
             $table->foreign("plan_id_fk")->references("plan_id")->on("plan");
             $table->foreign("plan_status_id_fk")->references("plan_status_id")->on("plan_status");
         });
