@@ -5,7 +5,12 @@
 
 
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./scss/xaccount.css";
+
+import {GoogleLogout } from "react-google-login";
+// eslint-disable-next-line no-unused-vars
+import { gapi } from "gapi-script"
 
 /*
  | IMAGE ASSETS
@@ -32,6 +37,7 @@ function getAccountLink()
 
 const XAccount = (props) => {
 
+    const navigate = useNavigate();
     const [userInfo, updateUserInfo] = useState({});
     const [serverMessage, updateServerMesage] = useState("");
     const [confPassword, updateConfPasswordState] = useState("");
@@ -150,6 +156,16 @@ const XAccount = (props) => {
             return fetchUser();
         }, 
         (error) => console.log("Error transmitting data at " + (getAccountLink() + "/update/image")));
+    }
+
+    const logoutAll= (x) => {
+        localStorage.setItem("todoherouser", null);
+        navigate("/signin");
+    }
+
+    const logoutFail = () => {
+        localStorage.setItem("todoherouser", null);
+        navigate("/signin");
     }
 
     const cleanup = () => {
@@ -298,10 +314,28 @@ const XAccount = (props) => {
                                             </p>
                                         </div>
                                         <div className="card-footer text-end border-0 bg-transparent">
-                                            <input id="xaccount__image-pick" className="d-none form-control" type="file" accept=".png" onChange={onNewDP}/>
-                                            <label className="btn btn-primary border-0 bg-transparent" htmlFor="xaccount__image-pick" role="button">
-                                                <i className="bi bi-camera-fill text-muted"></i>
-                                            </label>
+                                            <div className="d-flex align-items-center justify-content-between">
+                                                {(LoginHandler?.getLoginCred().isGoogle)?
+                                                    <GoogleLogout 
+                                                        clientId={process.env.REACT_APP_GOOGLE_API}
+                                                        className="float-start" 
+                                                        onLogoutSuccess={logoutAll} 
+                                                        onFailure={logoutFail} 
+                                                        buttonText="SIGNOUT GOOGLE"/>
+                                                    :
+                                                    <span className="d-inline-block shadow-sm">
+                                                        <button className="btn btn-success" onClick={logoutAll}>
+                                                            LOGOUT
+                                                        </button>
+                                                    </span>
+                                                }
+                                                <span>
+                                                    <input id="xaccount__image-pick" className="d-none form-control" type="file" accept=".png" onChange={onNewDP}/>
+                                                    <label className="btn btn-primary border-0 bg-transparent" htmlFor="xaccount__image-pick" role="button">
+                                                        <i className="bi bi-camera-fill text-muted"></i>
+                                                    </label>
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

@@ -18,7 +18,7 @@ class LoginHandler
         if (!credObj)
         return false;
 
-        return !(!(credObj.id && credObj.email));
+        return !(!((credObj.id && credObj.email) || credObj.isGoogle));
     }
 
     static getLoginCred()

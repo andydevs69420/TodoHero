@@ -81,6 +81,7 @@ const SigninPage = () => {
                     JSON.stringify({
                         id   : res_json.userdata.id   ,
                         email: res_json.userdata.email,
+                        isGoogle: false
                     }),
                 );
                 return navigate("/todoheroapp/todos");
@@ -121,6 +122,7 @@ const SigninPage = () => {
                 JSON.stringify({
                     id   : res_json.id   ,
                     email: res_json.email,
+                    isGoogle: true
                 }),
             );
             return navigate("/todoheroapp/todos");
