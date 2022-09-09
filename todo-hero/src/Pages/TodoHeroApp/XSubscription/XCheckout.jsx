@@ -76,6 +76,22 @@ const XCheckout = ({plan}) => {
 
         setIsLoading(true);
 
+
+        const savePlan = (plan) => {
+            fetch(getAccountLink() + "/update/plan", {
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                method: "POST",
+                body: JSON.stringify(plan)
+            })
+            .then((res) => res.json())
+            .then((res_json) => {
+                console.log(res_json.message);
+            },
+            (error) => console.log(getAccountLink() + "/update/plan"));
+        }
+
         const { error } = await stripe.confirmPayment({
             elements,
             confirmParams: {
@@ -98,21 +114,6 @@ const XCheckout = ({plan}) => {
 
         setIsLoading(false);
     };
-
-    const savePlan = (plan) => {
-        fetch(getAccountLink() + "/update/plan", {
-            headers: {
-                "Content-Type": "application/json"
-            },
-            method: "POST",
-            body: JSON.stringify(plan)
-        })
-        .then((res) => res.json())
-        .then((res_json) => {
-            console.log(res_json.message);
-        },
-        (error) => console.log(getAccountLink() + "/update/plan"));
-    }
 
     return (
         <form id="payment-form" onSubmit={handleSubmit}>

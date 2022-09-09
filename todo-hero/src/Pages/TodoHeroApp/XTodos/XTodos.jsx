@@ -49,7 +49,7 @@ const XTodos = (props) => {
     const onSearch = (e) => onFilter(e.target.value);
 
     return (
-        <section id="xtodos__main" className="d-block position-relative p-0 p-sm-3 w-100 h-100">
+        <section id="xtodos__main" className="d-block position-relative p-0 p-sm-2 w-100 h-100">
             {/* main view */}
             <div className="d-block p-0 px-sm-2 w-100 h-100">
                 <div id="xtodos__todos-controls-wrapper" className="d-block px-3 px-sm-0 pt-5 pb-4 pt-sm-2 pb-sm-3">

@@ -64,7 +64,7 @@ Route::controller(AccountController::class)->group(function() {
 
     Route::post("/account/{userid}/update/{column}", "update")
         ->where("userid", "[0-9]+")
-        ->whereIn("column", ["image", "name", "password"]);
+        ->whereIn("column", ["image", "name", "password", "plan"]);
 });
 
 

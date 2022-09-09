@@ -52,6 +52,8 @@ class AccountController extends Controller
                 return $this->updateName($request, $userid);
             case "password":
                 return $this->updatePassword($request, $userid);
+            case "plan":
+                return $this->updatePlan($request, $userid);
         }
     }
 
@@ -158,6 +160,34 @@ class AccountController extends Controller
         return json_encode([
             "status"  => "ok",
             "message" => "Succssfully updated account!",
+        ]);
+    }
+
+
+
+    /**
+     * Update plan information
+     * @param Request $request
+     * @param int $userid
+     * @return Array|JSON
+     **/
+    private function updatePlan(Request $request, int $userid)
+    {
+        $updated = UserPlanDetails::where("user_id_fk", "=", $userid)
+            ->update([
+                "plan_id_fk"        => $request->input("plan_id"),
+                "plan_status_id_fk" => 2
+            ]);
+
+        if (!$updated)
+        return json_encode([
+            "status"  => "bad",
+            "message" => "Something went wrong from the server!"
+        ]);
+
+        return json_encode([
+            "status"  => "ok",
+            "message" => "recieves plan update!"
         ]);
     }
 }

@@ -85,7 +85,23 @@ const XSubscription = (props) => {
     function onUpgrade() {
         
         if (planListFetched[selectPlan - 1].plan_price < 1)
-        return 
+        {
+            fetch(getAccountLink() + "/update/plan", {
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                method: "POST",
+                body: JSON.stringify(planListFetched[selectPlan - 1])
+            })
+            .then((res) => res.json())
+            .then((res_json) => {
+                updateSelectPlan(planListFetched[selectPlan - 1].plan_id);
+                window.location.reload();
+            },
+            (error) => console.log(getAccountLink() + "/update/plan"));
+            return;
+        }
+
         
         fetch("http://localhost:4000/create-payment-intent", {
             method: "POST",
