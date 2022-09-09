@@ -193,7 +193,7 @@ const XSubscription = (props) => {
                         {clientSecret &&
                             (
                                 <Elements options={options} stripe={stripePromise}>
-                                    <XCheckout />
+                                    <XCheckout plan={planListFetched[selectPlan - 1]} />
                                 </Elements>
                             )
                         }

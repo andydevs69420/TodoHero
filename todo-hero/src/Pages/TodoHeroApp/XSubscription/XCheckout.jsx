@@ -17,7 +17,17 @@ import {
 import XButtonFlat from "../../../Components/XButton/XButtonFlat";
 
 
-const XCheckout = () => {
+import LoginHandler from "../LogginHandler";
+
+
+function getAccountLink()
+{
+    const USER_LINK = process.env.REACT_APP_API_HOST + "/account/" + LoginHandler.getLoginCred().id;
+    return USER_LINK;
+}
+
+
+const XCheckout = ({plan}) => {
     const stripe = useStripe();
     const elements = useElements();
 
@@ -70,10 +80,16 @@ const XCheckout = () => {
             elements,
             confirmParams: {
                 // Make sure to change this to your payment completion page
-                return_url: "http://localhost:3000/todoheroapp/subscription",
+                return_url: (function() {
+
+                    // save
+                    savePlan(plan);
+
+                    return "http://localhost:3000/todoheroapp/subscription";
+                })(),
             },
         });
-        console.log(error);
+       
         if (error.type === "card_error" || error.type === "validation_error") {
             setMessage(error.message);
         } else {
@@ -82,6 +98,21 @@ const XCheckout = () => {
 
         setIsLoading(false);
     };
+
+    const savePlan = (plan) => {
+        fetch(getAccountLink() + "/update/plan", {
+            headers: {
+                "Content-Type": "application/json"
+            },
+            method: "POST",
+            body: JSON.stringify(plan)
+        })
+        .then((res) => res.json())
+        .then((res_json) => {
+            console.log(res_json.message);
+        },
+        (error) => console.log(getAccountLink() + "/update/plan"));
+    }
 
     return (
         <form id="payment-form" onSubmit={handleSubmit}>
