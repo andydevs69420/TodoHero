@@ -3,7 +3,7 @@
 Simple todo organizer web application.
 
 ## SAMPLE IMAGE :camera:
-### REGULAR VIEW
+- REGULAR VIEW
 <p align="left">
 
 </p>
