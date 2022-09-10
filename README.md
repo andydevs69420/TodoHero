@@ -36,8 +36,8 @@ Simple todo organizer web application.
         $users = UserTodoDetails::join("user", "user_todo_details.user_id_fk", "=", "user.user_id")
             ->join("todo", "user_todo_details.todo_id_fk", "=", "todo.todo_id")
             ->whereMonth("todo.date", "<=", DB::Raw("MONTH(CURRENT_DATE)"))
-            ->whereDay("todo.date"  , "<=", DB::Raw("CURRENT_DATE"))
-            ->whereTime("todo.time" , "<" , DB::Raw("MONTH(CURRENT_TIME)"))
+            ->whereDay("todo.date"  , "<=", DB::Raw("DAY(CURRENT_DATE)"))
+            ->whereTime("todo.time" , "<" , DB::Raw("TIME(CURRENT_TIME)"))
             ->get();
         
     ?>
