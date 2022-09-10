@@ -1,18 +1,29 @@
 
-# TodoHero app
+# TodoHero App
 Simple todo organizer web application.
 
 
 ## COMPONENTS :camera:
-[x] ADMIN
-[x] TodoHero App
+- [X] ADMIN Page
+- [x] TodoHero App
     - Todo List
     - Todo Manager
     - Plan Manager
     - Account Manager
 
-[x] Online Payment
-[x] Email Notification
+- [x] Online Payment
+- [x] Email Notification
+
+
+## CHANGES
+<code>
+```php
+
+    echo "hola!";
+
+```
+</code>
+
 
 ## SAMPLE IMAGES :camera:
 - REGULAR VIEW
