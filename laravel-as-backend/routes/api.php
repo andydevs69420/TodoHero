@@ -56,7 +56,7 @@ Route::controller(TodoController::class)->group(function() {
 
 /*
  | Account ctontroll area
- | status: unstable
+ | status: stable
  */
 Route::controller(AccountController::class)->group(function() {
     Route::post("/account/{userid}/get", "get")

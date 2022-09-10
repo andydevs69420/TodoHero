@@ -12,21 +12,25 @@ Simple todo organizer web application.
     - Account Manager
 
 - [x] Online Payment
+    - Stripe Payment Gateway
 - [x] Email Notification
 
 
 ## CHANGES
-<code>
 ```php
 
     echo "hola!";
 
 ```
-</code>
 
 
 ## SAMPLE IMAGES :camera:
 - REGULAR VIEW
 <p align="left">
-
+    <img src="screenshots/localhost_3000_signin.png" alt="md-to-xl and up" width="240px"/>
+    <img src="screenshots/localhost_3000_signup.png" alt="md-to-xl and up" width="240px"/>
+    <img src="screenshots/localhost_3000_todoheroapp_todos.png" alt="md-to-xl and up" width="240px"/>
+    <img src="screenshots/localhost_3000_todoheroapp_todos%20(1).png" alt="md-to-xl and up" width="240px"/>
+    <img src="screenshots/localhost_3000_todoheroapp_todos%20(2).png" alt="md-to-xl and up" width="240px"/>
+    <img src="screenshots/localhost_3000_todoheroapp_todos%20(3).png" alt="md-to-xl and up" width="240px"/>
 </p>
