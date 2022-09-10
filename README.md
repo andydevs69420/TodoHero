@@ -2,4 +2,8 @@
 # TodoHero app
 Simple todo organizer web application.
 
-## sample image :fire:
+## SAMPLE IMAGE :camera:
+### REGULAR VIEW
+<p align="left">
+
+</p>
