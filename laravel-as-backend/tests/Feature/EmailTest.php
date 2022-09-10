@@ -36,7 +36,6 @@ class EmailTest extends TestCase
             $status = Mail::to(
                 User::where("user_id", "=", $user_todo->user_id)->get()->first()
             )->send(new SendEmail($user_todo));
-            error_log("sent!!!");
 
             // UserTodoDetails::where(
             //     "user_todo_details_id",

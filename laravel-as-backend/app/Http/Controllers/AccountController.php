@@ -1,11 +1,13 @@
 <?php
 
+namespace App\Helpers;
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
+use App\Helpers\TodoHeroResponse;
 
 use App\Models\UserPlanDetails;
 use App\Models\User;
@@ -23,16 +25,9 @@ class AccountController extends Controller
         $user = UserPlanDetails::getUserById($userid);
 
         if (!$user)
-        return json_encode([
-            "status"  => "bad",
-            "message" => "User does not exist!"
-        ]);
+        return TodoHeroResponse::Bad("User does not exist!");
 
-        return json_encode([
-            "status"  => "ok",
-            "message" => "User succesfully fetched!",
-            "usrdata" => $user
-        ]);
+        return TodoHeroResponse::Ok("User succesfully fetched!", [ "usrdata" => $user ]);
     }
 
 
@@ -75,10 +70,7 @@ class AccountController extends Controller
         );
 
         if (!$path)
-        return json_encode([
-            "status"  => "bad",
-            "message" => "Could not save image(Something went wrong...)!"
-        ]);
+        return TodoHeroResponse::Bad("Could not save image(Something went wrong...)!");
 
         /** realpath */
         $rpath = $request->input("host") . Storage::url($path);
@@ -87,15 +79,10 @@ class AccountController extends Controller
             ->update([ "image" => $rpath ]);
 
         if (!$update)
-        return json_encode([
-            "status"  => "bad",
-            "message" => "Could not update record(Something went wrong...)!"
-        ]);
+        return TodoHeroResponse::Bad("Could not update record(Something went wrong...)!");
 
-        return json_encode([
-            "status"  => "ok",
-            "message" => "Successfully saved profile image!"
-        ]);
+        /** ok */
+        return TodoHeroResponse::Ok("Successfully saved profile image!");
     }
 
 
@@ -111,15 +98,10 @@ class AccountController extends Controller
             ->update(["name" => $request->input("name")]);
 
         if (!$update)
-        return json_encode([
-            "status"  => "bad",
-            "message" => "Something went wrong while updating account!"
-        ]);
+        return TodoHeroResponse::Bad("Something went wrong while updating account!");
 
-        return json_encode([
-            "status"  => "ok",
-            "message" => "Succssfully updated account!",
-        ]);
+        /** ok */
+        return TodoHeroResponse::Ok("Succssfully updated account!");
     }
 
 
@@ -135,32 +117,21 @@ class AccountController extends Controller
             ->get()->first();
 
         if (!$user)
-        return json_encode([
-            "status"  => "bad",
-            "message" => "User does not exist!"
-        ]);
+        return TodoHeroResponse::Bad("User does not exist!");
 
         /** user not exist */
         if (!Hash::check($request->input("password"), $user->password))
-        return json_encode([
-            "status"  => "bad",
-            "message" => "Password does not match!"
-        ]);
+        return TodoHeroResponse::Bad("Password does not match!");
 
         /** update */
         $update = User::where("user_id", "=", $userid)
             ->update([ "password" => Hash::make($request->input("newpass")) ]);
 
         if (!$update)
-        return json_encode([
-            "status"  => "bad",
-            "message" => "SSomething went wrong while updating password!"
-        ]);
+        return TodoHeroResponse::Bad("Something went wrong while updating password!");
 
-        return json_encode([
-            "status"  => "ok",
-            "message" => "Succssfully updated account!",
-        ]);
+        /** ok */
+        return TodoHeroResponse::Ok("Succssfully updated account!");
     }
 
 
@@ -180,14 +151,9 @@ class AccountController extends Controller
             ]);
 
         if (!$updated)
-        return json_encode([
-            "status"  => "bad",
-            "message" => "Something went wrong from the server!"
-        ]);
+        return TodoHeroResponse::Bad("Something went wrong from the server!");
 
-        return json_encode([
-            "status"  => "ok",
-            "message" => "recieves plan update!"
-        ]);
+        /** ok */
+        return TodoHeroResponse::Ok("recieves plan update!");
     }
 }

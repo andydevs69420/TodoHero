@@ -1,9 +1,11 @@
 <?php
 
+namespace App\Helpers;
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Helpers\TodoHeroResponse;
 
 use App\Models\Todo;
 use App\Models\Plan;
@@ -41,20 +43,11 @@ class TodoController extends Controller
         $time  = $request->input("time");
         $descr = $request->input("descr");
 
-        $response = ([
-            "status"  => "",
-            "message" => "",
-        ]);
-
         /** get current user first */
         $user = UserPlanDetails::getUserById($id);
 
         if (!$user)
-        {
-            $response["status" ] = "bad";
-            $response["message"] = "User does not exist!";
-            return json_encode($response);
-        }
+        return TodoHeroResponse::Bad("User does not exist!");
 
         /** user exist */
         // -> check plan
@@ -69,11 +62,9 @@ class TodoController extends Controller
             ->get()->first()->number_of_todos;
 
         if (($number_of_todos + 1) > $limiter)
-        {   // exceeded plan offer
-            $response["status" ] = "bad";
-            $response["message"] = "Maximum number of todo has been reached!";
-            return json_encode($response);
-        }
+        // exceeded plan offer
+        return TodoHeroResponse::Bad("Maximum number of todo has been reached!");
+
 
         /** insert todo first */
         $todo = Todo::create([
@@ -89,9 +80,7 @@ class TodoController extends Controller
             "todo_id_fk" => $todo->id,
         ]);
 
-        $response["status" ] = "ok";
-        $response["message"] = "Successfully added todo!";
-        return json_encode($response);
+        return TodoHeroResponse::Ok("Successfully added todo!");
     }
 
 
@@ -124,15 +113,11 @@ class TodoController extends Controller
             ]);
 
         if (!$updatev)
-        return json_encode([
-            "status"  => "bad",
-            "message" => "Something went wrong while updating todo."
-        ]);
+        return TodoHeroResponse::Bad("Something went wrong while updating todo.");
 
-        return json_encode([
-            "status"  => "ok",
-            "message" => "Successfully updated todo."
-        ]);
+        /** ok */
+        return TodoHeroResponse::Ok("Successfully updated todo.");
+
     }
 
 
@@ -146,14 +131,9 @@ class TodoController extends Controller
     {
         $del_flag = UserTodoDetails::deleteUserTodoByID($userid, $todoid);
         if (!$del_flag)
-            return json_encode([
-                "status"  => "bad",
-                "message" => "Cannot delete todo(Something went wrong...)!"
-            ]);
+        return TodoHeroResponse::Bad("Cannot delete todo(Something went wrong...)!");
 
-        return json_encode([
-            "status"  => "ok",
-            "message" => "Successfully deleted!"
-        ]);
+        /** ok */
+        return TodoHeroResponse::Ok("Successfully deleted!");
     }
 }

@@ -46,11 +46,10 @@ class NotifyUser extends Command
         // NEW
         $users = UserTodoDetails::join("user", "user_todo_details.user_id_fk", "=", "user.user_id")
             ->join("todo", "user_todo_details.todo_id_fk", "=", "todo.todo_id")
-            ->whereMonth("todo.date", "<=", date("CURRENT_DATE"))
-            ->whereDay("todo.date", "<=", date("CURRENT_DATE"))
-            ->whereTime("todo.time", "<", time("CURRENT_TIME"))
+            ->whereMonth("todo.date", "<=", DB::Raw("MONTH(CURRENT_DATE)"))
+            ->whereDay("todo.date"  , "<=", DB::Raw("DAY(CURRENT_DATE)"))
+            ->whereTime("todo.time" , "<" , DB::Raw("TIME(CURRENT_TIME)"))
             ->get();
-
 
 
         foreach($users as $user_todo)

@@ -1,6 +1,6 @@
 <?php
+namespace App\Helpers;
 namespace App\Http\Controllers;
-
 
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Registered;
@@ -9,12 +9,12 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Mail;
 
 
+use App\Helpers\TodoHeroResponse;
 
 
 use App\Models\User;
 use App\Models\UserPlanDetails;
 use App\Mail\SendVerificationEmail;
-
 
 
 class CredentialController extends Controller
@@ -27,22 +27,13 @@ class CredentialController extends Controller
      **/
     public function signup(Request $request)
     {
-        $email = $request->input("email");
-        $password = $request->input("password");
+        $email         = $request->input("email");
+        $password      = $request->input("password");
         $selected_plan = $request->input("choosenPlan");
-
-        $response = ([
-            "status"  => "",
-            "message" => "",
-        ]);
 
         /** ensure email does not exist! */
         if (User::emailExist($request->input("email")))
-        {
-            $response["status" ] = "bad";
-            $response["message"] = "This email is already used!";
-            return json_encode($response);
-        }
+        return TodoHeroResponse::Bad("This email is already used!");
 
         /** insert user first */
         $user = User::initialSave($email, $password);
@@ -52,14 +43,13 @@ class CredentialController extends Controller
             "user_id_fk" => $user->id     ,
             "plan_id_fk" => $selected_plan,
 
-            // TODO: 1 for unpaid. see plan_status table
-            "plan_status_id_fk" => 1,
+            // NOTE: 1 for unpaid. see plan_status table
+            // if freemium, mark as paid
+            "plan_status_id_fk" => ($selected_plan === 1)?1:2,
             "date_validated"    => Carbon::now("+8:00")
         ]);
 
-        $response["status" ] = "ok";
-        $response["message"] = "Successfully signedup!";
-        return json_encode($response);
+        return TodoHeroResponse::Ok("Successfully signedup!");
     }
 
 
@@ -73,47 +63,34 @@ class CredentialController extends Controller
      **/
     public function signin(Request $request)
     {
-        $email = $request->input("email");
+        $email    = $request->input("email");
         $password = $request->input("password");
-
-        $response = ([
-            "status" => "",
-            "email"  => "",
-            "passw"  => "",
-        ]);
 
         /** retrieve user by email */
         $user = User::getByEmail($email);
-        error_log($user);
 
+        /** check user existense */
         if (!$user)
-        {   // user does not exist
-            $response["status"] = "bad";
-            $response["email" ] = "User does not exist!";
-            return json_encode($response);
-        }
+        // user does not exist
+        return TodoHeroResponse::Bad("User does not exist!");
 
         /** user exist | check password hash! */
         if (!Hash::check($password, $user->password))
-        {   // invalid username or password
-            $response["status"] = "bad";
-            $response["passw" ] = "Incorrect password for this account!";
-            return json_encode($response);
-        }
+        // invalid username or password
+        return TodoHeroResponse::Bad("Incorrect password for this account!");
 
         /** user satisfied attempt! */
-        $response["status" ] = "ok";
-        $response["message"] = "User successful!";
-        // only user id and email to
-        // be returned!
-        $response["userdata"] = ([
-            "id"    => $user->user_id,
-            "email" => $user->email  ,
-        ]);
-        return json_encode($response);
+
+        // only user id and email will be returned!
+        $data = TodoHeroResponse::Ok("User successful!", [
+            "userdata" => ([
+                "id"    => $user->user_id,
+                "email" => $user->email  ,
+            ])]
+        );
+        error_log($data);
+        return $data;
     }
-
-
 
 
     /**
