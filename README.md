@@ -3,7 +3,7 @@
 Simple todo organizer web application.
 
 
-## COMPONENTS :camera:
+## COMPONENTS :fire:
 - [X] ADMIN Page
 - [x] TodoHero App
     - Todo List
