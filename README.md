@@ -43,34 +43,34 @@ Simple todo organizer web application.
 
 - REGULAR VIEW
 <p align="left">
-    <img src="screenshots/signin_xl.png" alt="md-to-xl and up" width="240px"/>
-    <img src="screenshots/signup_xl.png" alt="md-to-xl and up" width="240px"/>
-    <img src="screenshots/todo_xl.png" alt="md-to-xl and up" width="240px"/>
-    <img src="screenshots/manage_xl.png" alt="md-to-xl and up" width="240px"/>
-    <img src="screenshots/manage_new_todo_xl.png" alt="md-to-xl and up" width="240px"/>
-    <img src="screenshots/manage_update_todo_xl.png" alt="md-to-xl and up" width="240px"/>
-    <img src="screenshots/plan_xl.png" alt="md-to-xl and up" width="240px"/>
-    <img src="screenshots/plan_upgrade_xl.png" alt="md-to-xl and up" width="240px"/>
-    <img src="screenshots/account_xl.png" alt="md-to-xl and up" width="240px"/>
+    <img src="screenshots/signin_xl.png" alt="md-to-xl and up" width="190px"/>
+    <img src="screenshots/signup_xl.png" alt="md-to-xl and up" width="190px"/>
+    <img src="screenshots/todo_xl.png" alt="md-to-xl and up" width="190px"/>
+    <img src="screenshots/manage_xl.png" alt="md-to-xl and up" width="190px"/>
+    <img src="screenshots/manage_new_todo_xl.png" alt="md-to-xl and up" width="190px"/>
+    <img src="screenshots/manage_update_todo_xl.png" alt="md-to-xl and up" width="190px"/>
+    <img src="screenshots/plan_xl.png" alt="md-to-xl and up" width="190px"/>
+    <img src="screenshots/plan_upgrade_xl.png" alt="md-to-xl and up" width="190px"/>
+    <img src="screenshots/account_xl.png" alt="md-to-xl and up" width="190px"/>
 </p>
 - SMALL DEVICES VIEW
 <p align="left">
-    <img src="screenshots/signin.png" alt="md-to-xl and up" width="127px"/>
-    <img src="screenshots/signup.png" alt="md-to-xl and up" width="127px"/>
-    <img src="screenshots/todo.png" alt="md-to-xl and up" width="127px"/>
-    <img src="screenshots/todo_search.png" alt="md-to-xl and up" width="127px"/>
-    <img src="screenshots/manage_search.png" alt="md-to-xl and up" width="127px"/>
-    <img src="screenshots/manage_new_todo.png" alt="md-to-xl and up" width="127px"/>
-    <img src="screenshots/plan_new.png" alt="md-to-xl and up" width="127px"/>
-    <img src="screenshots/plan_upgrade.png" alt="md-to-xl and up" width="127px"/>
-    <img src="screenshots/account.png" alt="md-to-xl and up" width="127px"/>
-    <img src="screenshots/account_continue.png" alt="md-to-xl and up" width="127px"/>
+    <img src="screenshots/signin.png" alt="md-to-xl and up" width="90px"/>
+    <img src="screenshots/signup.png" alt="md-to-xl and up" width="90px"/>
+    <img src="screenshots/todo.png" alt="md-to-xl and up" width="90px"/>
+    <img src="screenshots/todo_search.png" alt="md-to-xl and up" width="90px"/>
+    <img src="screenshots/manage_search.png" alt="md-to-xl and up" width="90px"/>
+    <img src="screenshots/manage_new_todo.png" alt="md-to-xl and up" width="90px"/>
+    <img src="screenshots/plan_new.png" alt="md-to-xl and up" width="90px"/>
+    <img src="screenshots/plan_upgrade.png" alt="md-to-xl and up" width="90px"/>
+    <img src="screenshots/account.png" alt="md-to-xl and up" width="90px"/>
+    <img src="screenshots/account_continue.png" alt="md-to-xl and up" width="90px"/>
 </p>
 
 
 ## ADMIN PAGE
 <p align="left">
-    <img src="screenshots/admin_login.png" alt="md-to-xl and up" width="240px"/>
-    <img src="screenshots/admin_main.png" alt="md-to-xl and up" width="240px"/>
-    <img src="screenshots/admin_settings.png" alt="md-to-xl and up" width="240px"/>
+    <img src="screenshots/admin_login.png" alt="md-to-xl and up" width="190px"/>
+    <img src="screenshots/admin_main.png" alt="md-to-xl and up" width="190px"/>
+    <img src="screenshots/admin_settings.png" alt="md-to-xl and up" width="190px"/>
 </p>
