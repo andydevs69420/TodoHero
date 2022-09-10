@@ -24,11 +24,6 @@ Route::get("/", function () {
 });
 
 
-Route::get("/response", function () {
-    return TodoHeroResponse::Bad("FOOOOOOC!!");
-});
-
-
 /*
  | LOGIN AREA
  |
