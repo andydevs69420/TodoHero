@@ -16,6 +16,14 @@ Simple todo organizer web application.
 - [x] Email Notification
 
 
+## ADDED MOBILE APP COMPANION
+- [X] SIGNIN
+- [X] SIGNUP
+- [X] MANAGEMENT PAGE(semi finished)
+- [X] TODO PAGE(semi finished)
+- [ ] PLAN PAGE(not yet finished)
+- [ ] ACCOUNT PAGE(not yet finished)
+
 ## CHANGES
 ```php
 
@@ -99,4 +107,14 @@ Simple todo organizer web application.
     <img src="screenshots/admin_login.png" alt="md-to-xl and up" width="190px"/>
     <img src="screenshots/admin_main.png" alt="md-to-xl and up" width="190px"/>
     <img src="screenshots/admin_settings.png" alt="md-to-xl and up" width="190px"/>
+</p>
+
+## MOBILE APP
+<p align="left">
+    <img src="screenshots/mobile_app_signin.png" alt="md-to-xl and up" width="90px"/>
+    <img src="screenshots/mobile_app_signup.png" alt="md-to-xl and up" width="90px"/>
+    <img src="screenshots/mobile_app_todos.png" alt="md-to-xl and up" width="90px"/>
+    <img src="screenshots/mobile_app_management.png" alt="md-to-xl and up" width="90px"/>
+    <img src="screenshots/mobile_app_plan.png" alt="md-to-xl and up" width="90px"/>
+    <img src="screenshots/mobile_app_account.png" alt="md-to-xl and up" width="90px"/>
 </p>
