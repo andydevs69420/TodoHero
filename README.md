@@ -5,7 +5,7 @@ Simple todo organizer web application.
 
 # HOW TO RUN
 ```bash
-    #!bin/bash
+    #!/bin/bash
 
     # new terminal
     cd laravel-as-backend
