@@ -17,6 +17,7 @@ Simple todo organizer web application.
 
 
 ## ADDED MOBILE APP COMPANION
+### STATUS: DEV ONGOING
 - [X] SIGNIN
 - [X] SIGNUP
 - [X] MANAGEMENT PAGE(semi finished)
