@@ -6,7 +6,7 @@ Simple todo organizer web application.
 # HOW TO RUN
 ```bash
     #!bin/bash
-    
+
     # new terminal
     cd laravel-as-backend
     php artisan serve
@@ -110,6 +110,7 @@ Simple todo organizer web application.
     <img src="screenshots/plan_upgrade_xl.png" alt="md-to-xl and up" width="190px"/>
     <img src="screenshots/account_xl.png" alt="md-to-xl and up" width="190px"/>
 </p>
+
 - SMALL DEVICES VIEW
 <p align="left">
     <img src="screenshots/signin.png" alt="md-to-xl and up" width="90px"/>
