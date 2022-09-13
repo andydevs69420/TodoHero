@@ -22,8 +22,7 @@ class UserTodoDetails extends Model
      **/
     public static function getTodosByUserId(int $uid)
     {
-        return DB::table("user_todo_details")
-            ->join("todo", "user_todo_details.todo_id_fk", "=", "todo.todo_id")
+        return self::join("todo", "user_todo_details.todo_id_fk", "=", "todo.todo_id")
             ->where("user_todo_details.user_id_fk", "=", $uid)
             ->orderBy("todo.date", "asc")
             ->orderBy("todo.time", "desc")->get();
