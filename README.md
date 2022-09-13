@@ -3,6 +3,28 @@
 Simple todo organizer web application.
 
 
+# HOW TO RUN
+```bash
+    #!bin/bash
+    
+    # new terminal
+    cd laravel-as-backend
+    php artisan serve
+
+    # new terminal
+    cd laravel-as-backend
+    php artisan schedule:work
+
+    # new terminal
+    cd todo-hero
+    npm start
+
+    # NOTE: You can make a script to run react and express at the same time(or install a module)
+
+    cd todo-hero
+    node server.js
+```
+
 ## COMPONENTS :fire:
 - [X] ADMIN Page
 - [x] TodoHero App
