@@ -45,7 +45,7 @@ class CredentialController extends Controller
 
             // NOTE: 1 for unpaid. see plan_status table
             // if freemium, mark as paid
-            "plan_status_id_fk" => ($selected_plan === 1)?1:2,
+            "plan_status_id_fk" => ($selected_plan === 1)?2:1,
             "date_validated"    => Carbon::now("+8:00")
         ]);
 
