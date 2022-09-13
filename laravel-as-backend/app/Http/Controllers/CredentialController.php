@@ -129,7 +129,7 @@ class CredentialController extends Controller
             "user_id_fk" => $user->id,
             // TODO: 1 for freemium. see plan table
             "plan_id_fk" => 1,
-            // TODO: 2 for unpaid. see plan_status table
+            // TODO: 2 for paid. see plan_status table
             "plan_status_id_fk" => 2,
             "date_validated"    => Carbon::now("+8:00")
         ]);
