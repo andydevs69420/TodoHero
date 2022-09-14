@@ -17,7 +17,7 @@ class _ManagementState extends State<Management> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(15),
+      padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
       child: Column(
         mainAxisSize: MainAxisSize.max,
         children: [
@@ -33,6 +33,8 @@ class _ManagementState extends State<Management> {
                 return ManagementTile(
                   title: "Hola",
                   description: "World",
+                  date: "12/23/2022",
+                  time: "08:30",
                   onTap: () {
                     log("Hello!");
                   },
