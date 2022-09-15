@@ -41,13 +41,13 @@ class _SigninBodyState extends State<SigninBody> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(
-              width: MediaQuery.of(context).size.width * .65,
+              width: MediaQuery.of(context).size.width * .90,
               child: Image.asset("assets/images/todo-bg.png"),
             ),
             Text(
               "TodoHero",
               style: TextStyle(
-                  fontSize: MediaQuery.of(context).size.width * 0.11,
+                  fontSize: MediaQuery.of(context).size.width * 0.12,
                   fontWeight: FontWeight.bold),
             ),
             const SizedBox(

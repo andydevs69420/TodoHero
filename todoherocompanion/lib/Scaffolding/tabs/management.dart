@@ -30,8 +30,9 @@ class _ManagementState extends State<Management> {
             child: ListView.builder(
               itemCount: 12,
               itemBuilder: (context, index) {
+
                 return ManagementTile(
-                  title: "Hola",
+                  title: "Hola $index",
                   description: "World",
                   date: "12/23/2022",
                   time: "08:30",
