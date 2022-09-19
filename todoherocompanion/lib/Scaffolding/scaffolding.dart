@@ -26,7 +26,6 @@ class _ScaffoldingState extends State<Scaffolding> {
       child: Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          toolbarHeight: 56,
           title: const Text("TodoHero Mobile",
               style: TextStyle(
                 fontWeight: FontWeight.w200,

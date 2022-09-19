@@ -18,6 +18,9 @@ class TodosTile extends StatefulWidget {
 class _TodosTileState extends State<TodosTile> {
   @override
   Widget build(BuildContext context) {
+    
+    double percentage = 56.0;
+
     return GestureDetector(
       onTap: () => widget.onTap(),
       child: Padding(
@@ -41,6 +44,10 @@ class _TodosTileState extends State<TodosTile> {
                       fontSize: 17,
                       fontWeight: FontWeight.w400,
                     ),
+                  ),
+                  const SizedBox(height: 10),
+                  LinearProgressIndicator(
+                    value: (percentage/100),
                   ),
                   const SizedBox(height: 10),
                   Row(

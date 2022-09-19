@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
 class Account extends StatefulWidget {
@@ -10,6 +11,21 @@ class Account extends StatefulWidget {
 class _AccountState extends State<Account> {
   @override
   Widget build(BuildContext context) {
-    return const Text("Account");
+    return Column(
+      mainAxisSize: MainAxisSize.max,
+      children: [
+        CarouselSlider.builder(
+          options: CarouselOptions(
+            autoPlay: false
+          ),
+          itemCount: 100,
+          itemBuilder: (context, index, index1) {
+            return SizedBox(
+              child: Text("Hola! $index"),
+            );
+          },
+        )
+      ],
+    );
   }
 }
