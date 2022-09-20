@@ -251,4 +251,11 @@ class _SignupBodyState extends State<SignupBody> {
       ),
     );
   }
+
+  @override
+  void dispose() {
+    emailCtrl.dispose();
+    passwordCtrl.dispose();
+    super.dispose();
+  }
 }
