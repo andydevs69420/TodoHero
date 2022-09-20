@@ -4,6 +4,7 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todoherocompanion/components/input.dart';
+import 'package:todoherocompanion/components/snackbar.dart';
 import 'package:todoherocompanion/state/shared_state.dart';
 
 class Signup extends StatelessWidget {
@@ -141,12 +142,9 @@ class _SignupBodyState extends State<SignupBody> {
                       { return const Text("loading..."); }
                     
                       if (!snapshot.hasData)
-                      { return const Text("No data");}
+                      { return const Text("No data"); }
 
                       List data = snapshot.hasData?snapshot.data as List:[];
-
-                      if (data.isEmpty)
-                      { return const Text("No data");}
                       
                       return Padding(
                         padding: const EdgeInsets.only(top: 10, bottom: 10),
@@ -203,9 +201,7 @@ class _SignupBodyState extends State<SignupBody> {
                             if (result["status"] != "ok")
                             { // show error snackbar
                               // ignore: use_build_context_synchronously
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text(result["message"]))
-                              );
+                              showSnackBar(context, result["message"]);
                               setState(() {
                                 isPressed = false;
                               });

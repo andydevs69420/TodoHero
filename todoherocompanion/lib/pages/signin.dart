@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:todoherocompanion/components/input.dart';
+import 'package:todoherocompanion/components/snackbar.dart';
 
 GoogleSignIn _googleSignIn = GoogleSignIn(
     clientId:
@@ -168,16 +169,7 @@ class _SigninBodyState extends State<SigninBody> {
                               if (response == true)
                               {
                                 // ignore: use_build_context_synchronously
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                    content: Text("Successfully signed up!",
-                                      style: TextStyle(
-                                        color: Color(0xFF969626)
-                                      ),
-                                    ),
-                                    backgroundColor: Color(0xFF1D1F1D),
-                                  )
-                                );
+                                showSnackBar(context, "Successfully signed up!");
                               }
                             },
                             child: const Text("signup"),
