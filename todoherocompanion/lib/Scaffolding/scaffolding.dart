@@ -82,7 +82,7 @@ class MainApp extends StatefulWidget {
 class _MainAppState extends State<MainApp> {
   final List<Widget> tabs = [
     const Todos(),
-    Management(),
+    const Management(),
     const Plan(),
     const Account(),
   ];
