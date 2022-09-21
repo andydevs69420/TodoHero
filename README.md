@@ -40,6 +40,7 @@ Simple todo organizer web application.
 
 ## ADDED MOBILE APP COMPANION
 ### STATUS: DEV ONGOING
+- [X] flutter_bloc for state management
 - [X] SIGNIN
 - [X] SIGNUP
 - [X] MANAGEMENT PAGE(semi finished)
