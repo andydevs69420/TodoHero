@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todoherocompanion/Scaffolding/tabs/account.dart';
 import 'package:todoherocompanion/Scaffolding/tabs/management.dart';
 import 'package:todoherocompanion/Scaffolding/tabs/plan.dart';
 import 'package:todoherocompanion/Scaffolding/tabs/todos.dart';
+import 'package:todoherocompanion/state/shared_state.dart';
 
 class Scaffolding extends StatefulWidget {
   const Scaffolding({super.key});
@@ -32,8 +34,13 @@ class _ScaffoldingState extends State<Scaffolding> {
                 fontSize: 18,
               )),
         ),
-        body: MainApp(
-          active: selected,
+        body: BlocBuilder<LoadTodo, TodoHerState>(
+          bloc: LoadTodo,
+          builder: (context, state) {
+            return MainApp(
+              active: selected,
+            );
+          },
         ),
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,

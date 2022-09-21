@@ -30,7 +30,7 @@ class SignupCubit extends Cubit<Map> {
     var jsonData = [];
     try {
       var data = await API.client.get(Uri.http(API.host, "api/fetchPlanList"));
-      // jsonData = jsonDecode(data.body);
+      jsonData = jsonDecode(data.body);
     } catch(err) {
       log(err.toString());
     }
@@ -71,11 +71,17 @@ class SigninCubit extends Cubit<Map> {
 
   static const placeholder = {
     "isSignedin": false,
-    "uid": null,
+    "id": null,
     "email": null,
     "isgoogle": null
   };
 
+  /**
+   * Try signing in
+   * @param email String user email
+   * @param password String user password
+   * @return Map
+   **/
   Future<Map> signin(String email, String password) async {
     var jsonData = {};
     try {
@@ -93,10 +99,35 @@ class SigninCubit extends Cubit<Map> {
     return jsonData;
   }
 
+  /**
+   * Saves user info
+   * @param user Map use info
+   * @return null
+   **/ 
+  Future<void> save(Map user) async {
+   emit({...state, "id": user["id"], "email": user["email"], "isgoogle": user["isgoogle"]});
+  }
+
 }
 
-class SharedState extends Bloc<TodoHerState, int> {
-  SharedState() : super(0);
+class SharedState extends Bloc<TodoHerState, Map> {
+  SharedState() : super(inAppState) {
+
+    on<LoadTodo>(loadTodo);
+
+  }
+
+
+  static Map inAppState = {
+    "todos": []
+  };
+
+  void loadTodo(event, emit) 
+  {
+    
+  }
+
 }
 
 abstract class TodoHerState {}
+class LoadTodo extends TodoHerState {}

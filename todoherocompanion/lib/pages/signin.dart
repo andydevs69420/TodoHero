@@ -1,9 +1,11 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:todoherocompanion/components/input.dart';
 import 'package:todoherocompanion/components/snackbar.dart';
+import 'package:todoherocompanion/state/shared_state.dart';
 
 GoogleSignIn _googleSignIn = GoogleSignIn(
     clientId:
@@ -14,9 +16,12 @@ class Signin extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SafeArea(
+    return SafeArea(
       child: Scaffold(
-        body: SigninBody(),
+        body: BlocProvider<SigninCubit>(
+          create: (_) => SigninCubit(),
+          child: const SigninBody(),
+        ),
       ),
     );
   }
@@ -30,6 +35,11 @@ class SigninBody extends StatefulWidget {
 }
 
 class _SigninBodyState extends State<SigninBody> {
+  var formKey = GlobalKey<FormState>();
+  var emailCtrl    = TextEditingController();
+  var passwordCtrl = TextEditingController();
+  bool isPressed = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,6 +72,7 @@ class _SigninBodyState extends State<SigninBody> {
                 ),
               ),
               Form(
+                key: formKey,
                 child: Column(
                   children: [
 
@@ -69,10 +80,11 @@ class _SigninBodyState extends State<SigninBody> {
                     Padding(
                       padding: const EdgeInsets.only(top: 10, bottom: 10),
                       child: Input(
+                        controller: emailCtrl,
                         icon: Icons.email,
                         placeholder: "email",
                         validator: (value) {
-                          return "";
+                          return null;
                         },
                       ),
                     ),
@@ -83,11 +95,12 @@ class _SigninBodyState extends State<SigninBody> {
                     Padding(
                       padding: const EdgeInsets.only(top: 10, bottom: 10),
                       child: Input(
+                        controller: passwordCtrl,
                         icon: Icons.lock,
                         placeholder: "password",
                         obscureText: true,
                         validator: (value) {
-                          return "";
+                          return null;
                         },
                       ),
                     ),
@@ -105,10 +118,44 @@ class _SigninBodyState extends State<SigninBody> {
                               backgroundColor: MaterialStateProperty.all<Color>(
                                   const Color.fromARGB(255, 51, 121, 53))),
                           child: const Text("SIGNIN"),
-                          onPressed: () {
-                            Navigator.of(context)
+                          onPressed: () async {
+                            
+                            if (isPressed)
+                            { log("returnd!");
+                              return; }
+
+                            if (formKey.currentState!.validate())
+                            {
+                              setState(() {
+                                isPressed = true;
+                              });
+
+                              Map result = await context.read<SigninCubit>().signin(
+                                emailCtrl.text, passwordCtrl.text
+                              );
+
+                              if (result["status"] != "ok")
+                              { // show error snackbar
+                                // ignore: use_build_context_synchronously
+                                showSnackBar(context, result["message"]);
+                                setState(() {
+                                  isPressed = false;
+                                });
+                                return;
+                              }
+
+                              log(result.toString());
+                              // ignore: use_build_context_synchronously
+                              context.read<SigninCubit>().save({
+                                "uid": result["userdata"]["id"],
+                                "email": result["userdata"]["email"],
+                                "isgoogle": false
+                              });
+
+                              // ignore: use_build_context_synchronously
+                              Navigator.of(context)
                                 .pushReplacementNamed("/mainapp");
-                            log("Clicked!");
+                            }
                           },
                         ),
                       ),
