@@ -15,7 +15,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => SharedState(),
+      create: (context) => TodoHeroBloc(),
       child: const TodoHeroCompanion(),
     );
   }

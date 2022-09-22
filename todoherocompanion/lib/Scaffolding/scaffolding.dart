@@ -34,13 +34,14 @@ class _ScaffoldingState extends State<Scaffolding> {
                 fontSize: 18,
               )),
         ),
-        body: BlocBuilder<LoadTodo, TodoHerState>(
-          bloc: LoadTodo,
-          builder: (context, state) {
-            return MainApp(
-              active: selected,
-            );
-          },
+        body: MultiBlocProvider(
+          providers: [
+            BlocProvider<SigninCubit>(create: (_) => SigninCubit()),
+            BlocProvider<TodoHeroBloc>(create: (_) => TodoHeroBloc())
+          ],
+          child: MainApp(
+            active: selected,
+          ),
         ),
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
@@ -87,15 +88,31 @@ class MainApp extends StatefulWidget {
 }
 
 class _MainAppState extends State<MainApp> {
-  final List<Widget> tabs = [
-    const Todos(),
-    const Management(),
-    const Plan(),
-    const Account(),
-  ];
+
+  late var bloc;
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return tabs[widget.active];
+
+    bloc = BlocProvider.of<TodoHeroBloc>(context);
+
+    return BlocBuilder(
+      bloc: TodoHeroBloc(),
+        builder: (context, state) {
+        // ignore: unnecessary_new
+        switch (widget.active)
+        {
+          case 0: return Todos(bloc: bloc);
+          case 1: return const Management();
+          case 2: return const Plan();
+          default: return const Account();
+        }
+      },
+    );
   }
 }

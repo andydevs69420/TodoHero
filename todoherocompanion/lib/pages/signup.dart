@@ -1,3 +1,6 @@
+// ignore_for_file: slash_for_doc_comments
+
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:email_validator/email_validator.dart';
@@ -14,8 +17,8 @@ class Signup extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: BlocProvider<SignupCubit>(
-          create: (_) => SignupCubit(),
+        body: RepositoryProvider<SignupRepository>(
+          create: (_) => SignupRepository(),
           child: const SignupBody(),
         ),
       ),
@@ -42,6 +45,30 @@ class _SignupBodyState extends State<SignupBody> {
 
   late bool isPressed;
 
+  /**
+   * Signup attempt
+   * @param email String user email
+   * @param password String user password
+   * @param planID String user selected plan
+   * @return Future<Map> server response
+   **/ 
+  Future<Map> signup(String email, String password, String planID) async {
+    var jsonData = {};
+    try {
+      var data = await API.client.post(
+        Uri.http(API.host, "api/signup"),
+        body: {
+          "email": email,
+          "password": password,
+          "choosenPlan": planID
+        }
+      );
+      jsonData = jsonDecode(data.body);
+    } catch(err) {
+      log(err.toString());
+    }
+    return jsonData;
+  }
 
   @override
   void initState() {
@@ -136,7 +163,7 @@ class _SignupBodyState extends State<SignupBody> {
 
                   ////////////////////////// PLAN DROPDOWN ////////////////////////
                   FutureBuilder(
-                    future: context.read<SignupCubit>().fetchPlanList(),
+                    future: context.read<SignupRepository>().fetchPlanList(),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting)
                       { return const Text("loading..."); }
@@ -194,14 +221,14 @@ class _SignupBodyState extends State<SignupBody> {
                           {
                             isPressed = true;
 
-                            Map result = await context.read<SignupCubit>().signup(
+                            Map result = await signup(
                               emailCtrl.text, passwordCtrl.text, planID.toString()
                             );
 
                             if (result["status"] != "ok")
                             { // show error snackbar
                               // ignore: use_build_context_synchronously
-                              showSnackBar(context, result["message"]);
+                              showSnackBar(context, (result["message"] != null)?result["messsage"]:"error!");
                               setState(() {
                                 isPressed = false;
                               });

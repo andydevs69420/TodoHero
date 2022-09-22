@@ -1,5 +1,9 @@
+// ignore_for_file: slash_for_doc_comments
+
+import 'dart:convert';
 import 'dart:developer';
 
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -39,6 +43,30 @@ class _SigninBodyState extends State<SigninBody> {
   var emailCtrl    = TextEditingController();
   var passwordCtrl = TextEditingController();
   bool isPressed = false;
+
+
+  /**
+   * Try signing in
+   * @param email String user email
+   * @param password String user password
+   * @return Map
+   **/
+  Future<Map> signin(String email, String password) async {
+    var jsonData = {};
+    try {
+      var data = await API.client.post(
+        Uri.http(API.host, "api/signin"),
+        body: {
+          "email": email,
+          "password": password,
+        }
+      );
+      jsonData = jsonDecode(data.body);
+    } catch(err) {
+      log(err.toString());
+    }
+    return jsonData;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -84,6 +112,8 @@ class _SigninBodyState extends State<SigninBody> {
                         icon: Icons.email,
                         placeholder: "email",
                         validator: (value) {
+                          if (!EmailValidator.validate(value as String))
+                          { return "invalid email format!"; }
                           return null;
                         },
                       ),
@@ -100,6 +130,8 @@ class _SigninBodyState extends State<SigninBody> {
                         placeholder: "password",
                         obscureText: true,
                         validator: (value) {
+                          if (value!.isEmpty)
+                          { return "password field is required!"; }
                           return null;
                         },
                       ),
@@ -130,21 +162,20 @@ class _SigninBodyState extends State<SigninBody> {
                                 isPressed = true;
                               });
 
-                              Map result = await context.read<SigninCubit>().signin(
+                              Map result = await signin(
                                 emailCtrl.text, passwordCtrl.text
                               );
 
                               if (result["status"] != "ok")
                               { // show error snackbar
                                 // ignore: use_build_context_synchronously
-                                showSnackBar(context, result["message"]);
+                                showSnackBar(context, (result["message"] != null)?result["message"]:"error!");
                                 setState(() {
                                   isPressed = false;
                                 });
                                 return;
                               }
 
-                              log(result.toString());
                               // ignore: use_build_context_synchronously
                               context.read<SigninCubit>().save({
                                 "uid": result["userdata"]["id"],
