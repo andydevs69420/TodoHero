@@ -15,7 +15,7 @@ class Management extends StatefulWidget {
 }
 
 class _ManagementState extends State<Management> {
-  String search = "";
+  String filter = "";
 
   @override
   void initState() {
@@ -42,7 +42,11 @@ class _ManagementState extends State<Management> {
                     borderColor: Colors.transparent,
                     icon: Icons.search,
                     placeholder: "search todo",
-                    onChange: (value) {},
+                    onChange: (value) {
+                      setState(() {
+                        filter = value;
+                      });
+                    },
                   ),
                 ),
                 const SizedBox(height: 10),
@@ -57,16 +61,21 @@ class _ManagementState extends State<Management> {
                         itemBuilder: (context, index) 
                         {
                           Map current = state["todos"][index];
-                         
-                          return ManagementTile(
-                            title: current["title"],
-                            description: current["description"],
-                            date: current["date"],
-                            time: current["time"],
-                            onTap: () {
-                              log("Hello!");
-                            },
-                          );
+
+                          if (current["title"].toString().startsWith(filter) || filter.isEmpty)
+                          {
+                            return ManagementTile(
+                              title: current["title"],
+                              description: current["description"],
+                              date: current["date"],
+                              time: current["time"],
+                              onTap: () {
+                                log("Hello!");
+                              },
+                            );
+                          }
+
+                          return const SizedBox();
                         },
                       );
                     },
