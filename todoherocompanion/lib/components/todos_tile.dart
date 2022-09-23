@@ -1,12 +1,15 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 
 class TodosTile extends StatefulWidget {
-  final String title, date, time;
+  final String title, createdDate, date, time;
   final Function onTap;
 
   const TodosTile({super.key,
       required this.title,
+      required this.createdDate,
       required this.date,
       required this.time,
       required this.onTap});
@@ -16,15 +19,39 @@ class TodosTile extends StatefulWidget {
 }
 
 class _TodosTileState extends State<TodosTile> {
+
+
+  double getPercentageByDate(String createdAt, String schedule, String time)
+  {
+    int start, sched, now;
+    start = DateTime.parse(createdAt).millisecondsSinceEpoch;
+    sched = DateTime.parse("$schedule $time").millisecondsSinceEpoch;
+    now   = DateTime.now().millisecondsSinceEpoch;
+
+    double perc = ((now - start) / (sched - start)) * 100;
+        perc = (perc > 100)? 100 : perc;
+    return perc;
+  }
+
   @override
   Widget build(BuildContext context) {
     
-    double percentage = 56.0;
+    double percentage = getPercentageByDate(widget.createdDate, widget.date, widget.time);
+    Color? color;
+   
+    if (percentage <= 25.0) 
+    { color = Colors.blueAccent;  }
+    else if (percentage <= 50.0) 
+    { color = Colors.amberAccent; }
+    else if (percentage <= 75.0) 
+    { color = Colors.red[300];    }
+    else if (percentage <= 100.0)
+    { color = Colors.redAccent;   }
 
     return GestureDetector(
       onTap: () => widget.onTap(),
       child: Padding(
-        padding: const EdgeInsets.only(top: 10, bottom: 10),
+        padding: const EdgeInsets.only(top: 2.5, bottom: 2.5),
         child: Material(
           elevation: 3,
           shadowColor: Colors.black.withAlpha(100),
@@ -47,7 +74,8 @@ class _TodosTileState extends State<TodosTile> {
                   ),
                   const SizedBox(height: 10),
                   LinearProgressIndicator(
-                    value: (percentage/100),
+                    color: color,
+                    value: percentage / 100,
                   ),
                   const SizedBox(height: 10),
                   Row(

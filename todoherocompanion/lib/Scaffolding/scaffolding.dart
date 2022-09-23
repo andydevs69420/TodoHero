@@ -99,6 +99,12 @@ class _MainAppState extends State<MainApp> {
 
   late var bloc = BlocProvider.of<TodoHeroBloc>(context);
 
+  @override
+  void initState() {
+    super.initState();
+    // load todos here!
+    context.read<TodoHeroBloc>().add(LoadTodo());
+  }
 
   @override
   Widget build(BuildContext context) {

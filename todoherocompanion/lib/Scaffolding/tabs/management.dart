@@ -45,6 +45,7 @@ class _ManagementState extends State<Management> {
                     onChange: (value) {},
                   ),
                 ),
+                const SizedBox(height: 10),
                 Expanded(
                   child: BlocConsumer<TodoHeroBloc, Map>(
                     listener: (context, state) {

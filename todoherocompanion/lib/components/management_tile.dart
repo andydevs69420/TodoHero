@@ -21,7 +21,7 @@ class _ManagementTileState extends State<ManagementTile> {
     return GestureDetector(
       onTap: () => widget.onTap(),
       child: Padding(
-        padding: const EdgeInsets.only(top: 10, bottom: 10),
+        padding: const EdgeInsets.only(top: 5, bottom: 5),
         child: Material(
           elevation: 3,
           shadowColor: Colors.black.withAlpha(100),

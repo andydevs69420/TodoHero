@@ -1,9 +1,7 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todoherocompanion/components/input.dart';
-import 'package:todoherocompanion/components/management_tile.dart';
 import 'package:todoherocompanion/components/todos_tile.dart';
 import 'package:todoherocompanion/state/shared_state.dart';
 
@@ -17,11 +15,7 @@ class Todos extends StatefulWidget {
 
 class _TodosState extends State<Todos> {
 
-  @override
-  void initState() {
-    super.initState();
-    context.read<TodoHeroBloc>().add(LoadTodo());
-  }
+  late String filter = "";
 
   @override
   Widget build(BuildContext context) {
@@ -40,9 +34,14 @@ class _TodosState extends State<Todos> {
                 borderColor: Colors.transparent,
                 icon: Icons.search,
                 placeholder: "search todo",
-                onChange: (value) {},
+                onChange: (value) {
+                  setState(() {
+                    filter = value;
+                  });
+                },
               ),
             ),
+            const SizedBox(height: 10),
             Expanded(
               child: BlocConsumer<TodoHeroBloc, Map>(
                 listener: (context, state) {
@@ -54,16 +53,21 @@ class _TodosState extends State<Todos> {
                     itemBuilder: (context, index) 
                     {
                       Map current = state["todos"][index];
-                      
-                      return ManagementTile(
-                        title: current["title"],
-                        description: current["description"],
-                        date: current["date"],
-                        time: current["time"],
-                        onTap: () {
-                          log("Hello!");
-                        },
-                      );
+
+                      if (current["title"].toString().startsWith(filter) || filter.isEmpty)
+                      {
+                        return TodosTile(
+                          title: current["title"],
+                          createdDate: current["created_at"],
+                          date: current["date"],
+                          time: current["time"],
+                          onTap: () {
+                            log("Hello!");
+                          },
+                        );
+                      }
+
+                      return const SizedBox();
                     },
                   );
                 },
