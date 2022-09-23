@@ -18,6 +18,11 @@ class _ManagementState extends State<Management> {
   String search = "";
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocProvider.value(
       value: widget.bloc,
@@ -28,24 +33,39 @@ class _ManagementState extends State<Management> {
               Column(
               mainAxisSize: MainAxisSize.max,
               children: [
-                Input(
-                  icon: Icons.search,
-                  placeholder: "search todo",
-                  onChange: (value) {},
+                Material(
+                  elevation: 6,
+                  shadowColor: Colors.grey.withOpacity(.4),
+                  borderRadius: BorderRadius.circular(6),
+                  child: Input(
+                    borderRadius: 6,
+                    borderColor: Colors.transparent,
+                    icon: Icons.search,
+                    placeholder: "search todo",
+                    onChange: (value) {},
+                  ),
                 ),
                 Expanded(
-                  child: ListView.builder(
-                    itemCount: 12,
-                    itemBuilder: (context, index) 
-                    {
-                      log(context.read<TodoHeroBloc>().state["todos"].toString());
-                      return ManagementTile(
-                        title: "Hola $index",
-                        description: "World",
-                        date: "12/23/2022",
-                        time: "08:30",
-                        onTap: () {
-                          log("Hello!");
+                  child: BlocConsumer<TodoHeroBloc, Map>(
+                    listener: (context, state) {
+                      log(state.toString());
+                    },
+                    builder: (context, state) {
+                      return ListView.builder(
+                        itemCount: state["todos"].length,
+                        itemBuilder: (context, index) 
+                        {
+                          Map current = state["todos"][index];
+                         
+                          return ManagementTile(
+                            title: current["title"],
+                            description: current["description"],
+                            date: current["date"],
+                            time: current["time"],
+                            onTap: () {
+                              log("Hello!");
+                            },
+                          );
                         },
                       );
                     },

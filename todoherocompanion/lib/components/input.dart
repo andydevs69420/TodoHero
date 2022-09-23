@@ -9,6 +9,7 @@ class Input extends StatefulWidget {
   final Function(String value)? onChange;
   final Function(String? value)? onSave;
   final String? Function(String? value)? validator;
+  final Color borderColor;
 
   const Input(
       {super.key,
@@ -19,7 +20,8 @@ class Input extends StatefulWidget {
       this.obscureText = false,
       this.onChange,
       this.onSave,
-      this.validator});
+      this.validator, 
+      this.borderColor = Colors.grey});
 
   @override
   State<Input> createState() => _InputState();
@@ -37,9 +39,9 @@ class _InputState extends State<Input> {
           border: OutlineInputBorder(
               borderRadius:
                 BorderRadius.all(Radius.circular(widget.borderRadius))),
-          enabledBorder: const OutlineInputBorder(
+          enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
-              color: Colors.grey
+              color: widget.borderColor
             )
           ),
           prefixIcon: Icon(widget.icon),

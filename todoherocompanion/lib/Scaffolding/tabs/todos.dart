@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todoherocompanion/components/input.dart';
+import 'package:todoherocompanion/components/management_tile.dart';
 import 'package:todoherocompanion/components/todos_tile.dart';
 import 'package:todoherocompanion/state/shared_state.dart';
 
@@ -19,6 +20,7 @@ class _TodosState extends State<Todos> {
   @override
   void initState() {
     super.initState();
+    context.read<TodoHeroBloc>().add(LoadTodo());
   }
 
   @override
@@ -29,28 +31,44 @@ class _TodosState extends State<Todos> {
         padding: const EdgeInsets.all(15),
         child: Column(
           children: [
-            Input(
-              icon: Icons.search,
-              placeholder: "search todo",
-              onChange: (value) {
-              
-              },
+            Material(
+              elevation: 6,
+              shadowColor: Colors.grey.withOpacity(.4),
+              borderRadius: BorderRadius.circular(6),
+              child: Input(
+                borderRadius: 6,
+                borderColor: Colors.transparent,
+                icon: Icons.search,
+                placeholder: "search todo",
+                onChange: (value) {},
+              ),
             ),
             Expanded(
-              child: ListView.builder(
-                itemCount: 12,
-                itemBuilder: (context, index) {
-                  return TodosTile(
-                    title: "Hola $index",
-                    date: "12/23/2022",
-                    time: "08:30",
-                    onTap: () {
-                      log("Hello!");
+              child: BlocConsumer<TodoHeroBloc, Map>(
+                listener: (context, state) {
+                  log(state.toString());
+                },
+                builder: (context, state) {
+                  return ListView.builder(
+                    itemCount: state["todos"].length,
+                    itemBuilder: (context, index) 
+                    {
+                      Map current = state["todos"][index];
+                      
+                      return ManagementTile(
+                        title: current["title"],
+                        description: current["description"],
+                        date: current["date"],
+                        time: current["time"],
+                        onTap: () {
+                          log("Hello!");
+                        },
+                      );
                     },
                   );
                 },
               ),
-            )
+            ),
           ],
         ),
       ),
