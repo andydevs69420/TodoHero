@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todoherocompanion/Scaffolding/tabs/account.dart';
@@ -14,6 +16,7 @@ class Scaffolding extends StatefulWidget {
 }
 
 class _ScaffoldingState extends State<Scaffolding> {
+  late Object? args;
   late int selected;
 
   @override
@@ -24,6 +27,11 @@ class _ScaffoldingState extends State<Scaffolding> {
 
   @override
   Widget build(BuildContext context) {
+
+    final args = (ModalRoute.of(context)?.settings.arguments ?? {}) as Map;
+
+    log(args["cubit"]!.state.toString());
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -36,7 +44,7 @@ class _ScaffoldingState extends State<Scaffolding> {
         ),
         body: MultiBlocProvider(
           providers: [
-            BlocProvider<SigninCubit>(create: (_) => SigninCubit()),
+            BlocProvider<SigninCubit>(create: (_) => args["cubit"]),
             BlocProvider<TodoHeroBloc>(create: (_) => TodoHeroBloc())
           ],
           child: MainApp(
@@ -89,18 +97,11 @@ class MainApp extends StatefulWidget {
 
 class _MainAppState extends State<MainApp> {
 
-  late var bloc;
+  late var bloc = BlocProvider.of<TodoHeroBloc>(context);
 
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
-
-    bloc = BlocProvider.of<TodoHeroBloc>(context);
-
     return BlocBuilder(
       bloc: TodoHeroBloc(),
         builder: (context, state) {
@@ -108,7 +109,7 @@ class _MainAppState extends State<MainApp> {
         switch (widget.active)
         {
           case 0: return Todos(bloc: bloc);
-          case 1: return const Management();
+          case 1: return Management(bloc: bloc);
           case 2: return const Plan();
           default: return const Account();
         }

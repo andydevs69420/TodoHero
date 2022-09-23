@@ -185,7 +185,8 @@ class _SigninBodyState extends State<SigninBody> {
 
                               // ignore: use_build_context_synchronously
                               Navigator.of(context)
-                                .pushReplacementNamed("/mainapp");
+                                // ignore: use_build_context_synchronously
+                                .pushReplacementNamed("/mainapp", arguments: {"cubit": BlocProvider.of<SigninCubit>(context)});
                             }
                           },
                         ),

@@ -53,6 +53,9 @@ class SigninCubit extends Cubit<Map> {
     "isgoogle": null
   };
 
+  get ID => state["id"];
+  get EMAIL => state["email"];
+
   /**
    * Saves user info
    * @param user Map use info
@@ -66,17 +69,20 @@ class SigninCubit extends Cubit<Map> {
 
 class TodoHeroBloc extends Bloc<TodoHeroState, Map> {
   TodoHeroBloc() : super(inAppState) {
-
-    on<LoadTodo>(loadTodo);
-
+    on<LoadTodo>((event, emit) => null);
   }
 
   static Map inAppState = {
     "todos": []
   };
 
-  void loadTodo(event, emit) async
-  {
+
+}
+
+abstract class TodoHeroState {}
+class LoadTodo extends TodoHeroState {
+
+  Future<void> loadTodo() async {
     var jsonData = {};
     try {
       var data = await API.client.post(Uri.http(API.host, "/todo/${SigninCubit.placeholder["id"]}/fetchTodos"));
@@ -86,8 +92,4 @@ class TodoHeroBloc extends Bloc<TodoHeroState, Map> {
     }
     return;
   }
-
 }
-
-abstract class TodoHeroState {}
-class LoadTodo extends TodoHeroState {}
