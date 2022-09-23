@@ -45,7 +45,6 @@ class SignupRepository {
 class SigninCubit extends Cubit<Map> {
   SigninCubit():super(placeholder);
 
-
   static const placeholder = {
     "isSignedin": false,
     "id": null,
@@ -67,29 +66,33 @@ class SigninCubit extends Cubit<Map> {
 
 }
 
-class TodoHeroBloc extends Bloc<TodoHeroState, Map> {
+class TodoHeroBloc extends Bloc<TodoHeroEvent, Map> {
   TodoHeroBloc() : super(inAppState) {
-    on<LoadTodo>((event, emit) => null);
+    on<LoadTodo>(handleLoad);
   }
 
   static Map inAppState = {
     "todos": []
   };
 
+  Future<dynamic> handleLoad(event, emit) async 
+  {
+    return emit({...state, "todos": await event.loadTodo(1)});
+  }
 
 }
 
-abstract class TodoHeroState {}
-class LoadTodo extends TodoHeroState {
+abstract class TodoHeroEvent {}
+class LoadTodo extends TodoHeroEvent {
 
-  Future<void> loadTodo() async {
-    var jsonData = {};
+  Future<List> loadTodo(int id) async {
+    var jsonData = [];
     try {
-      var data = await API.client.post(Uri.http(API.host, "/todo/${SigninCubit.placeholder["id"]}/fetchTodos"));
+      var data = await API.client.get(Uri.http(API.host, "api/todo/$id/fetchTodos"));
       jsonData = jsonDecode(data.body);
     } catch(err) {
       log(err.toString());
     }
-    return;
+    return jsonData;
   }
 }

@@ -36,8 +36,9 @@ class _ManagementState extends State<Management> {
                 Expanded(
                   child: ListView.builder(
                     itemCount: 12,
-                    itemBuilder: (context, index) {
-
+                    itemBuilder: (context, index) 
+                    {
+                      log(context.read<TodoHeroBloc>().state["todos"].toString());
                       return ManagementTile(
                         title: "Hola $index",
                         description: "World",
@@ -59,7 +60,7 @@ class _ManagementState extends State<Management> {
                 child: FloatingActionButton(
                   backgroundColor: const Color(0xFFA18635),
                   onPressed: () {
-                    
+                    context.read<TodoHeroBloc>().add(LoadTodo());
                   },
                   child: const Icon(Icons.create),
                 ),

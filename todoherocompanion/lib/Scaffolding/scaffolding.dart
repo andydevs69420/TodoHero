@@ -105,7 +105,6 @@ class _MainAppState extends State<MainApp> {
     return BlocBuilder(
       bloc: TodoHeroBloc(),
         builder: (context, state) {
-        // ignore: unnecessary_new
         switch (widget.active)
         {
           case 0: return Todos(bloc: bloc);
