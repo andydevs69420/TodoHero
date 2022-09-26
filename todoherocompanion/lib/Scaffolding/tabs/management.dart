@@ -74,6 +74,8 @@ class _ManagementState extends State<Management> {
                             time: current["time"],
                             onTap: () {
                               Navigator.of(context).push(MaterialPageRoute(builder: (context) => TodoView(
+                                cubit: widget.cubit,
+                                bloc: widget.bloc,
                                 mode: MODE.update,
                                 title: current["title"],
                                 descr: current["description"],
@@ -99,7 +101,10 @@ class _ManagementState extends State<Management> {
               child: FloatingActionButton.small(
                 backgroundColor: const Color(0xFFA18635),
                 onPressed: () async {
-                  var result = await Navigator.of(context).push(MaterialPageRoute(builder: (context) => const TodoView(
+                  
+                  var result = await Navigator.of(context).push(MaterialPageRoute(builder: (context) => TodoView(
+                    cubit: widget.cubit,
+                    bloc: widget.bloc,
                     mode: MODE.insert,
                   )));
 
@@ -137,6 +142,8 @@ enum MODE {
 
 class TodoView extends StatefulWidget {
 
+  final SigninCubit cubit;
+  final TodoHeroBloc bloc;
   final Enum mode;
   final String title;
   final String descr;
@@ -145,6 +152,8 @@ class TodoView extends StatefulWidget {
   
   const TodoView({
     super.key, 
+    required this.cubit,
+    required this.bloc,
     this.mode=MODE.insert,
     this.title="",
     this.descr="",
@@ -219,7 +228,7 @@ class _TodoViewState extends State<TodoView> {
 
             if (formKey.currentState!.validate())
             {
-
+              
             }
 
           },

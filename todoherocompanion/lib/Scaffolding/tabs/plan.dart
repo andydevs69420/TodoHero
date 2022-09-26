@@ -27,6 +27,7 @@ class _PlanState extends State<Plan> {
                 padding: const EdgeInsets.all(15),
                 child: Material(
                   elevation: 6,
+                  borderRadius: BorderRadius.circular(10),  
                   child: Container(
                     decoration: BoxDecoration(
                       image: const DecorationImage(

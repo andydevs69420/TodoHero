@@ -76,9 +76,7 @@ class TodoHeroBloc extends Bloc<TodoHeroEvent, Map> {
   };
 
   Future<dynamic> handleLoad(event, emit) async 
-  {
-    return emit({...state, "todos": await event.loadTodo(1)});
-  }
+  { return emit({...state, "todos": await event.loadTodo()}); }
 
 }
 
@@ -88,15 +86,40 @@ class LoadTodo extends TodoHeroEvent {
   final int userID;
   LoadTodo({required this.userID});
 
-
-  Future<List> loadTodo(int id) async {
+  Future<List> loadTodo() async {
     var jsonData = [];
     try {
-      var data = await API.client.get(Uri.http(API.host, "api/todo/$id/fetchTodos"));
+      var data = await API.client.get(Uri.http(API.host, "api/todo/$userID/fetchTodos"));
       jsonData = jsonDecode(data.body);
     } catch(err) {
       log(err.toString());
     }
     return jsonData;
   }
+}
+
+class InsertTodo extends Cubit<int> {
+
+  final int userID;
+  InsertTodo({required this.userID}): super(0);
+
+  Future<Map> insertTodo({required String title, required String date, required String time, required String description}) async
+  {
+    var jsonData = {};
+    try {
+      var data = await API.client.post(Uri.http(API.host, "api/todo/$userID/insert"), 
+        body: {
+          "title": title,
+          "date" : date,
+          "time" : time,
+          "descr": description
+        }
+      );
+      jsonData = jsonDecode(data.body);
+    } catch(err) {
+      log(err.toString());
+    }
+    return jsonData;
+  }
+
 }
