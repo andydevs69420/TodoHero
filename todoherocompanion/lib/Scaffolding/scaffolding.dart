@@ -97,28 +97,31 @@ class MainApp extends StatefulWidget {
 
 class _MainAppState extends State<MainApp> {
 
-  late var bloc = BlocProvider.of<TodoHeroBloc>(context);
+  late var cubit = BlocProvider.of<SigninCubit>(context);
+  late var bloc  = BlocProvider.of<TodoHeroBloc>(context);
+
+  late List<Widget> tabs;
 
   @override
   void initState() {
     super.initState();
     // load todos here!
-    context.read<TodoHeroBloc>().add(LoadTodo());
+    
+    context.read<TodoHeroBloc>().add(LoadTodo(
+      userID: context.read<SigninCubit>().ID
+    ));
+
+    tabs = [
+      Todos(bloc: bloc),
+      Management(cubit: cubit, bloc: bloc),
+      const Plan(),
+      const Account()
+    ];
+
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder(
-      bloc: TodoHeroBloc(),
-        builder: (context, state) {
-        switch (widget.active)
-        {
-          case 0: return Todos(bloc: bloc);
-          case 1: return Management(bloc: bloc);
-          case 2: return const Plan();
-          default: return const Account();
-        }
-      },
-    );
+    return tabs[widget.active];
   }
 }

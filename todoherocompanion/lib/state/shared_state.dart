@@ -12,12 +12,13 @@ import 'package:http/http.dart' as http;
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class API {
-  static const host   = "localhost:8000";
+  static const host   = "192.168.43.76:8080";
   static final client = http.Client();
 }
+// redodophilippandrew@gmail.com
 
-
-class SignupRepository {
+class SignupRepository 
+{
   
   SignupRepository();
 
@@ -27,7 +28,6 @@ class SignupRepository {
    * Fetches plan type(s) from api server
    * @return Future<List> list of plans
    **/ 
-  //  OR USE Repository instead
   Future<List> fetchPlanList() async {
     var jsonData = [];
     try {
@@ -84,6 +84,10 @@ class TodoHeroBloc extends Bloc<TodoHeroEvent, Map> {
 
 abstract class TodoHeroEvent {}
 class LoadTodo extends TodoHeroEvent {
+
+  final int userID;
+  LoadTodo({required this.userID});
+
 
   Future<List> loadTodo(int id) async {
     var jsonData = [];

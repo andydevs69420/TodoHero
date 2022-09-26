@@ -1,25 +1,26 @@
 import 'package:flutter/material.dart';
 
-class Input extends StatefulWidget {
+
+class TextArea extends StatefulWidget {
   final TextEditingController? controller;
-  final IconData? icon;
   final String placeholder;
   final double borderRadius;
   final double borderWidth;
+  final int lines;
   final bool obscureText;
   final Function(String value)? onChange;
   final Function(String? value)? onSave;
   final String? Function(String? value)? validator;
   final Color borderColor;
 
-  const Input(
+  const TextArea(
       {super.key,
       this.controller,
-      this.icon,
-      this.placeholder = "input",
+      this.placeholder  = "input",
       this.borderRadius = 6,
-      this.borderWidth = 1,
-      this.obscureText = false,
+      this.borderWidth  = 1,
+      this.lines        = 2,
+      this.obscureText  = false,
       this.onChange,
       this.onSave,
       this.validator, 
@@ -27,10 +28,10 @@ class Input extends StatefulWidget {
     });
 
   @override
-  State<Input> createState() => _InputState();
+  State<TextArea> createState() => _TextAreaState();
 }
 
-class _InputState extends State<Input> {
+class _TextAreaState extends State<TextArea> {
   @override
   Widget build(BuildContext context) {
     return TextFormField( 
@@ -49,11 +50,13 @@ class _InputState extends State<Input> {
               width: widget.borderWidth,
             )
           ),
-          prefixIcon: (widget.icon != null)?Icon(widget.icon):null,
           hintText: widget.placeholder,
+          alignLabelWithHint: true,
           labelText: widget.placeholder),
-      obscureText: widget.obscureText,
       onChanged: widget.onChange,
+      textAlignVertical: TextAlignVertical.bottom,
+      minLines: widget.lines,
+      maxLines: widget.lines * 2,
     );
   }
 }

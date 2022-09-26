@@ -27,7 +27,10 @@ class TodoHeroCompanion extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(primaryColor: Colors.blue),
+      theme: ThemeData(
+        primaryColor: Colors.green,
+        primarySwatch: Colors.green
+      ),
       initialRoute: "/signin",
       routes: {
         "/signin": (context) => const Signin(),

@@ -116,6 +116,7 @@ class _SigninBodyState extends State<SigninBody> {
                           { return "invalid email format!"; }
                           return null;
                         },
+                        borderColor: const Color(0xFF337935),
                       ),
                     ),
                     ////////////
@@ -134,6 +135,7 @@ class _SigninBodyState extends State<SigninBody> {
                           { return "password field is required!"; }
                           return null;
                         },
+                        borderColor: const Color(0xFF337935),
                       ),
                     ),
                     //////////////
@@ -148,7 +150,7 @@ class _SigninBodyState extends State<SigninBody> {
                         child: ElevatedButton(
                           style: ButtonStyle(
                               backgroundColor: MaterialStateProperty.all<Color>(
-                                  const Color.fromARGB(255, 51, 121, 53))),
+                                  const Color(0xFF337935))),
                           child: const Text("SIGNIN"),
                           onPressed: () async {
                             
@@ -178,7 +180,7 @@ class _SigninBodyState extends State<SigninBody> {
 
                               // ignore: use_build_context_synchronously
                               context.read<SigninCubit>().save({
-                                "uid": result["userdata"]["id"],
+                                "id": result["userdata"]["id"],
                                 "email": result["userdata"]["email"],
                                 "isgoogle": false
                               });

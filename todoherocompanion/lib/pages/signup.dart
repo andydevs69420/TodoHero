@@ -114,6 +114,7 @@ class _SignupBodyState extends State<SignupBody> {
 
                         return null;
                       },
+                      borderColor: const Color(0xFF337935),
                     ),
                   ),
                   ////////////
@@ -136,6 +137,7 @@ class _SignupBodyState extends State<SignupBody> {
                         
                         return null;
                       },
+                      borderColor: const Color(0xFF337935),
                     ),
                   ),
                   ////////////
@@ -155,6 +157,7 @@ class _SignupBodyState extends State<SignupBody> {
                         { return "password did not match!";  }
                         return null;
                       },
+                      borderColor: const Color(0xFF337935),
                     ),
                   ),
                   ////////////

@@ -42,6 +42,7 @@ dependencies:
   carousel_slider: ^4.1.1
   email_validator: ^2.1.17
   http: ^0.13.5
+  syncfusion_flutter_datepicker: ^20.2.50
 
 dev_dependencies:
   flutter_test:
