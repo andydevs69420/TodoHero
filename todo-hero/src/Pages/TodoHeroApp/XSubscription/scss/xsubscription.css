@@ -1,0 +1,11 @@
+/*
+ *   Copyright (c) 2022 
+ *   All rights reserved.
+ */
+.xsubscription__plan-entry {
+  top: 50%;
+  left: 50%;
+  width: 80%;
+  height: auto;
+  transform: translate(-50%, -50%);
+}/*# sourceMappingURL=xsubscription.css.map */

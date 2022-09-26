@@ -1,0 +1,115 @@
+/*
+ *   Copyright (c) 2022 andydevs69420
+ *   All rights reserved.
+ */
+
+
+
+$light: rgb(248, 249, 250);
+
+$page-background-mobile: $light;
+$panel-background: $light;
+$banner-color-on-mobile: $light;
+$signin-btn-bg: #35c44d;
+$dark-on-mobile-fg: #212529;
+$light-on-mobile-fg: $light;
+
+
+
+#signin-page
+{ overflow: hidden auto; }
+
+
+#signup-page__panel
+{
+    z-index: 2;
+    width: 100%;
+    height: auto;
+    min-height: 100%;
+    
+    backdrop-filter: blur(6px);
+    background-color: transparent !important;
+}
+
+
+#signup-page__blob-design-0
+{
+    width: 400px;
+    left: -200px;
+    bottom: -200px;
+    z-index: 0;
+}
+
+#signup-page__blob-design-1
+{
+    width: 400px;
+    top: -200px;
+    right: -200px;
+    z-index: 0;
+}
+
+#signup-page__app-icon
+{ width: 64px; }
+
+#signup-page__app-brand > *
+{ font-family: "Roboto Regular"; }
+
+
+
+#signup-page__btn-signin
+{ background-color: $signin-btn-bg !important; }
+
+
+
+
+
+// on sm and below
+@media screen and (max-width: 576px) {
+    #signup-page__app-brand > *
+    { color: $banner-color-on-mobile !important; }
+
+
+    .dark-on-mobile
+    { color: $dark-on-mobile-fg !important; } 
+
+    .light-on-mobile
+    { 
+        color: $light !important; 
+        &:hover
+        { color: #3333d4 !important; }
+    } 
+}
+
+
+
+// on sm to xxl and up
+@media screen and (min-width: 576px) 
+{
+    #signup-page__panel {
+        width: 380px;
+        min-height: initial;
+        max-height: 90%;
+        overflow-y: auto;
+        
+        /*
+         | based on bootstrap 
+         | default bd-radius,
+         */
+        border-radius: 0.375rem !important;
+        background-color: $panel-background !important;
+    }
+
+    #signup-page__bg
+    {
+        top: 50%;
+        left: 10%;
+        transform: translate(-10%, -50%);
+
+        width: 50%;
+        transition: left 1s ease-in-out !important;
+    }
+
+    #signup-page__app-bg
+    { width: 80% !important; }
+
+}

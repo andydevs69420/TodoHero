@@ -1,0 +1,25 @@
+/*
+ *   Copyright (c) 2022 andydevs69420
+ *   All rights reserved.
+ */
+
+
+$control-wrapper-height-default: 60px;
+$control-wrapper-height-mobile: 108px;
+
+#xtodos__main
+{ overflow-y: auto !important; }
+
+#xtodos__todos-controls-wrapper
+{ overflow: visible !important; }
+
+#xtodos__todos-list-wrapper
+{ height: calc(100% - $control-wrapper-height-default) !important; }
+
+
+
+@media screen and (max-width: 576px) 
+{
+    #xtodos__todos-list-wrapper
+    { height: calc(100% - $control-wrapper-height-mobile) !important; }
+}

@@ -1,0 +1,36 @@
+/*
+ *   Copyright (c) 2022 andydevs69420
+ *   All rights reserved.
+ */
+
+
+.xinput__ig >
+.xinput__igt 
+{
+    top: 0;
+    left: 0;
+    z-index: 1;
+
+    margin-left: -1px;
+
+    min-width: 40px;
+    min-height: 100%;
+
+    border-top-left-radius: inherit !important;
+    border-bottom-left-radius: inherit !important;
+    
+}
+
+.xinput__ig >
+.xinput__fc
+{
+    z-index: 0;
+
+    padding-left: calc(40.1px + 0.750rem);
+    border-radius: inherit !important;
+
+    &:focus
+    {
+        z-index: 0 !important;
+    }
+}

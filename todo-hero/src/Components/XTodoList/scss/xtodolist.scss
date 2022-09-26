@@ -1,0 +1,92 @@
+/*
+ *   Copyright (c) 2022 andydevs69420
+ *   All rights reserved.
+ */
+
+
+
+.xtodolist__list
+{   
+    max-height: 100% !important;
+    overflow: hidden auto !important; 
+
+    // scrollbar
+    -ms-overflow-style: none; 
+    scrollbar-width: none;
+}
+
+.xtodolist__list::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+}
+
+/*
+ | SIMILAR TO BOOTSTRAP GRID SYSTEM 
+ | intended for list purposes
+ */ 
+
+
+$gradient-1: rgba(255, 246, 246, 0.849);
+$gradient-2: rgba(254, 255, 253, 0.8);
+
+.xtllistitem__list-item
+{
+    margin: .5rem .5rem;
+    width: calc( calc(100% - 3rem)  / 4);
+    height: auto;
+    user-select: none !important;
+    & * 
+    { user-select: none !important; }
+
+    background: linear-gradient(80deg, $gradient-1, $gradient-2);
+
+}
+
+
+.xtllistitem__list-item:nth-child(4n + 1)
+{ margin-left: 0; }
+
+.xtllistitem__list-item:nth-child(4n)
+{ margin-right: 0; }
+
+.card-footer small
+{ font-size: .8em !important; }
+
+/** sm and below */ 
+@media screen and (max-width: 576px)
+{
+    .xtllistitem__list-item
+    { 
+        margin: .5rem auto !important; 
+        width: 92% !important;
+        border: 0;
+    }   
+}
+
+
+/** md and below */ 
+@media screen and (min-width: 576px) and (max-width: 768px)
+{
+    .xtllistitem__list-item
+    { 
+        margin: .5rem 0 !important; 
+        width: 100% !important;
+    }   
+}
+
+
+
+@media screen and (min-width: 768px) and (max-width: 992px)
+{
+    .xtllistitem__list-item
+    { 
+        margin: .5rem .5rem;
+        width: calc( calc(100% - 1rem)  / 2);
+    }     
+
+    .xtllistitem__list-item:nth-child(2n + 1)
+    { margin-left: 0; }
+
+    .xtllistitem__list-item:nth-child(2n)
+    { margin-right: 0; }
+    
+}

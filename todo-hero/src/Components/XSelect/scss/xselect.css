@@ -1,0 +1,21 @@
+/*
+ *   Copyright (c) 2022 andydevs69420
+ *   All rights reserved.
+ */
+.xselect__ig > .xselect__igt {
+  top: 0;
+  left: 0;
+  z-index: 1;
+  margin-left: -1px;
+  border-top-left-radius: inherit !important;
+  border-bottom-left-radius: inherit !important;
+}
+
+.xselect__ig > .xselect__fs {
+  z-index: 0;
+  padding-left: calc(40.1px + 0.75rem);
+  border-radius: inherit !important;
+}
+.xselect__ig > .xselect__fs:focus {
+  z-index: 0 !important;
+}/*# sourceMappingURL=xselect.css.map */

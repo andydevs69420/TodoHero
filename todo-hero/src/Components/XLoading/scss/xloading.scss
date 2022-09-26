@@ -1,0 +1,34 @@
+/*
+ *   Copyright (c) 2022 andydevs69420
+ *   All rights reserved.
+ */
+
+
+
+
+ $overlay-bg-fallback: rgb(255,255,255,0.6);
+
+.xloading__overlay-bg
+{
+    top: 0;
+    left: 0;
+    z-index: 10999;
+    
+    @supports not(backdrop-filter: blur(5px)) 
+    { background-color: $overlay-bg-fallback; }
+    backdrop-filter: blur(5px);
+}
+
+.xloading__overlay-bg >
+.xloading__loading-panel
+{
+    transition: top 0.8s ease-in;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -40%);
+
+    width: 100%;
+    min-width: 260px;
+    max-width: 265px;
+    height: auto;
+}

@@ -1,0 +1,31 @@
+/*
+ *   Copyright (c) 2022 andydevs69420
+ *   All rights reserved.
+ */
+
+
+$top-bar-default-height: 54.5px;
+$top-bar-mobile-height: 74px;
+
+$content-wrap-bgcolor-default: #e4f2f5;
+
+.todoheroapp__content-wrap
+{ background-color: $content-wrap-bgcolor-default; }
+
+
+.todoheroapp__view-wrapper
+{
+    width: 100% !important;
+    height: calc(100% - $top-bar-default-height) !important;
+    overflow: hidden !important;
+}
+
+
+@media screen and (max-width: 576px) 
+{
+    .todoheroapp__content-wrap
+    { background-color: initial; }  
+
+    .todoheroapp__view-wrapper
+    { height: calc(100% - $top-bar-mobile-height) !important; }
+}

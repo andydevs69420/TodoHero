@@ -1,0 +1,74 @@
+/*
+ *   Copyright (c) 2022 andydevs69420
+ *   All rights reserved.
+ */
+.xsidebar__collapse {
+  width: auto;
+  height: 100% !important;
+}
+
+.xsidebar__nav {
+  width: 225px;
+  height: 100%;
+  overflow-y: auto !important;
+  background-color: #fefeff;
+}
+
+.xsidebar__link-btn {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 0 auto !important;
+  padding: 0 1rem;
+  width: 90%;
+  line-height: 35px;
+}
+
+.xsidebar__link-btn > * {
+  font-size: 1rem !important;
+}
+
+.xsidebar__link-btn:hover {
+  background-color: #eaeef5;
+}
+
+.xsidebar__link-btn.active {
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.08) !important;
+  background-color: #0d6efd;
+}
+.xsidebar__link-btn.active > * {
+  color: #ffffff !important;
+}
+
+/** on sm below */
+@media screen and (max-width: 576px) {
+  .xsidebar__shape-wrapper {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: 1;
+    width: 100% !important;
+    height: auto !important;
+  }
+  .xsidebar__nav {
+    width: 100% !important;
+    background-color: #ffffff;
+  }
+  .xsidebar__link-btn {
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 0.375rem;
+  }
+  .xsidebar__link-btn > * {
+    font-size: 1.3rem !important;
+  }
+  .xsidebar__link-btn.active {
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.08) !important;
+    background-color: #f3eded;
+  }
+  .xsidebar__link-btn.active > * {
+    color: #0d6efd !important;
+  }
+}/*# sourceMappingURL=xsidebar.css.map */

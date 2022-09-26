@@ -1,0 +1,12 @@
+/*
+ *   Copyright (c) 2022 andydevs69420
+ *   All rights reserved.
+ */
+#xaccount__main {
+  overflow-y: auto !important;
+}
+
+#xaccount__avatar {
+  margin-top: calc(-20% - 0.5rem) !important;
+  margin-bottom: 1rem;
+}/*# sourceMappingURL=xaccount.css.map */

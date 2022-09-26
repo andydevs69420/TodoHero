@@ -1,0 +1,74 @@
+/*
+ *   Copyright (c) 2022 andydevs69420
+ *   All rights reserved.
+ */
+.xmanagelist__list {
+  max-height: 100% !important;
+  overflow: hidden auto !important;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.xmanagelist__list::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
+
+/*
+ | SIMILAR TO BOOTSTRAP GRID SYSTEM 
+ | intended for list purposes
+ */
+.xmllistitem__list-item {
+  margin: 0.5rem 0.5rem;
+  width: calc((100% - 3rem) / 4);
+  height: auto;
+  -webkit-user-select: none !important;
+     -moz-user-select: none !important;
+      -ms-user-select: none !important;
+          user-select: none !important;
+}
+.xmllistitem__list-item * {
+  -webkit-user-select: none !important;
+     -moz-user-select: none !important;
+      -ms-user-select: none !important;
+          user-select: none !important;
+}
+
+.xmllistitem__list-item:nth-child(4n+1) {
+  margin-left: 0;
+}
+
+.xmllistitem__list-item:nth-child(4n) {
+  margin-right: 0;
+}
+
+.card-footer small {
+  font-size: 0.8em !important;
+}
+
+/** sm and below */
+@media screen and (max-width: 576px) {
+  .xmllistitem__list-item {
+    margin: 0.5rem auto !important;
+    width: 92% !important;
+    border: 0;
+  }
+}
+/** md and below */
+@media screen and (min-width: 576px) and (max-width: 768px) {
+  .xmllistitem__list-item {
+    margin: 0.5rem 0 !important;
+    width: 100% !important;
+  }
+}
+@media screen and (min-width: 768px) and (max-width: 992px) {
+  .xmllistitem__list-item {
+    margin: 0.5rem 0.5rem;
+    width: calc((100% - 1rem) / 2);
+  }
+  .xmllistitem__list-item:nth-child(2n+1) {
+    margin-left: 0;
+  }
+  .xmllistitem__list-item:nth-child(2n) {
+    margin-right: 0;
+  }
+}/*# sourceMappingURL=xmanagelist.css.map */

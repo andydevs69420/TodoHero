@@ -1,0 +1,98 @@
+/*
+ *   Copyright (c) 2022 andydevs69420
+ *   All rights reserved.
+ */
+#signin-page {
+  overflow: hidden auto;
+}
+
+#signin-page__bg {
+  top: 50%;
+  left: 100%;
+  transform: translateY(-50%);
+  width: 80%;
+  transition: left 0.8s ease-in-out !important;
+}
+
+#signin-page__app-bg {
+  width: 100% !important;
+}
+
+#signin-page__panel {
+  z-index: 2;
+  width: 100%;
+  height: auto;
+  min-height: 100%;
+  -webkit-backdrop-filter: blur(6px);
+          backdrop-filter: blur(6px);
+  background-color: transparent !important;
+}
+
+#signin-page__blob-design-0 {
+  width: 400px;
+  left: -200px;
+  bottom: -200px;
+  z-index: 0;
+}
+
+#signin-page__blob-design-1 {
+  width: 400px;
+  top: -200px;
+  right: -200px;
+  z-index: 0;
+}
+
+#signin-page__app-icon {
+  width: 64px;
+}
+
+#signin-page__app-brand > * {
+  font-family: "Roboto Regular";
+}
+
+#signin-page__btn-signin {
+  background-color: #35c44d !important;
+}
+
+@media screen and (max-width: 576px) {
+  #signin-page__app-brand > * {
+    color: rgb(248, 249, 250) !important;
+  }
+  .dark-on-mobile {
+    color: #212529 !important;
+  }
+  .light-on-mobile {
+    color: rgb(248, 249, 250) !important;
+  }
+  .light-on-mobile:hover {
+    color: #3333d4 !important;
+  }
+}
+@media screen and (min-width: 576px) {
+  #signin-page__panel {
+    position: absolute;
+    top: 50%;
+    right: 10%;
+    transform: translateY(-50%);
+    width: 380px;
+    min-height: initial;
+    max-height: 90%;
+    overflow-y: auto;
+    /*
+     | based on bootstrap 
+     | default bd-radius,
+     */
+    border-radius: 0.375rem !important;
+    background-color: rgb(248, 249, 250) !important;
+  }
+  #signin-page__bg {
+    top: 50%;
+    left: 10%;
+    transform: translate(-10%, -50%);
+    width: 50%;
+    transition: left 1s ease-in-out !important;
+  }
+  #signin-page__app-bg {
+    width: 80% !important;
+  }
+}/*# sourceMappingURL=signin.css.map */
