@@ -134,7 +134,7 @@ Simple todo organizer web application.
     <img src="screenshots/admin_settings.png" alt="md-to-xl and up" width="190px"/>
 </p>
 
-## MOBILE APP
+## MOBILE APP (outdated screenshots)
 <p align="left">
     <img src="screenshots/mobile_app_signin.png" alt="md-to-xl and up" width="90px"/>
     <img src="screenshots/mobile_app_signup.png" alt="md-to-xl and up" width="90px"/>
